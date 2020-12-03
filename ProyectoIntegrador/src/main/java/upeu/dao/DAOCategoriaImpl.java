@@ -1,8 +1,8 @@
 package upeu.dao;
 
-import upeu.interfaces.DAOPersona;
-import upeu.pojo.Persona;
 import upeu.conexion.Conexion;
+import upeu.interfaces.DAOCategoria;
+import upeu.pojo.Categoria;
 
 import javax.swing.*;
 import java.sql.PreparedStatement;
@@ -10,10 +10,10 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DAOPersonaImpl extends Conexion implements DAOPersona{
+public class DAOCategoriaImpl extends Conexion implements DAOCategoria {
     @Override
-    public List<Persona> listar() {
-        List<Persona>lista = new ArrayList<>();
+    public List<Categoria> listar() {
+        List<Categoria>lista = new ArrayList<>();
         try {
             PreparedStatement pstmt = conectar().prepareStatement("");
             ResultSet rs = pstmt.executeQuery();
@@ -25,7 +25,20 @@ public class DAOPersonaImpl extends Conexion implements DAOPersona{
     }
 
     @Override
-    public void registrar(Persona p) {
+    public Categoria buscarProv(int id) {
+        Categoria cat = new Categoria();
+        try {
+            PreparedStatement pstmt = conectar().prepareStatement("");
+            ResultSet rs = pstmt.executeQuery();
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
+        }
+        cerrarConexion(conectar());
+        return null;
+    }
+
+    @Override
+    public void registrar(Categoria cat) {
         try {
             PreparedStatement pstmt = conectar().prepareStatement("");
             pstmt.executeUpdate();
@@ -36,7 +49,7 @@ public class DAOPersonaImpl extends Conexion implements DAOPersona{
     }
 
     @Override
-    public void actualizar(Persona p) {
+    public void actualizar(Categoria cat) {
         try {
             PreparedStatement pstmt = conectar().prepareStatement("");
             pstmt.executeUpdate();
@@ -47,7 +60,7 @@ public class DAOPersonaImpl extends Conexion implements DAOPersona{
     }
 
     @Override
-    public void eliminar(Persona p) {
+    public void eliminar(Categoria cat) {
         try {
             PreparedStatement pstmt = conectar().prepareStatement("");
             pstmt.executeUpdate();

@@ -1,8 +1,8 @@
 package upeu.dao;
 
-import upeu.interfaces.DAOPersona;
-import upeu.pojo.Persona;
 import upeu.conexion.Conexion;
+import upeu.interfaces.DAOProveedor;
+import upeu.pojo.Proveedor;
 
 import javax.swing.*;
 import java.sql.PreparedStatement;
@@ -10,10 +10,10 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DAOPersonaImpl extends Conexion implements DAOPersona{
+public class DAOProveedorImpl extends Conexion implements DAOProveedor {
     @Override
-    public List<Persona> listar() {
-        List<Persona>lista = new ArrayList<>();
+    public List<Proveedor> listar() {
+        List<Proveedor>lista = new ArrayList<>();
         try {
             PreparedStatement pstmt = conectar().prepareStatement("");
             ResultSet rs = pstmt.executeQuery();
@@ -25,7 +25,20 @@ public class DAOPersonaImpl extends Conexion implements DAOPersona{
     }
 
     @Override
-    public void registrar(Persona p) {
+    public Proveedor buscarProv(int id) {
+        Proveedor pvr = new Proveedor();
+        try {
+            PreparedStatement pstmt = conectar().prepareStatement("");
+            ResultSet rs = pstmt.executeQuery();
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
+        }
+        cerrarConexion(conectar());
+        return null;
+    }
+
+    @Override
+    public void registrar(Proveedor pvr) {
         try {
             PreparedStatement pstmt = conectar().prepareStatement("");
             pstmt.executeUpdate();
@@ -36,7 +49,7 @@ public class DAOPersonaImpl extends Conexion implements DAOPersona{
     }
 
     @Override
-    public void actualizar(Persona p) {
+    public void actualizar(Proveedor pvr) {
         try {
             PreparedStatement pstmt = conectar().prepareStatement("");
             pstmt.executeUpdate();
@@ -47,7 +60,7 @@ public class DAOPersonaImpl extends Conexion implements DAOPersona{
     }
 
     @Override
-    public void eliminar(Persona p) {
+    public void eliminar(Proveedor pvr) {
         try {
             PreparedStatement pstmt = conectar().prepareStatement("");
             pstmt.executeUpdate();
