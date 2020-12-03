@@ -5,7 +5,7 @@ import upeu.interfaces.DAOPersona;
 import upeu.pojo.Persona;
 
 /**
- * @utores Ziro, Jhobany, Jheyson, Olger
+ * @autores Ziro, Jhobany, Jheyson y Olger
  *
  */
 public class App {
