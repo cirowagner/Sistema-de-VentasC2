@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="upeu.myapp.AppTest" time="0.179" tests="1" errors="0" skipped="0" failures="0">
+=======
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="upeu.myapp.AppTest" time="0.184" tests="1" errors="0" skipped="0" failures="0">
+>>>>>>> 4f020fb6427356427fa2f285c138f4948a5f381c
   <properties>
     <property name="java.specification.version" value="14"/>
     <property name="sun.cpu.isalist" value="amd64"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
+<<<<<<< HEAD
     <property name="java.class.path" value="C:\Users\Usuario\Documents\NetBeansProjects\Proyecto_Integrador\Sistema-de-VentasC2\ProyectoIntegrador\target\test-classes;C:\Users\Usuario\Documents\NetBeansProjects\Proyecto_Integrador\Sistema-de-VentasC2\ProyectoIntegrador\target\classes;C:\Users\Usuario\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\Usuario\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\Usuario\.m2\repository\org\xerial\sqlite-jdbc\3.32.3.2\sqlite-jdbc-3.32.3.2.jar;"/>
+=======
+    <property name="java.class.path" value="D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\target\test-classes;D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\target\classes;C:\Users\HP_I3\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\HP_I3\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\HP_I3\.m2\repository\org\xerial\sqlite-jdbc\3.30.1\sqlite-jdbc-3.30.1.jar;"/>
+>>>>>>> 4f020fb6427356427fa2f285c138f4948a5f381c
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="user.variant" value=""/>
@@ -14,10 +22,17 @@
     <property name="java.vm.specification.version" value="14"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="PE"/>
+<<<<<<< HEAD
     <property name="sun.boot.library.path" value="D:\Nueva carpeta\jdk-14.0.1\bin"/>
     <property name="sun.java.command" value="C:\Users\Usuario\AppData\Local\Temp\surefire9419260299886950642\surefirebooter5251162824368005785.jar C:\Users\Usuario\AppData\Local\Temp\surefire9419260299886950642 2020-12-03T16-59-56_272-jvmRun1 surefire1019804686914207817tmp surefire_013410265941414446158tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\Usuario\Documents\NetBeansProjects\Proyecto_Integrador\Sistema-de-VentasC2\ProyectoIntegrador\target\test-classes;C:\Users\Usuario\Documents\NetBeansProjects\Proyecto_Integrador\Sistema-de-VentasC2\ProyectoIntegrador\target\classes;C:\Users\Usuario\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\Usuario\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\Usuario\.m2\repository\org\xerial\sqlite-jdbc\3.32.3.2\sqlite-jdbc-3.32.3.2.jar;"/>
+=======
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-14.0.1\bin"/>
+    <property name="sun.java.command" value="C:\Users\HP_I3\AppData\Local\Temp\surefire10416294848750825866\surefirebooter351077833157171610.jar C:\Users\HP_I3\AppData\Local\Temp\surefire10416294848750825866 2020-12-03T17-47-03_899-jvmRun1 surefire11750824395693908413tmp surefire_03332288239203908326tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\target\test-classes;D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\target\classes;C:\Users\HP_I3\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\HP_I3\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\HP_I3\.m2\repository\org\xerial\sqlite-jdbc\3.30.1\sqlite-jdbc-3.30.1.jar;"/>
+>>>>>>> 4f020fb6427356427fa2f285c138f4948a5f381c
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\Usuario"/>
     <property name="user.language" value="es"/>
@@ -30,7 +45,11 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
+<<<<<<< HEAD
     <property name="surefire.real.class.path" value="C:\Users\Usuario\AppData\Local\Temp\surefire9419260299886950642\surefirebooter5251162824368005785.jar"/>
+=======
+    <property name="surefire.real.class.path" value="C:\Users\HP_I3\AppData\Local\Temp\surefire10416294848750825866\surefirebooter351077833157171610.jar"/>
+>>>>>>> 4f020fb6427356427fa2f285c138f4948a5f381c
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="14.0.1+7"/>
