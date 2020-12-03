@@ -9,7 +9,7 @@ public class Conexion {
         try{
             Class.forName("org.sqlite.JDBC");
             if(conn == null){
-                conn = DriverManager.getConnection("jdbc:sqlite:D:\\ZIROJAVA-SegundoCiclo\\PROYECTO_INTEGRADOR\\ProyectoIntegrador\\DB");
+                conn = DriverManager.getConnection("jdbc:sqlite:DB\\DataBases.db");
                 conn.createStatement().executeQuery("PRAGMA foreign_keys = ON;");
                 System.out.println("|> Conexion exitosa...100%");
             }

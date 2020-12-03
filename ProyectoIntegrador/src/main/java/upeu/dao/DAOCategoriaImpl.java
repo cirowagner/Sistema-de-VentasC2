@@ -15,13 +15,18 @@ public class DAOCategoriaImpl extends Conexion implements DAOCategoria {
     public List<Categoria> listar() {
         List<Categoria>lista = new ArrayList<>();
         try {
-            PreparedStatement pstmt = conectar().prepareStatement("");
+            PreparedStatement pstmt = conectar().prepareStatement("SELECT * FROM categoria");
             ResultSet rs = pstmt.executeQuery();
+            if (rs.next()){
+                Categoria cat = new Categoria();
+                cat.setNombreC(rs.getString(2));
+                lista.add(cat);
+            }
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
         }
         cerrarConexion(conectar());
-        return null;
+        return lista;
     }
 
     @Override
