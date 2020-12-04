@@ -1,11 +1,7 @@
 package upeu.myapp;
 
 import upeu.dao.DAOCategoriaImpl;
-import upeu.dao.DAOPersonaImpl;
 import upeu.interfaces.DAOCategoria;
-import upeu.interfaces.DAOCliente;
-import upeu.interfaces.DAOPersona;
-import upeu.interfaces.DAOVenta;
 import upeu.pojo.Categoria;
 
 import java.util.List;
