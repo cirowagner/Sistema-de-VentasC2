@@ -20,6 +20,7 @@ public class DAOCategoriaImpl extends Conexion implements DAOCategoria {
             if (rs.next()) {
                 Categoria cat = new Categoria();
                 cat.setNombreC(rs.getString(2));
+                cat.setCodC(rs.getString(3));
                 lista.add(cat);
             }
         }catch (Exception e){

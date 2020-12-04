@@ -26,7 +26,7 @@ public class App {
         DAOCategoria dao = new DAOCategoriaImpl();
         List<Categoria>list = dao.listar();
         for(Categoria l : list){
-            System.out.println("Name Cat: "+l.getNombreC());
+            System.out.println("Name Cod: "+l.getCodC());
         }
     }
 }

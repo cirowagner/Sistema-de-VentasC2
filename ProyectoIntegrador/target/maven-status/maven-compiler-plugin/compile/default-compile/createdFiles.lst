@@ -10,6 +10,7 @@ upeu\dao\DAOTrabajadorImpl.class
 upeu\gui\panelImage.class
 upeu\gui\MainR.class
 upeu\dao\DAOProveedorImpl.class
+upeu\myapp\MCategoriaPrueba.class
 upeu\pojo\Trabajador.class
 upeu\interfaces\DAOCategoria.class
 upeu\pojo\Cliente.class

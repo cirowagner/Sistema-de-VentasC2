@@ -7,7 +7,7 @@ public class Conexion {
     Connection conn = null;
     public Connection conectar(){
         try{
-           Class.forName("org.sqlite.JDBC");
+            Class.forName("org.sqlite.JDBC");
             if(conn == null){
                 conn = DriverManager.getConnection("jdbc:sqlite:DB\\DataBases.db");
                 conn.createStatement().execute("PRAGMA Foreign_keys = ON;");
