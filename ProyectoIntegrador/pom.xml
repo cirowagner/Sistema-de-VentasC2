@@ -26,12 +26,26 @@
       <version>3.7.2</version>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/com.toedter/jcalendar -->
+    <dependency>
+      <groupId>com.toedter</groupId>
+      <artifactId>jcalendar</artifactId>
+      <version>1.4</version>
+    </dependency>
+
+    <dependency>
+      <groupId>JComponents</groupId>
+      <artifactId>JPanelSlider</artifactId>
+      <version>1.0</version>
+    </dependency>
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
+
   </dependencies>
 
   <build>
@@ -103,13 +117,15 @@
 
         <plugin>
           <artifactId>maven-assembly-plugin</artifactId>
-          <version>2.5.3</version>
+          <version>2.2.1</version>
           <configuration>
-            <descriptor>src/assembly/dep.xml</descriptor>
+            <descriptorRefs>
+              <descriptorRef>jar-with-dependencies</descriptorRef>
+            </descriptorRefs>
           </configuration>
           <executions>
             <execution>
-              <id>create-archive</id>
+              <id>make-all-in-one-jar</id>
               <phase>package</phase>
               <goals>
                 <goal>single</goal>
