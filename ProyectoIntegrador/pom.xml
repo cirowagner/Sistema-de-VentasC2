@@ -24,7 +24,6 @@
       <groupId>org.xerial</groupId>
       <artifactId>sqlite-jdbc</artifactId>
       <version>3.7.2</version>
-      <scope>runtime</scope>
     </dependency>
 
     <dependency>
@@ -100,6 +99,23 @@
         <plugin>
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.0.0</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>2.5.3</version>
+          <configuration>
+            <descriptor>src/assembly/dep.xml</descriptor>
+          </configuration>
+          <executions>
+            <execution>
+              <id>create-archive</id>
+              <phase>package</phase>
+              <goals>
+                <goal>single</goal>
+              </goals>
+            </execution>
+          </executions>
         </plugin>
 
       </plugins>

@@ -17,7 +17,7 @@ public class DAOCategoriaImpl extends Conexion implements DAOCategoria {
         try {
             PreparedStatement pstmt = conectar().prepareStatement("SELECT * FROM categoria");
             ResultSet rs = pstmt.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 Categoria cat = new Categoria();
                 cat.setNombreC(rs.getString(2));
                 cat.setCodC(rs.getString(3));

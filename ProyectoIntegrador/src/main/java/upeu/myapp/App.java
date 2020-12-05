@@ -7,11 +7,12 @@ import upeu.pojo.Categoria;
 import java.util.List;
 
 /**
- * @autores Ziro, Jhobany, Jheyson y Olger
+ * @author Ziro, Jhobany, Jheyson y Olger
  *
  */
 public class App {
     public static void main( String[] args ) {
+
         System.out.print( "Hello World!" );
         System.out.println(" -> Proyecto creado correctamente");
         System.out.println("Reporte Jheyson");
