@@ -92,7 +92,7 @@ public class DAOPersonaImpl extends Conexion implements DAOPersona{
     public void eliminar(Persona p) {
         try {
             PreparedStatement pstmt = conectar().prepareStatement("DELETE FROM persona WHERE IDP = ?");
-            pstmt.setInt(1, p.getId());
+            pstmt.setInt(1, p.getIdp());
             pstmt.executeUpdate();
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
