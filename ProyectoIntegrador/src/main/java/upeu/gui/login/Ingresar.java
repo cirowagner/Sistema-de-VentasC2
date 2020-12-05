@@ -110,8 +110,8 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
         btIngrs.setOpaque(false);
         btIngrs.setForeground(fuenteColor);
         btIngrs.setContentAreaFilled(false);
-        btIngrs.setMnemonic('p');
         btIngrs.addActionListener(this);
+        btIngrs.setMnemonic('w'); // <--- Alt + w
         pnlRegstr.add(btIngrs);
     }
 
