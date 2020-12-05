@@ -34,19 +34,31 @@ public class DAOCategoriaImpl extends Conexion implements DAOCategoria {
     public Categoria buscarProv(int id) {
         Categoria cat = new Categoria();
         try {
-            PreparedStatement pstmt = conectar().prepareStatement("");
+            PreparedStatement pstmt = conectar().prepareStatement("SELECT * FROM categoria WHERE IDC = "+id+"");
             ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                cat = new Categoria();
+                cat.setIdC(rs.getInt(1));
+                cat.setNombreC(rs.getString(2));
+                cat.setCodC(rs.getString(3));
+            }else{
+                cat.setIdC(0);
+            }
+            pstmt.close();
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
         }
         cerrarConexion(conectar());
-        return null;
+        return cat;
     }
 
     @Override
     public void registrar(Categoria cat) {
         try {
-            PreparedStatement pstmt = conectar().prepareStatement("");
+            PreparedStatement pstmt = conectar().prepareStatement("INSERT INTO categoria" +
+                    "NOMBREC, CODIGOC");
+            pstmt.setString(1, cat.getNombreC());
+            pstmt.setString(2, cat.getCodC());
             pstmt.executeUpdate();
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
@@ -57,7 +69,13 @@ public class DAOCategoriaImpl extends Conexion implements DAOCategoria {
     @Override
     public void actualizar(Categoria cat) {
         try {
-            PreparedStatement pstmt = conectar().prepareStatement("");
+            PreparedStatement pstmt = conectar().prepareStatement("UPDATE categoria SET" +
+                    "NOMBREC = ?, " +
+                    "CODIGOC = ?, " +
+                    " WHERE IDC = ?");
+            pstmt.setString(1, cat.getNombreC());
+            pstmt.setString(2, cat.getCodC());
+            pstmt.setInt(3, cat.getIdC());
             pstmt.executeUpdate();
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
@@ -68,7 +86,8 @@ public class DAOCategoriaImpl extends Conexion implements DAOCategoria {
     @Override
     public void eliminar(Categoria cat) {
         try {
-            PreparedStatement pstmt = conectar().prepareStatement("");
+            PreparedStatement pstmt = conectar().prepareStatement("DELETE FROM categoria WHERE IDC = ?");
+            pstmt.setInt(1, cat.getIdC());
             pstmt.executeUpdate();
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
