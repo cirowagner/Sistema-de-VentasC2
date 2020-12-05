@@ -5,7 +5,7 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Ingresar extends JFrame implements MouseListener, ActionListener, MouseMotionListener {
+public class Ingresar extends JFrame implements MouseListener, ActionListener, MouseMotionListener, FocusListener{
 
 
     public static void main(String[] args) {
@@ -37,7 +37,7 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
         utils();
     }
 
-    ImageIcon imagen = new ImageIcon("imagenes/login/FondoRegstr2.jpg");
+    ImageIcon imagen = new ImageIcon("imagenes/login/Fondo2.0.jpg");
     JLabel fondo = new JLabel(imagen);
 
     public void fondoR() {
@@ -77,36 +77,46 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
         iconUser.setIcon(new ImageIcon(imageUser.getImage().getScaledInstance(iconUser.getWidth(), iconUser.getHeight(), Image.SCALE_SMOOTH)));
         pnlRegstr.add(iconUser);
 
-        lbUser.setBounds(70, 150, 190, 24);
+        lbUser.setBounds(70, 155, 190, 24);
         lbUser.setFont(fuente);
         lbUser.setForeground(fuenteColor);
         pnlRegstr.add(lbUser);
 
-        tfUser.setBounds(70, 180, 190, 24);
+        tfUser.setBounds(70, 180, 220, 24);
         tfUser.setOpaque(false);
         tfUser.setBorder(null);
+        tfUser.setHorizontalAlignment(SwingConstants.CENTER);
         tfUser.setFont(fuenteTf);
         tfUser.setForeground(fuenteColor);
         pnlRegstr.add(tfUser);
-        spdr1.setBounds(70, 204, 200, 2);
+        spdr1.setBounds(70, 204, 220, 2);
         spdr1.setBackground(Color.WHITE);
         pnlRegstr.add(spdr1);
 
-        lbClave.setBounds(70, 241, 190, 24);
+        lbClave.setBounds(70, 236, 190, 24);
         lbClave.setFont(fuente);
         lbClave.setForeground(fuenteColor);
         pnlRegstr.add(lbClave);
 
-        tfClave.setBounds(70, 261, 190, 24);
+        tfClave.setBounds(70, 261, 220, 24);
         pnlRegstr.add(tfClave);
         tfClave.setOpaque(false);
         tfClave.setBorder(null);
+        tfClave.setHorizontalAlignment(SwingConstants.CENTER);
+        tfClave.setLayout(new BorderLayout());
+        box.setOpaque(false);
+        box.addFocusListener(this);
+        box.addMouseListener(this);
+        box.addActionListener(this);
+        tfClave.add(box, BorderLayout.EAST);
+        tfClave.addFocusListener(this);
         tfClave.setFont(fuenteTf);
         tfClave.setForeground(fuenteColor);
-        spdr2.setBounds(70, 285, 200, 2);
+
+        spdr2.setBounds(70, 285, 220, 2);
         pnlRegstr.add(spdr2);
 
-        btIngrs.setBounds(100, 310, 130, 26);
+        btIngrs.setBounds(112, 310, 135, 26);
         btIngrs.setOpaque(false);
         btIngrs.setForeground(fuenteColor);
         btIngrs.setContentAreaFilled(false);
@@ -115,12 +125,19 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
         pnlRegstr.add(btIngrs);
     }
 
+    ImageIcon eye = new ImageIcon("imagenes/login/EyeChecked.png");
+    ImageIcon Uneye = new ImageIcon("imagenes/login/EyeUnchecked.png");
+    ImageIcon eye31 = new ImageIcon("imagenes/login/EyeChecked31.png");
+    ImageIcon Uneye31 = new ImageIcon("imagenes/login/EyeUnchecked31.png");
+    JCheckBox box = new JCheckBox(Uneye);
+
     ImageIcon icoSalir = new ImageIcon("imagenes/login/icoSalir.png");
     JButton btSalir = new JButton(icoSalir);
     JLabel mensage = new JLabel("");
     JLabel logoUPeU = new JLabel("");
+
     public void utils(){
-        btSalir.setBounds(10,515,45,50);
+        btSalir.setBounds(10,510,45,50);
         btSalir.setIcon(new ImageIcon(icoSalir.getImage().getScaledInstance(btSalir.getWidth(), btSalir.getHeight(), Image.SCALE_SMOOTH)));
         btSalir.setOpaque(false);
         btSalir.setContentAreaFilled(false);
@@ -132,6 +149,15 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == btIngrs){
             JOptionPane.showMessageDialog(null,"EPAAAA¡¡¡¡¡¡¡");
+        }
+        if (e.getSource() == box){
+            if(box.isSelected()){
+                tfClave.setEchoChar((char)0);
+                box.setIcon(eye);
+            }else {
+                tfClave.setEchoChar('*');
+                box.setIcon(Uneye);
+            }
         }
         if(e.getSource() == btSalir){
             System.exit(0);
@@ -146,9 +172,11 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
     int xx,xy;
     @Override
     public void mouseDragged(MouseEvent e) {
-        int x = e.getXOnScreen();
-        int y = e.getYOnScreen();
-        this.setLocation(x - xx, y -xy);
+        if(e.getSource() == fondo){
+            int x = e.getXOnScreen();
+            int y = e.getYOnScreen();
+            this.setLocation(x - xx, y -xy);
+        }
     }
 
     @Override
@@ -158,8 +186,10 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
 
     @Override
     public void mousePressed(MouseEvent e) {
-        xx = e.getX();
-        xy = e.getY();
+        if(e.getSource() == fondo){
+            xx = e.getX();
+            xy = e.getY();
+        }
     }
 
     @Override
@@ -169,12 +199,38 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
+        if (e.getSource() == box){
+            if (box.isSelected()){
+                box.setIcon(eye31);
+            }else {
+                box.setIcon(Uneye31);
+            }
+        }
+        box.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
+        if (e.getSource() == box){
+            if (box.isSelected()){
+                box.setIcon(eye);
+            }else {
+                box.setIcon(Uneye);
+            }
+        }
+        box.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }
 
+    @Override
+    public void focusGained(FocusEvent f){
+    }
+
+    @Override
+    public void focusLost(FocusEvent f){
+        if (f.getSource() == tfClave){
+            tfClave.setEchoChar('*');
+            box.setIcon(Uneye);
+        }
     }
 
 }
