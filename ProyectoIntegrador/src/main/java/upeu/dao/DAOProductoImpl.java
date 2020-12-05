@@ -15,8 +15,12 @@ public class DAOProductoImpl extends Conexion implements DAOProducto {
     public List<Producto> listar() {
         List<Producto>listar = new ArrayList<>();
         try {
-            PreparedStatement pstmt = conectar().prepareStatement("");
+            PreparedStatement pstmt = conectar().prepareStatement("SELECT * FROM producto");
             ResultSet rs = pstmt.executeQuery();
+            while (rs.next()){
+                Producto prod = new Producto();
+                prod.setNOMBRE_Prod(rs.getString(2));
+            }
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
         }
@@ -40,7 +44,9 @@ public class DAOProductoImpl extends Conexion implements DAOProducto {
     @Override
     public void registrar(Producto prod) {
         try {
-            PreparedStatement pstmt = conectar().prepareStatement("");
+            PreparedStatement pstmt = conectar().prepareStatement("INSERT INTO producto(NOMBRE_Prov, TIPO) VALUES (?,?)");
+            pstmt.setString(1,prod.getNOMBRE_Prod());
+            pstmt.setString(2,prod.getTIPO_Prod());
             pstmt.executeUpdate();
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
@@ -51,7 +57,7 @@ public class DAOProductoImpl extends Conexion implements DAOProducto {
     @Override
     public void actualizar(Producto prod) {
         try {
-            PreparedStatement pstmt = conectar().prepareStatement("");
+            PreparedStatement pstmt = conectar().prepareStatement("UPDATE");
             pstmt.executeUpdate();
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
