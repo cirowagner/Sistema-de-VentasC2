@@ -7,8 +7,6 @@ import java.awt.event.*;
 import java.awt.font.TextAttribute;
 import java.util.Map;
 
-import diu.swe.habib.JPanelSlider.JPanelSlider; // Librería externa -> Controlador de Paneles deslizables
-
 public class Ingresar extends JFrame implements MouseListener, ActionListener, MouseMotionListener, FocusListener, KeyListener{
 
     public Ingresar() {
@@ -143,7 +141,7 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
     ImageIcon icoSalir = new ImageIcon("imagenes/login/icoSalir.png");
     JButton btSalir = new JButton(icoSalir);
     JLabel recuperarClave = new JLabel("Olvidaste la contraseña?");
-    //JLabel logoUPeU = new JLabel("");
+    //JLabel logoUPeU = new JLabel(new ImageIcon("imagenes/logo.gif"));
 
     JLabel lbRegistrar = new JLabel("Registrarce");
     JLabel lbRgstrCliente = new JLabel("Cliente");
@@ -188,6 +186,11 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == btIngrs){
+            new CargarVentana();
+            this.setVisible(false);
+        }
+
         if(e.getSource() == panelTrbjador.btnRegresar){
             panelSl.nextPanel(5,panelIngresar,panelSl.right);
             lbRgstrEmpleado.setVisible(false);

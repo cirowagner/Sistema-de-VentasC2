@@ -1,5 +1,6 @@
 D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\gui\login\RegistrarCliente.java
 D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\dao\DAOProductoImpl.java
+D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\gui\login\CargarVentana.java
 D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\pojo\Producto.java
 D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\conexion\Conexion.java
 D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\interfaces\DAOVenta.java
@@ -7,13 +8,13 @@ D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\up
 D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\dao\DAOCategoriaImpl.java
 D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\myapp\MCategoriaPrueba.java
 D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\interfaces\DAOProducto.java
-D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\gui\ventana\VentanaPrincipal.java
 D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\dao\DAOClienteImpl.java
 D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\dao\DAOPersonaImpl.java
 D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\gui\MainR.java
 D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\interfaces\DAOPersona.java
 D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\interfaces\DAOProveedor.java
 D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\gui\login\Ingresar.java
+D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\gui\ventana\VentanaPrincipalCliente.java
 D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\pojo\Categoria.java
 D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\pojo\Trabajador.java
 D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\pojo\Persona.java
@@ -22,6 +23,7 @@ D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\up
 D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\pojo\Proveedor.java
 D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\dao\DAOProveedorImpl.java
 D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\pojo\Venta.java
+D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\gui\login\JPanelSlider.java
 D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\interfaces\DAOCategoria.java
 D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\interfaces\DAOCliente.java
 D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\pojo\Cliente.java

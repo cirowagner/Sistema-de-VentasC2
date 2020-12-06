@@ -37,7 +37,7 @@ public class RegistrarCliente extends JPanel implements MouseListener, ActionLis
     public void publicidad (){
         pnlPublicdid.setOpaque(false);
         pnlPublicdid.setLayout(null);
-        pnlPublicdid.setBorder(new TitledBorder("Infoooooooo"));
+        pnlPublicdid.setBorder(new TitledBorder("Publicidad"));
 
         btnRegresar.setBounds(50,50,80,20);
         btnRegresar.setOpaque(false);
