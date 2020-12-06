@@ -19,6 +19,7 @@ public class DAOCategoriaImpl extends Conexion implements DAOCategoria {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 Categoria cat = new Categoria();
+                cat.setIdC(rs.getInt(1));
                 cat.setNombreC(rs.getString(2));
                 cat.setCodC(rs.getString(3));
                 lista.add(cat);
@@ -37,14 +38,12 @@ public class DAOCategoriaImpl extends Conexion implements DAOCategoria {
             PreparedStatement pstmt = conectar().prepareStatement("SELECT * FROM categoria WHERE IDC = "+id+"");
             ResultSet rs = pstmt.executeQuery();
             if(rs.next()){
-                cat = new Categoria();
                 cat.setIdC(rs.getInt(1));
                 cat.setNombreC(rs.getString(2));
                 cat.setCodC(rs.getString(3));
             }else{
                 cat.setIdC(0);
             }
-            pstmt.close();
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
         }
@@ -56,7 +55,7 @@ public class DAOCategoriaImpl extends Conexion implements DAOCategoria {
     public void registrar(Categoria cat) {
         try {
             PreparedStatement pstmt = conectar().prepareStatement("INSERT INTO categoria" +
-                    "NOMBREC, CODIGOC");
+                    " (NOMBREC, CODIGOC) VALUES (?, ?)");
             pstmt.setString(1, cat.getNombreC());
             pstmt.setString(2, cat.getCodC());
             pstmt.executeUpdate();
@@ -71,8 +70,8 @@ public class DAOCategoriaImpl extends Conexion implements DAOCategoria {
         try {
             PreparedStatement pstmt = conectar().prepareStatement("UPDATE categoria SET" +
                     "NOMBREC = ?, " +
-                    "CODIGOC = ?, " +
-                    " WHERE IDC = ?");
+                    "CODIGOC = ? " +
+                    "WHERE IDC = ?");
             pstmt.setString(1, cat.getNombreC());
             pstmt.setString(2, cat.getCodC());
             pstmt.setInt(3, cat.getIdC());

@@ -1,7 +1,7 @@
 package upeu.pojo;
 
 public class Persona {
-    private int id;
+    private int idp;
     private String nombre;
     private String ap_Paterno;
     private String ap_Materno;
@@ -12,12 +12,12 @@ public class Persona {
     private String correo;
     private String dni;
 
-    public int getId() {
-        return id;
+    public int getIdp() {
+        return idp;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdp(int idp) {
+        this.idp = idp;
     }
 
     public String getNombre() {
