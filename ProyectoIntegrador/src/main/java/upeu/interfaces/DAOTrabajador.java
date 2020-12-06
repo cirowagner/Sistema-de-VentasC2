@@ -4,9 +4,9 @@ import java.util.List;
 import upeu.pojo.Trabajador;
 
 public interface DAOTrabajador {
-    public List<Trabajador> listar();
-    public Trabajador buscarProv(int id);
-    public void registrar(Trabajador t);
-    public void actualizar(Trabajador t);
-    public void eliminar(Trabajador t);
+     List<Trabajador> listar();
+     Trabajador buscarTrabajador(int id);
+     void registrar(Trabajador t);
+     void actualizar(Trabajador t);
+     void eliminar(Trabajador t);
 }

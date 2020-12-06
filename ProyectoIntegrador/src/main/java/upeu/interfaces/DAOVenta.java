@@ -4,9 +4,9 @@ import upeu.pojo.Venta;
 import java.util.List;
 
 public interface DAOVenta {
-    public List<Venta> listar();
-    public Venta buscarProv(int id);
-    public void registrar(Venta vnt);
-    public void actualizar(Venta vnt);
-    public void eliminar(Venta vnt);
+     List<Venta> listar();
+     Venta buscarProv(int id);
+     void registrar(Venta vnt);
+     void actualizar(Venta vnt);
+     void eliminar(Venta vnt);
 }

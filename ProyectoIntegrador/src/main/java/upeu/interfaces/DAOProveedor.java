@@ -4,9 +4,9 @@ import upeu.pojo.Proveedor;
 import java.util.List;
 
 public interface DAOProveedor {
-    public List<Proveedor> listar();
-    public Proveedor buscarProv(int id);
-    public void registrar(Proveedor pvr);
-    public void actualizar(Proveedor pvr);
-    public void eliminar(Proveedor pvr);
+     List<Proveedor> listar();
+     Proveedor buscarProv(int id);
+     void registrar(Proveedor pvr);
+     void actualizar(Proveedor pvr);
+     void eliminar(Proveedor pvr);
 }

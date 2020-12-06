@@ -38,7 +38,7 @@ public class DAOProductoImpl extends Conexion implements DAOProducto {
     }
 
     @Override
-    public Producto buscarProv(int id) {
+    public Producto buscarProducto(int id) {
         Producto prod = new Producto();
         try {
             PreparedStatement pstmt = conectar().prepareStatement("SELECT * FROM producto p, categoria c Where p.IDC_F = c.IDC and ID_Prod = "+id+"");

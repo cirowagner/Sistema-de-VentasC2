@@ -4,9 +4,9 @@ import upeu.pojo.Producto;
 import java.util.List;
 
 public interface DAOProducto {
-    public List<Producto> listar();
-    public Producto buscarProv(int id);
-    public void registrar(Producto prod);
-    public void actualizar(Producto prod);
-    public void eliminar(Producto prod);
+     List<Producto> listar();
+     Producto buscarProducto(int id);
+     void registrar(Producto prod);
+     void actualizar(Producto prod);
+     void eliminar(Producto prod);
 }

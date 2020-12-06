@@ -143,16 +143,17 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
     ImageIcon icoSalir = new ImageIcon("imagenes/login/icoSalir.png");
     JButton btSalir = new JButton(icoSalir);
     JLabel recuperarClave = new JLabel("Olvidaste la contraseña?");
-    JLabel logoUPeU = new JLabel("");
+    //JLabel logoUPeU = new JLabel("");
 
     JLabel lbRegistrar = new JLabel("Registrarce");
     JLabel lbRgstrCliente = new JLabel("Cliente");
     JLabel lbRgstrEmpleado = new JLabel("Empleado");
-    Font fuenteRs = new Font("Arial",0,17);
+    Font fuenteRs = new Font("Arial",Font.PLAIN,17);
     Color coloRs = new Color(255,255,255);
+
     public void utils(){
         recuperarClave.setBounds(157,290,155,20);
-        recuperarClave.setFont(new Font("Arial",0,12));
+        recuperarClave.setFont(new Font("Arial",Font.PLAIN,12));
         recuperarClave.setForeground(new Color(190,190,190));
         recuperarClave.addMouseListener(this);
         pnlIngrs.add(recuperarClave);
@@ -290,7 +291,7 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
 
         //nice :3
         if(e.getSource() == recuperarClave){
-            recuperarClave.setFont(new Font("Arial",0,13));
+            recuperarClave.setFont(new Font("Arial",Font.PLAIN,13));
             Font font = recuperarClave.getFont();
             Map attributes = font.getAttributes();
             attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
@@ -311,7 +312,7 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
     @Override
     public void mouseExited(MouseEvent e) {
         if(e.getSource() == recuperarClave){
-            recuperarClave.setFont(new Font("Arial",0,12));
+            recuperarClave.setFont(new Font("Arial",Font.PLAIN,12));
             recuperarClave.setForeground(new Color(190,190,190));
         }
 

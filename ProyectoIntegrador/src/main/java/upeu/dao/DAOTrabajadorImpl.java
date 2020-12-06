@@ -25,7 +25,7 @@ public class DAOTrabajadorImpl extends Conexion implements DAOTrabajador {
     }
 
     @Override
-    public Trabajador buscarProv(int id) {
+    public Trabajador buscarTrabajador(int id) {
         Trabajador t = new Trabajador();
         try {
             PreparedStatement pstmt = conectar().prepareStatement("");

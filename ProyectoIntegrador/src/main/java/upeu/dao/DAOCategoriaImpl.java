@@ -32,7 +32,7 @@ public class DAOCategoriaImpl extends Conexion implements DAOCategoria {
     }
 
     @Override
-    public Categoria buscarProv(int id) {
+    public Categoria buscarCategoria(int id) {
         Categoria cat = new Categoria();
         try {
             PreparedStatement pstmt = conectar().prepareStatement("SELECT * FROM categoria WHERE IDC = "+id+"");
