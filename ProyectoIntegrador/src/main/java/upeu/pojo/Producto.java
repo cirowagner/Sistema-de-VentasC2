@@ -8,7 +8,7 @@ public class Producto extends Categoria{
     private double PRECIO_Prod ;
     private String STOCK_Prod ;
     private String CONTROL_Stock ;
-    private int IDC_F ;
+    private int IDC_FK;
 
     public int getID_Prod() {
         return ID_Prod;
@@ -58,11 +58,11 @@ public class Producto extends Categoria{
         this.CONTROL_Stock = CONTROL_Stock;
     }
 
-    public int getIDC_F() {
-        return IDC_F;
+    public int getIDC_FK() {
+        return IDC_FK;
     }
 
-    public void setIDC_F(int IDC_F) {
-        this.IDC_F = IDC_F;
+    public void setIDC_FK(int IDC_FK) {
+        this.IDC_FK = IDC_FK;
     }
 }

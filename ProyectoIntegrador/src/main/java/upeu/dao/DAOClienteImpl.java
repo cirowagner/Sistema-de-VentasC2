@@ -75,7 +75,7 @@ public class DAOClienteImpl extends Conexion implements DAOCliente {
     @Override
     public void eliminar(Cliente clt) {
         try {
-            PreparedStatement pstmt = conectar().prepareStatement("DELETE FROM cliente c, persona p, WHERE c.IDP_F = p.IDP and IDP = ?");
+            PreparedStatement pstmt = conectar().prepareStatement("DELETE FROM cliente WHERE IDC = ?");
             pstmt.executeUpdate();
         }catch (Exception e){
             JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());

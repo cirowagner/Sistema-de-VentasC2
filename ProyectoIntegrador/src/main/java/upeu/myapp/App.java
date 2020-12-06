@@ -1,6 +1,10 @@
 package upeu.myapp;
 
+import upeu.dao.DAOCategoriaImpl;
 import upeu.gui.login.Ingresar;
+import upeu.interfaces.DAOCategoria;
+import upeu.pojo.Categoria;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -23,6 +27,11 @@ public class App {
                     runI.setVisible(true);
                     runI.setLocationRelativeTo(null);
                     runI.setResizable(true);
+
+                    /*DAOCategoria dao = new DAOCategoriaImpl();
+                    for(Categoria l : dao.listar()){
+                        System.out.println("Nombre C: "+l.getNombreC());
+                    }*/
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Error : " + e.getMessage());
                 }
