@@ -33,6 +33,7 @@ public class CargarVentana extends JFrame implements Runnable{
                 new VentanaPrincipalCliente().repaint();
                 break;
             }
+            this.setVisible(false);
         }catch (InterruptedException r){
             JOptionPane.showMessageDialog(null,"Error al cargar>> "+r.getMessage());
         }

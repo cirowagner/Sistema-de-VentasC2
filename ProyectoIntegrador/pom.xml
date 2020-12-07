@@ -50,6 +50,7 @@
         <targetPath>${project.build.directory}</targetPath><!-- to -->
         <includes><!-- what -->
           <include>DB/*.db</include>
+          <include>imagenes/</include>
         </includes>
       </resource>
     </resources>

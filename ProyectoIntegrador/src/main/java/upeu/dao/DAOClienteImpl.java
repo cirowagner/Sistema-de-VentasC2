@@ -15,7 +15,7 @@ public class DAOClienteImpl extends Conexion implements DAOCliente {
     public List<Cliente> listar() {
         List<Cliente> lista = new ArrayList<>();
         try {
-            PreparedStatement pstmt = conectar().prepareStatement("SELECT * FROM cliente c, persona p WHERE c.IDP_F = p.IDP");
+            PreparedStatement pstmt = conectar().prepareStatement("SELECT * FROM cliente c, persona p WHERE c.IDP_F = p.IDP and c.ESTADO_Cliente = 1");
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()){
                 Cliente clt = new Cliente();
@@ -108,7 +108,7 @@ public class DAOClienteImpl extends Conexion implements DAOCliente {
     @Override
     public void eliminar(Cliente clt) {
         try {
-            PreparedStatement pstmt = conectar().prepareStatement("DELETE FROM cliente WHERE IDC = ?");
+            PreparedStatement pstmt = conectar().prepareStatement("UPDATE cliente SET ESTADO_Cliente = 0 WHERE IDC = ?");
             pstmt.setInt(1, clt.getIdc());
             pstmt.executeUpdate();
         }catch (Exception e){

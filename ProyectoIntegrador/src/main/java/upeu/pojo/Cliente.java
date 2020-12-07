@@ -5,6 +5,7 @@ public class Cliente extends Persona{
     private int idc;
     private String codC;
     private String tipoC;
+    private int estado_Cliente;
     private int idp_F;
 
     public int getIdc() {
@@ -29,6 +30,14 @@ public class Cliente extends Persona{
 
     public void setTipoC(String tipoC) {
         this.tipoC = tipoC;
+    }
+
+    public int getEstado_Cliente() {
+        return estado_Cliente;
+    }
+
+    public void setEstado_Cliente(int estado_Cliente) {
+        this.estado_Cliente = estado_Cliente;
     }
 
     public int getIdp_F() {
