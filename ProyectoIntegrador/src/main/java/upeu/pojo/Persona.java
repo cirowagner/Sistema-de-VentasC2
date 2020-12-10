@@ -1,31 +1,30 @@
 package upeu.pojo;
 
 public class Persona {
-    private int idp;
-    private String nombre;
+    private int id_Persona;
+    private String nombres;
     private String ap_Paterno;
     private String ap_Materno;
-    private String f_Nacimiento;
+    private String fechaNacimiento;
     private String sexo;
-    private String direction;
-    private int telefono;
-    private String correo;
-    private String dni;
+    private String documento;
+    private String direccion;
+    private int celular;
 
-    public int getIdp() {
-        return idp;
+    public int getId_Persona() {
+        return id_Persona;
     }
 
-    public void setIdp(int idp) {
-        this.idp = idp;
+    public void setId_Persona(int id_Persona) {
+        this.id_Persona = id_Persona;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombres() {
+        return nombres;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
     }
 
     public String getAp_Paterno() {
@@ -44,12 +43,12 @@ public class Persona {
         this.ap_Materno = ap_Materno;
     }
 
-    public String getF_Nacimiento() {
-        return f_Nacimiento;
+    public String getFechaNacimiento() {
+        return fechaNacimiento;
     }
 
-    public void setF_Nacimiento(String f_Nacimiento) {
-        this.f_Nacimiento = f_Nacimiento;
+    public void setFechaNacimiento(String fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
 
     public String getSexo() {
@@ -60,35 +59,42 @@ public class Persona {
         this.sexo = sexo;
     }
 
-    public String getDirection() {
-        return direction;
+    public String getDocumento() {
+        return documento;
     }
 
-    public void setDirection(String direction) {
-        this.direction = direction;
+    public void setDocumento(String documento) {
+        this.documento = documento;
     }
 
-    public int getTelefono() {
-        return telefono;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public void setTelefono(int telefono) {
-        this.telefono = telefono;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
-    public String getCorreo() {
-        return correo;
+    public int getCelular() {
+        return celular;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setCelular(int celular) {
+        this.celular = celular;
     }
 
-    public String getDni() {
-        return dni;
-    }
-
-    public void setDni(String dni) {
-        this.dni = dni;
+    @Override
+    public String toString() {
+        return "Persona{" +
+                "id_Persona=" + id_Persona +
+                ", nombres='" + nombres + '\'' +
+                ", ap_Paterno='" + ap_Paterno + '\'' +
+                ", ap_Materno='" + ap_Materno + '\'' +
+                ", fechaNacimiento='" + fechaNacimiento + '\'' +
+                ", sexo='" + sexo + '\'' +
+                ", documento='" + documento + '\'' +
+                ", direccion='" + direccion + '\'' +
+                ", celular=" + celular +
+                '}';
     }
 }

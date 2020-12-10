@@ -1,68 +1,93 @@
 package upeu.pojo;
 
+import java.util.Arrays;
+
 public class Producto extends Categoria{
 
-    private int ID_Prod ;
-    private String NOMBRE_Prod ;
-    private String TIPO_Prod ;
-    private double PRECIO_Prod ;
-    private String STOCK_Prod ;
-    private String CONTROL_Stock ;
-    private int IDC_FK;
+    private int id_Producto;
+    private String nombre_Producto;
+    private byte[] imagen_Producto;
+    private double precio_Producto;
+    private int estado_Producto;
+    private int StockInicial_Producto;
+    private int StockActual_Producto;
+    private int ID_CategoriaFK;
 
-    public int getID_Prod() {
-        return ID_Prod;
+    public int getId_Producto() {
+        return id_Producto;
     }
 
-    public void setID_Prod(int ID_Prod) {
-        this.ID_Prod = ID_Prod;
+    public void setId_Producto(int id_Producto) {
+        this.id_Producto = id_Producto;
     }
 
-    public String getNOMBRE_Prod() {
-        return NOMBRE_Prod;
+    public String getNombre_Producto() {
+        return nombre_Producto;
     }
 
-    public void setNOMBRE_Prod(String NOMBRE_Prod) {
-        this.NOMBRE_Prod = NOMBRE_Prod;
+    public void setNombre_Producto(String nombre_Producto) {
+        this.nombre_Producto = nombre_Producto;
     }
 
-    public String getTIPO_Prod() {
-        return TIPO_Prod;
+    public byte[] getImagen_Producto() {
+        return imagen_Producto;
     }
 
-    public void setTIPO_Prod(String TIPO_Prod) {
-        this.TIPO_Prod = TIPO_Prod;
+    public void setImagen_Producto(byte[] imagen_Producto) {
+        this.imagen_Producto = imagen_Producto;
     }
 
-    public Double getPRECIO_Prod() {
-        return PRECIO_Prod;
+    public double getPrecio_Producto() {
+        return precio_Producto;
     }
 
-    public void setPRECIO_Prod(Double PRECIO_Prod) {
-        this.PRECIO_Prod = PRECIO_Prod;
+    public void setPrecio_Producto(double precio_Producto) {
+        this.precio_Producto = precio_Producto;
     }
 
-    public String getSTOCK_Prod() {
-        return STOCK_Prod;
+    public int getEstado_Producto() {
+        return estado_Producto;
     }
 
-    public void setSTOCK_Prod(String STOCK_Prod) {
-        this.STOCK_Prod = STOCK_Prod;
+    public void setEstado_Producto(int estado_Producto) {
+        this.estado_Producto = estado_Producto;
     }
 
-    public String getCONTROL_Stock() {
-        return CONTROL_Stock;
+    public int getStockInicial_Producto() {
+        return StockInicial_Producto;
     }
 
-    public void setCONTROL_Stock(String CONTROL_Stock) {
-        this.CONTROL_Stock = CONTROL_Stock;
+    public void setStockInicial_Producto(int stockInicial_Producto) {
+        StockInicial_Producto = stockInicial_Producto;
     }
 
-    public int getIDC_FK() {
-        return IDC_FK;
+    public int getStockActual_Producto() {
+        return StockActual_Producto;
     }
 
-    public void setIDC_FK(int IDC_FK) {
-        this.IDC_FK = IDC_FK;
+    public void setStockActual_Producto(int stockActual_Producto) {
+        StockActual_Producto = stockActual_Producto;
+    }
+
+    public int getID_CategoriaFK() {
+        return ID_CategoriaFK;
+    }
+
+    public void setID_CategoriaFK(int ID_CategoriaFK) {
+        this.ID_CategoriaFK = ID_CategoriaFK;
+    }
+
+    @Override
+    public String toString() {
+        return "Producto{" +
+                "id_Producto=" + id_Producto +
+                ", nombre_Producto='" + nombre_Producto + '\'' +
+                ", imagen_Producto=" + Arrays.toString(imagen_Producto) +
+                ", precio_Producto=" + precio_Producto +
+                ", estado_Producto=" + estado_Producto +
+                ", StockInicial_Producto=" + StockInicial_Producto +
+                ", StockActual_Producto=" + StockActual_Producto +
+                ", ID_CategoriaFK=" + ID_CategoriaFK +
+                '}';
     }
 }

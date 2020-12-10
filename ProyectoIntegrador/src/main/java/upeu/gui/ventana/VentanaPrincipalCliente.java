@@ -57,14 +57,10 @@ public class VentanaPrincipalCliente extends JFrame implements MouseMotionListen
     }
 
     JPanel pnl3 = new JPanel();
-    JButton bt3 = new JButton("3");
-    JButton bt4 = new JButton("3.1");
     public void configuracion (){
         pnl3.setLayout(null);
         pnl3.setBounds(10,10,250,540);
         pnl3.setBackground(new Color(0,0,200,200));
-        //pnl3.add(bt3);
-        //pnl3.add(bt4);
         panelPricipal.add(pnl3);
     }
 
