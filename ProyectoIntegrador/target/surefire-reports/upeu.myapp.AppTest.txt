@@ -1,4 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: upeu.myapp.AppTest
 -------------------------------------------------------------------------------
+<<<<<<< HEAD
 Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.161 s - in upeu.myapp.AppTest
+=======
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.078 s - in upeu.myapp.AppTest
+>>>>>>> 1e3aa8c6ccb12426a28a5f3871ec9816d4ed0462

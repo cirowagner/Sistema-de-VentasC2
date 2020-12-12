@@ -4,10 +4,11 @@ import upeu.interfaces.DAOPersona;
 import upeu.pojo.Persona;
 import upeu.conexion.Conexion;
 import javax.swing.*;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DAOPersonaImpl extends Conexion implements DAOPersona{
     @Override
@@ -18,21 +19,24 @@ public class DAOPersonaImpl extends Conexion implements DAOPersona{
             ResultSet rs = pstmt.executeQuery();
             while(rs.next()){
                 Persona p = new Persona();
-                p.setNombre(rs.getString(2));
+                p.setId_Persona(rs.getInt(1));
+                p.setNombres(rs.getString(2));
                 p.setAp_Paterno(rs.getString(3));
                 p.setAp_Materno(rs.getString(4));
-                p.setF_Nacimiento(rs.getString(5));
+                p.setFechaNacimiento(rs.getString(5));
                 p.setSexo(rs.getString(6));
-                p.setDirection(rs.getString(7));
-                p.setTelefono(rs.getInt(8));
-                p.setCorreo(rs.getString(9));
-                p.setDni(rs.getString(10));
+                p.setDocumento(rs.getString(7));
+                p.setCelular(rs.getInt(8));
+                p.setDireccion(rs.getString(9));
                 lista.add(p);
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
+        }catch (SQLException e){
+            JOptionPane.showMessageDialog(null,"Error:: "+e.getMessage());
+        }catch (Exception e){
+            Logger.getLogger(DAOPersonaImpl.class.getName()).log(Level.SEVERE, null, e);
+        }finally {
+            cerrarConexion(conectar());
         }
-        cerrarConexion(conectar());
         return lista; 
     }
 
@@ -40,63 +44,70 @@ public class DAOPersonaImpl extends Conexion implements DAOPersona{
     public void registrar(Persona p) {
         try {
             PreparedStatement pstmt = conectar().prepareStatement("INSERT INTO persona(" +
-                    "NOMBRE,ApPATERNO,ApMATERNO,FECHAN,SEXO,DIRECCION,TELEFONO,CORREO,DNI)" +
-                    " VALUES(?,?,?,?,?,?,?,?,?)");
-            pstmt.setString(1, p.getNombre());
+                    "Nombres, ApPaterno, ApMaterno, FechaNacimeinto, Sexo, Documento, Direccion, Celular)" +
+                    " VALUES(?,?,?,?,?,?,?,?)");
+            pstmt.setString(1, p.getNombres());
             pstmt.setString(2, p.getAp_Paterno());
             pstmt.setString(3, p.getAp_Materno());
-            pstmt.setString(4, p.getF_Nacimiento());
+            pstmt.setString(4, p.getFechaNacimiento());
             pstmt.setString(5, p.getSexo());
-            pstmt.setString(6, p.getDirection());
-            pstmt.setInt(7, p.getTelefono());
-            pstmt.setString(8, p.getCorreo());
-            pstmt.setString(9, p.getDni());
+            pstmt.setString(6, p.getDocumento());
+            pstmt.setInt(7, p.getCelular());
+            pstmt.setString(8, p.getDireccion());
             pstmt.executeUpdate();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
+        }catch (SQLException e){
+            JOptionPane.showMessageDialog(null,"Error:: "+e.getMessage());
+        }catch (Exception e){
+            Logger.getLogger(DAOPersonaImpl.class.getName()).log(Level.SEVERE, null, e);
+        }finally {
+            cerrarConexion(conectar());
         }
-        cerrarConexion(conectar());
     }
 
     @Override
     public void actualizar(Persona p) {
         try {
             PreparedStatement pstmt =conectar().prepareStatement("UPDATE persona SET"+
-                   " NOMBRE = ?, " +
-                   " ApPATERNO = ?, " +
-                   " ApMATERNO = ?, " +
-                   " FECHAN = ?, " +
-                   " SEXO  = ?, " +
-                   " DIRECCION  = ?, " +
-                   " TELEFONO = ?, " +
-                   " CORREO  = ?, " +
-                   " DNI  = ? " +
-                   " WHERE IDP = ?");
-            pstmt.setString(1, p.getNombre());
+                   " Nombres = ?, " +
+                   " ApPaterno = ?, " +
+                   " ApMaterno = ?, " +
+                   " FechaNacimiento = ?, " +
+                   " Sexo = ?, " +
+                   " Documento  = ?, " +
+                   " Direccion = ?, " +
+                   " Celular = ? " +
+                   " WHERE ID_Persona = ?");
+            pstmt.setString(1, p.getNombres());
             pstmt.setString(2, p.getAp_Paterno());
             pstmt.setString(3, p.getAp_Materno());
-            pstmt.setString(4, p.getF_Nacimiento());
+            pstmt.setString(4, p.getFechaNacimiento());
             pstmt.setString(5, p.getSexo());
-            pstmt.setString(6, p.getDirection());
-            pstmt.setInt(7, p.getTelefono());
-            pstmt.setString(8, p.getCorreo());
-            pstmt.setString(9, p.getDni());  
+            pstmt.setString(6, p.getDocumento());
+            pstmt.setString(7, p.getDireccion());
+            pstmt.setInt(8, p.getCelular());
+            pstmt.setInt(9, p.getId_Persona());
             pstmt.executeUpdate();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
+        }catch (SQLException e){
+            JOptionPane.showMessageDialog(null,"Error:: "+e.getMessage());
+        }catch (Exception e){
+            Logger.getLogger(DAOPersonaImpl.class.getName()).log(Level.SEVERE, null, e);
+        }finally {
+            cerrarConexion(conectar());
         }
-        cerrarConexion(conectar());
     }
 
     @Override
     public void eliminar(Persona p) {
         try {
-            PreparedStatement pstmt = conectar().prepareStatement("DELETE FROM persona WHERE IDP = ?");
-            pstmt.setInt(1, p.getIdp());
+            PreparedStatement pstmt = conectar().prepareStatement("DELETE FROM persona WHERE ID_Persona = ?");
+            pstmt.setInt(1, p.getId_Persona());
             pstmt.executeUpdate();
+        }catch (SQLException e){
+            JOptionPane.showMessageDialog(null,"Error:: "+e.getMessage());
         }catch (Exception e){
-            JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
+            Logger.getLogger(DAOPersonaImpl.class.getName()).log(Level.SEVERE, null, e);
+        }finally {
+            cerrarConexion(conectar());
         }
-        cerrarConexion(conectar());
     }
 }

@@ -10,7 +10,7 @@ public class Conexion {
             Class.forName("org.sqlite.JDBC");
             if(conn == null){
                 conn = DriverManager.getConnection("jdbc:sqlite:DB\\DataBases.db");
-                conn.createStatement().execute("PRAGMA Foreign_keys = ON;");
+                //conn.createStatement().execute("PRAGMA Foreign_keys = ON;");
                 System.out.println("|> Conexion exitosa...100%");
             }   
         }catch (SQLException | ClassNotFoundException e){

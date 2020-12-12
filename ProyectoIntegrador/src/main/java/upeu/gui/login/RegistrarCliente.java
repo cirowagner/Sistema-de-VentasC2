@@ -12,9 +12,9 @@ public class RegistrarCliente extends JPanel implements MouseListener, ActionLis
 
     public RegistrarCliente(){
         setBounds(0,0,1005,570);
-        setBackground(Color.CYAN);
         setLayout(null);
         initComponents();
+        setVisible(false);
     }
 
     public void initComponents(){

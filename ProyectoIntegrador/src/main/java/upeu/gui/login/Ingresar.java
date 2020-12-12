@@ -1,7 +1,10 @@
 package upeu.gui.login;
 
+import upeu.gui.admin.AdministracionPanel;
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.font.TextAttribute;
@@ -24,16 +27,16 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
     }
 
     ImageIcon imagen = new ImageIcon("imagenes/login/GIF2.gif"); //Creamos un objeto que porte la imagen Fondo2.0.jpg
-    JLabel lbFondo = new JLabel(imagen); // Creamos un objeto JLabel y le pasamos al constructor el objeto con la imagen
+    JLabel lbFondo = new JLabel(imagen); // Creamos un objeto JLabel y le pasamos a su constructor, el objeto imagen
     JPanelSlider panelSl = new JPanelSlider();
     JPanel panelIngresar = new JPanel();
     RegistrarCliente panelCliente = new RegistrarCliente();
-    RegistrarTrabajador panelTrbjador = new RegistrarTrabajador();
+    AdministracionPanel panelTrbjador = new AdministracionPanel();
     public void fondoR() {
 
         panelSl.setBounds(0,0,1005,570);
         panelSl.addMouseMotionListener(this);
-        panelSl.setBackground(Color.RED);
+        panelSl.setBackground(Color.CYAN);
         panelSl.setLayout(null);
         panelSl.addMouseListener(this);
 
@@ -45,7 +48,7 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
         panelIngresar.setLayout(null);
         lbFondo.setLayout(null);
 
-        panelTrbjador.btnRegresar.addActionListener(this);
+        panelTrbjador.btnSalir.addActionListener(this);
         panelCliente.btnRegresar.addActionListener(this);
         panelSl.add(panelIngresar);
         panelSl.add(panelCliente);
@@ -140,41 +143,26 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
 
     ImageIcon icoSalir = new ImageIcon("imagenes/login/icoSalir.png");
     JButton btSalir = new JButton(icoSalir);
-    JLabel recuperarClave = new JLabel("Olvidaste la contraseña?");
+
     //JLabel logoUPeU = new JLabel(new ImageIcon("imagenes/logo.gif"));
 
-    JLabel lbRegistrar = new JLabel("Registrarce");
-    JLabel lbRgstrCliente = new JLabel("Cliente");
-    JLabel lbRgstrEmpleado = new JLabel("Empleado");
+    JLabel lbRegistrarCliente = new JLabel("Registrarce");
+    JLabel lbAdmin = new JLabel("ADM");
     Font fuenteRs = new Font("Arial",Font.PLAIN,17);
     Color coloRs = new Color(255,255,255);
 
     public void utils(){
-        recuperarClave.setBounds(157,290,155,20);
-        recuperarClave.setFont(new Font("Arial",Font.PLAIN,12));
-        recuperarClave.setForeground(new Color(190,190,190));
-        recuperarClave.addMouseListener(this);
-        pnlIngrs.add(recuperarClave);
+        lbRegistrarCliente.setBounds(140,370,135,25);
+        lbRegistrarCliente.setForeground(coloRs);
+        lbRegistrarCliente.setFont(fuenteRs);
+        lbRegistrarCliente.addMouseListener(this);
+        pnlIngrs.add(lbRegistrarCliente);
 
-        lbRegistrar.setBounds(140,370,135,25);
-        lbRegistrar.setForeground(coloRs);
-        lbRegistrar.setFont(fuenteRs);
-        lbRegistrar.addMouseListener(this);
-        pnlIngrs.add(lbRegistrar);
-
-        lbRgstrCliente.setBounds(83,375,100,25);
-        lbRgstrCliente.setVisible(false);
-        lbRgstrCliente.setForeground(coloRs);
-        lbRgstrCliente.setFont(fuenteRs);
-        lbRgstrCliente.addMouseListener(this);
-        pnlIngrs.add(lbRgstrCliente);
-
-        lbRgstrEmpleado.setBounds(218,375,100,25);
-        lbRgstrEmpleado.setVisible(false);
-        lbRgstrEmpleado.setForeground(coloRs);
-        lbRgstrEmpleado.setFont(fuenteRs);
-        lbRgstrEmpleado.addMouseListener(this);
-        pnlIngrs.add(lbRgstrEmpleado);
+        lbAdmin.setBounds(305,5,40,25);
+        lbAdmin.setForeground(coloRs);
+        lbAdmin.setFont(fuenteRs);
+        lbAdmin.addMouseListener(this);
+        pnlIngrs.add(lbAdmin);
 
         btSalir.setBounds(10,510,45,50);
         btSalir.setIcon(new ImageIcon(icoSalir.getImage().getScaledInstance(btSalir.getWidth(), btSalir.getHeight(), Image.SCALE_SMOOTH)));
@@ -182,6 +170,91 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
         btSalir.setContentAreaFilled(false);
         btSalir.addActionListener(this);
         lbFondo.add(btSalir);
+
+        lbRecuperarClave.setBounds(157,290,155,20);
+        lbRecuperarClave.setFont(new Font("Arial",Font.PLAIN,12));
+        lbRecuperarClave.setForeground(new Color(190,190,190));
+        lbRecuperarClave.addMouseListener(this);
+        pnlIngrs.add(lbRecuperarClave);
+    }
+
+    JLabel lbRecuperarClave = new JLabel("Olvidaste tu contraseña?");
+    JFrame frameRClave = new JFrame();
+    JPanel pnlRClave = new JPanel();
+    JLabel lbLogoRC = new JLabel("logo");
+    JLabel lbNombreRC = new JLabel("Usuario",SwingConstants.CENTER);
+    JTextField tfNombreRC = new JTextField();
+    JLabel lbCorreoRC = new JLabel("Correo",SwingConstants.CENTER);
+    JTextField tfCoreoRC = new JTextField();
+    JButton btEnviarRC = new JButton("Enviar");
+    JTextField tfClaveRC = new JTextField();
+    JButton btSalirRC = new JButton("Salir");
+    JSeparator spdrRC1 = new JSeparator();
+    JSeparator spdrRC2 = new JSeparator();
+    public void recuperarClave(){
+        frameRClave.setUndecorated(true);
+        frameRClave.setSize(400,500);
+        frameRClave.setVisible(true);
+        frameRClave.setBackground(new Color(20,0,0,231));
+        frameRClave.addMouseMotionListener(this);
+        frameRClave.addMouseListener(this);
+        frameRClave.setLocationRelativeTo(null);
+        frameRClave.setLayout(new BorderLayout());
+
+        pnlRClave.setOpaque(false);
+        pnlRClave.setLayout(null);
+        frameRClave.add(pnlRClave,BorderLayout.CENTER);
+
+        lbLogoRC.setBounds(150,20,100,100);
+        lbLogoRC.setOpaque(true);
+        pnlRClave.add(lbLogoRC);
+
+        lbNombreRC.setBounds(100,150,200,30);
+        lbNombreRC.setFont(fuente);
+        lbNombreRC.setForeground(fuenteColor);
+        pnlRClave.add(lbNombreRC);
+
+        tfNombreRC.setBounds(100,178,200,25);
+        tfNombreRC.setFont(fuenteTf);
+        tfNombreRC.setForeground(fuenteColor);
+        tfNombreRC.setBorder(null);
+        tfNombreRC.setOpaque(false);
+        tfNombreRC.setHorizontalAlignment(SwingConstants.CENTER);
+        spdrRC1.setBounds(100,203,200,2);
+        pnlRClave.add(spdrRC1);
+        pnlRClave.add(tfNombreRC);
+
+        lbCorreoRC.setBounds(100,225,200,30);
+        lbCorreoRC.setFont(fuente);
+        lbCorreoRC.setForeground(fuenteColor);
+        pnlRClave.add(lbCorreoRC);
+
+        tfCoreoRC.setBounds(100,253,200,25);
+        tfCoreoRC.setFont(fuenteTf);
+        tfCoreoRC.setForeground(fuenteColor);
+        tfCoreoRC.setBorder(null);
+        tfCoreoRC.setOpaque(false);
+        tfCoreoRC.setHorizontalAlignment(SwingConstants.CENTER);
+        spdrRC2.setBounds(100,278,200,2);
+        pnlRClave.add(spdrRC2);
+        pnlRClave.add(tfCoreoRC);
+
+        btEnviarRC.setBounds(100,305,200,30);
+        btEnviarRC.setBackground(new Color(0,0,0,190));
+        btEnviarRC.addActionListener(this);
+        pnlRClave.add(btEnviarRC);
+
+        tfClaveRC.setBounds(100,350,200,60);
+        tfClaveRC.setHorizontalAlignment(SwingConstants.CENTER);
+        tfClaveRC.setFont(new Font("Sitka Banner",Font.BOLD,30));
+        tfClaveRC.setBorder(new TitledBorder(""));
+        tfClaveRC.setBackground(new Color(25, 10, 72,190));
+        pnlRClave.add(tfClaveRC);
+
+        btSalirRC.setBounds(150,445,100,25);
+        btSalirRC.setBackground(new Color(0,0,0,190));
+        btSalirRC.addActionListener(this);
+        pnlRClave.add(btSalirRC);
     }
 
     @Override
@@ -191,17 +264,13 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
             this.setVisible(false);
         }
 
-        if(e.getSource() == panelTrbjador.btnRegresar){
+        if(e.getSource() == panelTrbjador.btnSalir){
             panelSl.nextPanel(5,panelIngresar,panelSl.right);
-            lbRgstrEmpleado.setVisible(false);
-            lbRgstrCliente.setVisible(false);
-            lbRegistrar.setVisible(true);
+            lbRegistrarCliente.setVisible(true);
         }
         if (e.getSource() == panelCliente.btnRegresar){
             panelSl.nextPanel(5,panelIngresar,panelSl.right);
-            lbRgstrEmpleado.setVisible(false);
-            lbRgstrCliente.setVisible(false);
-            lbRegistrar.setVisible(true);
+            lbRegistrarCliente.setVisible(true);
         }
 
         if (e.getSource() == verClave){
@@ -214,6 +283,11 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
             }
         }
 
+        if(e.getSource() == btSalirRC){
+            frameRClave.dispose();
+            this.setEnabled(true);
+        }
+
         if(e.getSource() == btSalir){
             System.exit(0);
         }
@@ -221,17 +295,14 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if(e.getSource() == lbRgstrCliente){
+        if(e.getSource() == lbRegistrarCliente){
             panelSl.nextPanel(5,panelCliente,panelSl.left);
-        }
-        if(e.getSource() == lbRgstrEmpleado){
-            panelSl.nextPanel(5,panelTrbjador,panelSl.left);
+            panelCliente.setVisible(true);
         }
 
-        if(e.getSource() == lbRegistrar){
-            lbRegistrar.setVisible(false);
-            lbRgstrCliente.setVisible(true);
-            lbRgstrEmpleado.setVisible(true);
+        if(e.getSource() == lbAdmin){
+            panelSl.nextPanel(5,panelTrbjador,panelSl.left);
+            panelTrbjador.setVisible(true);
         }
 
         if(e.getSource() == verClave){
@@ -240,6 +311,11 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
             }else{
                 verClave.setIcon(Uneye31);
             }
+        }
+
+        if(e.getSource() == lbRecuperarClave){
+            recuperarClave();
+            this.setEnabled(false);
         }
     }
 
@@ -250,6 +326,12 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
             int x = e.getXOnScreen();
             int y = e.getYOnScreen();
             this.setLocation(x - xx, y -xy);
+        }
+
+        if(e.getSource() == frameRClave){
+            int x = e.getXOnScreen();
+            int y = e.getYOnScreen();
+            frameRClave.setLocation(x - xx, y -xy);
         }
     }
 
@@ -272,6 +354,11 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
             xx = e.getX();
             xy = e.getY();
         }
+
+        if(e.getSource() == frameRClave){
+            xx = e.getX();
+            xy = e.getY();
+        }
     }
 
     @Override
@@ -282,24 +369,22 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
     Font fontEntered = new Font("Arial",Font.BOLD,17);
     @Override
     public void mouseEntered(MouseEvent e) {
-        if (e.getSource() == lbRegistrar){
-            lbRegistrar.setFont(fontEntered);
+        if (e.getSource() == lbRegistrarCliente){
+            lbRegistrarCliente.setFont(fontEntered);
         }
-        if(e.getSource() == lbRgstrCliente){
-            lbRgstrCliente.setFont(fontEntered);
-        }
-        if(e.getSource() == lbRgstrEmpleado){
-            lbRgstrEmpleado.setFont(fontEntered);
+
+        if(e.getSource() == lbAdmin){
+            lbAdmin.setFont(fontEntered);
         }
 
         //nice :3
-        if(e.getSource() == recuperarClave){
-            recuperarClave.setFont(new Font("Arial",Font.PLAIN,13));
-            Font font = recuperarClave.getFont();
+        if(e.getSource() == lbRecuperarClave){
+            lbRecuperarClave.setFont(new Font("Arial",Font.PLAIN,13));
+            Font font = lbRecuperarClave.getFont();
             Map attributes = font.getAttributes();
             attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
-            recuperarClave.setFont(font.deriveFont(attributes));
-            recuperarClave.setForeground(coloRs);
+            lbRecuperarClave.setFont(font.deriveFont(attributes));
+            lbRecuperarClave.setForeground(coloRs);
         }
 
         if (e.getSource() == verClave){
@@ -314,9 +399,9 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
 
     @Override
     public void mouseExited(MouseEvent e) {
-        if(e.getSource() == recuperarClave){
-            recuperarClave.setFont(new Font("Arial",Font.PLAIN,12));
-            recuperarClave.setForeground(new Color(190,190,190));
+        if(e.getSource() == lbRecuperarClave){
+            lbRecuperarClave.setFont(new Font("Arial",Font.PLAIN,12));
+            lbRecuperarClave.setForeground(new Color(190,190,190));
         }
 
         if (e.getSource() == verClave){
@@ -328,14 +413,11 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
         }
         verClave.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 
-        if (e.getSource() == lbRegistrar){
-            lbRegistrar.setFont(fuenteRs);
+        if (e.getSource() == lbRegistrarCliente){
+            lbRegistrarCliente.setFont(fuenteRs);
         }
-        if(e.getSource() == lbRgstrCliente){
-            lbRgstrCliente.setFont(fuenteRs);
-        }
-        if(e.getSource() == lbRgstrEmpleado){
-            lbRgstrEmpleado.setFont(fuenteRs);
+        if(e.getSource() == lbAdmin){
+            lbAdmin.setFont(fuenteRs);
         }
     }
 

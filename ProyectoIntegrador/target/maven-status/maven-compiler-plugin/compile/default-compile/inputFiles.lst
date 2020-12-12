@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\Usuario\Documents\NetBeansProjects\Proyecto_Integrador\Sistema-de-VentasC2\ProyectoIntegrador\src\main\java\upeu\gui\login\CargarVentana.java
 C:\Users\Usuario\Documents\NetBeansProjects\Proyecto_Integrador\Sistema-de-VentasC2\ProyectoIntegrador\src\main\java\upeu\interfaces\DAOCliente.java
 C:\Users\Usuario\Documents\NetBeansProjects\Proyecto_Integrador\Sistema-de-VentasC2\ProyectoIntegrador\src\main\java\upeu\pojo\Proveedor.java
@@ -29,3 +30,34 @@ C:\Users\Usuario\Documents\NetBeansProjects\Proyecto_Integrador\Sistema-de-Venta
 C:\Users\Usuario\Documents\NetBeansProjects\Proyecto_Integrador\Sistema-de-VentasC2\ProyectoIntegrador\src\main\java\upeu\interfaces\DAOProducto.java
 C:\Users\Usuario\Documents\NetBeansProjects\Proyecto_Integrador\Sistema-de-VentasC2\ProyectoIntegrador\src\main\java\upeu\dao\DAOClienteImpl.java
 C:\Users\Usuario\Documents\NetBeansProjects\Proyecto_Integrador\Sistema-de-VentasC2\ProyectoIntegrador\src\main\java\upeu\myapp\MCategoriaPrueba.java
+=======
+D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\gui\login\RegistrarCliente.java
+D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\dao\DAOProductoImpl.java
+D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\gui\login\CargarVentana.java
+D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\dao\DAOUsuarioImpl.java
+D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\pojo\Producto.java
+D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\conexion\Conexion.java
+D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\gui\admin\TablaAdmin.java
+D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\interfaces\DAOVenta.java
+D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\dao\DAODetalleVImpl.java
+D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\dao\DAOCategoriaImpl.java
+D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\interfaces\DAOUsuario.java
+D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\pojo\Usuario.java
+D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\myapp\MCategoriaPrueba.java
+D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\gui\admin\AdministracionPanel.java
+D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\interfaces\DAOProducto.java
+D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\dao\DAOPersonaImpl.java
+D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\gui\MainR.java
+D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\interfaces\DAOPersona.java
+D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\gui\login\Ingresar.java
+D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\gui\ventana\VentanaPrincipalCliente.java
+D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\pojo\Categoria.java
+D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\pojo\DetalleVenta.java
+D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\pojo\Persona.java
+D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\myapp\App.java
+D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\interfaces\DAODetalleVenta.java
+D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\pojo\Venta.java
+D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\gui\login\JPanelSlider.java
+D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\interfaces\DAOCategoria.java
+D:\ZIROJAVA-SegundoCiclo\PROYECTO_INTEGRADOR\ProyectoIntegrador\src\main\java\upeu\dao\DAOVentaImpl.java
+>>>>>>> 1e3aa8c6ccb12426a28a5f3871ec9816d4ed0462
