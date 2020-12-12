@@ -1,4 +1,4 @@
-package upeu.gui.login;
+package upeu.gui.cargas;
 
 import upeu.gui.ventana.VentanaPrincipalCliente;
 
@@ -17,7 +17,7 @@ public class CargarVentana extends JFrame implements Runnable{
         fondo.setBounds(0,0,800,600);
         add(fondo);
 
-        //JLabel barra = new JLabel(new ImageIcon(""));
+        //JLabel barraCarga = new JLabel(new ImageIcon(""));
 
         carga = new Thread(this);
         carga.start();
@@ -33,7 +33,6 @@ public class CargarVentana extends JFrame implements Runnable{
                 new VentanaPrincipalCliente().repaint();
                 break;
             }
-            this.setVisible(false);
         }catch (InterruptedException r){
             JOptionPane.showMessageDialog(null,"Error al cargar>> "+r.getMessage());
         }

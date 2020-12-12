@@ -3,7 +3,7 @@ package upeu.pojo;
 public class Venta {
 
     private int id_Venta;
-    private int numeroComprovante_Venta;
+    private int numeroComprobante_Venta;
     private String fechaHora_Venta;
     private int estado_Venta;
     private double impuesto_Venta;
@@ -19,12 +19,12 @@ public class Venta {
         this.id_Venta = id_Venta;
     }
 
-    public int getNumeroComprovante_Venta() {
-        return numeroComprovante_Venta;
+    public int getNumeroComprobante_Venta() {
+        return numeroComprobante_Venta;
     }
 
-    public void setNumeroComprovante_Venta(int numeroComprovante_Venta) {
-        this.numeroComprovante_Venta = numeroComprovante_Venta;
+    public void setNumeroComprobante_Venta(int numeroComprobante_Venta) {
+        this.numeroComprobante_Venta = numeroComprobante_Venta;
     }
 
     public String getFechaHora_Venta() {
@@ -79,7 +79,7 @@ public class Venta {
     public String toString() {
         return "Venta{" +
                 "id_Venta=" + id_Venta +
-                ", numeroComprovante_Venta=" + numeroComprovante_Venta +
+                ", numeroComprovante_Venta=" + numeroComprobante_Venta +
                 ", fechaHora_Venta='" + fechaHora_Venta + '\'' +
                 ", estado_Venta=" + estado_Venta +
                 ", impuesto_Venta=" + impuesto_Venta +

@@ -1,5 +1,6 @@
 package upeu.myapp;
 
+import upeu.gui.cargas.CargarInicio;
 import upeu.gui.login.Ingresar;
 
 import javax.swing.*;
@@ -20,10 +21,10 @@ public class App {
                     System.out.println("Reporte Jhobany");
                     System.out.println("Reporte Ciro");
 
-                    Ingresar runI = new Ingresar();
+                    new CargarInicio();
+                    /*Ingresar runI = new Ingresar();
                     runI.setVisible(true);
-                    runI.setLocationRelativeTo(null);
-                    runI.setResizable(true);
+                    runI.setLocationRelativeTo(null);*/
 
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Error : " + e.getMessage());

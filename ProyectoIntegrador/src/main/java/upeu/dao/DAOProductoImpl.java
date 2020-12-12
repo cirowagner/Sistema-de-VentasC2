@@ -20,6 +20,7 @@ public class DAOProductoImpl extends Conexion implements DAOProducto {
         try {
             PreparedStatement pstmt = conectar().prepareStatement("SELECT * FROM producto");
             ResultSet rs = pstmt.executeQuery();
+
             while (rs.next()){
                 Producto prod = new Producto();
                 prod.setId_Producto(rs.getInt(1));
@@ -41,12 +42,14 @@ public class DAOProductoImpl extends Conexion implements DAOProducto {
         return listar;
     }
 
+
+
     @Override
     public Producto buscarProducto(int id) {
         Producto prod = new Producto();
         try {
             PreparedStatement pstmt = conectar().prepareStatement("SELECT * FROM" +
-                    " producto p, categoria c Where p.ID_CategoriaFK = c.ID_Categoria and ID_Producto = "+id+"");
+                    "producto p, categoria c Where p.ID_CategoriaFK = c.ID_Categoria and ID_Producto = "+id+"");
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()){
                 prod.setId_Producto(rs.getInt(1));
@@ -57,8 +60,8 @@ public class DAOProductoImpl extends Conexion implements DAOProducto {
                 prod.setStockActual_Producto(rs.getInt(7));
                 prod.setID_CategoriaFK(rs.getInt(8));
                 prod.setId_Categoria(rs.getInt(9));
-                prod.setNombre_Categoria(rs.getString(9));
-                prod.setCodigo_Categoria(rs.getString(10));
+                prod.setNombre_Categoria(rs.getString(10));
+                prod.setCodigo_Categoria(rs.getString(11));
             }
         }catch (SQLException e){
             JOptionPane.showMessageDialog(null,"Error:: "+e.getMessage());
@@ -73,7 +76,7 @@ public class DAOProductoImpl extends Conexion implements DAOProducto {
     public void registrar(Producto prod) {
         try {
             PreparedStatement pstmt = conectar().prepareStatement("INSERT INTO producto(" +
-                    "Nombre_Prod, Imagen_Prod, Precio_Prod, Estado_Prod, StockInicial_Prod, StockActual_Prod, ID_CategoriaFK)" +
+                    "Nombre_Producto, Imagen_Producto, Precio_Producto, Estado_Producto, StockInicial_Producto, StockActual_Producto, ID_CategoriaFK)" +
                     "VALUES (?,?,?,?,?,?,?)");
             pstmt.setString(1,prod.getNombre_Producto());
             pstmt.setBytes(2,prod.getImagen_Producto());
@@ -120,7 +123,6 @@ public class DAOProductoImpl extends Conexion implements DAOProducto {
         }
     }
 
-    @Override
     public void eliminar(Producto prod) {
         try {
             PreparedStatement pstmt = conectar().prepareStatement("DELETE FROM producto WHERE ID_Producto = ?");

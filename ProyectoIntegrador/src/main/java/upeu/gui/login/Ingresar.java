@@ -1,13 +1,17 @@
 package upeu.gui.login;
 
 import upeu.gui.admin.AdministracionPanel;
+import upeu.gui.cargas.CargarVentana;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.font.TextAttribute;
+import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 
 public class Ingresar extends JFrame implements MouseListener, ActionListener, MouseMotionListener, FocusListener, KeyListener{
@@ -17,6 +21,13 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
         setSize(1005, 570);
         initComponents();
         getContentPane().setLayout(null);
+        try {
+            this.setIconImage(ImageIO.read(new File("imagenes/logo4.png")));
+        }
+        catch (IOException exc) {
+            exc.printStackTrace();
+        }
+        setTitle("Login");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
@@ -188,16 +199,15 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
     JTextField tfCoreoRC = new JTextField();
     JButton btEnviarRC = new JButton("Enviar");
     JTextField tfClaveRC = new JTextField();
-    JButton btSalirRC = new JButton("Salir");
+    JButton btSalirRC = new JButton("Cancelar");
     JSeparator spdrRC1 = new JSeparator();
     JSeparator spdrRC2 = new JSeparator();
     public void recuperarClave(){
         frameRClave.setUndecorated(true);
         frameRClave.setSize(400,500);
         frameRClave.setVisible(true);
-        frameRClave.setBackground(new Color(20,0,0,231));
+        frameRClave.setBackground(new Color(0,0,10,231));
         frameRClave.addMouseMotionListener(this);
-        frameRClave.addMouseListener(this);
         frameRClave.setLocationRelativeTo(null);
         frameRClave.setLayout(new BorderLayout());
 
@@ -327,12 +337,6 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
             int y = e.getYOnScreen();
             this.setLocation(x - xx, y -xy);
         }
-
-        if(e.getSource() == frameRClave){
-            int x = e.getXOnScreen();
-            int y = e.getYOnScreen();
-            frameRClave.setLocation(x - xx, y -xy);
-        }
     }
 
     @Override
@@ -351,11 +355,6 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
         }
 
         if(e.getSource() == panelSl){
-            xx = e.getX();
-            xy = e.getY();
-        }
-
-        if(e.getSource() == frameRClave){
             xx = e.getX();
             xy = e.getY();
         }

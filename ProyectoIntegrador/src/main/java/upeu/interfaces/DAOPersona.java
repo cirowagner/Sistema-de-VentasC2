@@ -7,5 +7,4 @@ public interface DAOPersona{
      List<Persona> listar();
      void registrar(Persona p);
      void actualizar(Persona p);
-     void eliminar(Persona p);
 }

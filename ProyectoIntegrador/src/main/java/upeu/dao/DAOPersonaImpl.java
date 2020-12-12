@@ -95,19 +95,4 @@ public class DAOPersonaImpl extends Conexion implements DAOPersona{
             cerrarConexion(conectar());
         }
     }
-
-    @Override
-    public void eliminar(Persona p) {
-        try {
-            PreparedStatement pstmt = conectar().prepareStatement("DELETE FROM persona WHERE ID_Persona = ?");
-            pstmt.setInt(1, p.getId_Persona());
-            pstmt.executeUpdate();
-        }catch (SQLException e){
-            JOptionPane.showMessageDialog(null,"Error:: "+e.getMessage());
-        }catch (Exception e){
-            Logger.getLogger(DAOPersonaImpl.class.getName()).log(Level.SEVERE, null, e);
-        }finally {
-            cerrarConexion(conectar());
-        }
-    }
 }

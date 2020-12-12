@@ -4,17 +4,15 @@ upeu\gui\login\Ingresar.class
 upeu\conexion\Conexion.class
 upeu\dao\DAOCategoriaImpl.class
 upeu\interfaces\DAOUsuario.class
+upeu\gui\cargas\CargarInicio.class
 upeu\pojo\Producto.class
 upeu\gui\ventana\VentanaPrincipalCliente.class
 upeu\interfaces\DAODetalleVenta.class
 upeu\pojo\Usuario.class
-upeu\gui\login\CargarVentana.class
 upeu\dao\DAOUsuarioImpl.class
-upeu\gui\panelImage.class
+upeu\gui\cargas\CargarVentana.class
 upeu\gui\login\JPanelSlidingListener.class
-upeu\gui\MainR.class
 upeu\pojo\DetalleVenta.class
-upeu\myapp\MCategoriaPrueba.class
 upeu\interfaces\DAOCategoria.class
 upeu\myapp\App.class
 upeu\interfaces\DAOProducto.class
@@ -29,4 +27,5 @@ upeu\pojo\Categoria.class
 upeu\pojo\Venta.class
 upeu\gui\login\JPanelSlider.class
 upeu\dao\DAOPersonaImpl.class
+upeu\gui\admin\ProductosPanel.class
 upeu\interfaces\DAOVenta.class

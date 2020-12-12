@@ -22,7 +22,7 @@ public class DAOVentaImpl extends Conexion implements DAOVenta {
             while (rs.next()){
                 Venta vnt = new Venta();
                 vnt.setId_Venta(rs.getInt(1));
-                vnt.setNumeroComprovante_Venta(rs.getInt(2));
+                vnt.setNumeroComprobante_Venta(rs.getInt(2));
                 vnt.setFechaHora_Venta(rs.getString(3));
                 vnt.setEstado_Venta(rs.getInt(4));
                 vnt.setImpuesto_Venta(rs.getDouble(5));
@@ -46,11 +46,11 @@ public class DAOVentaImpl extends Conexion implements DAOVenta {
         Venta vnt = new Venta();
         try {
             PreparedStatement pstmt = conectar().prepareStatement("SELECT * FROM venta" +
-                    " usuario u, persona p WHERE u.ID_PersonaFK = p.ID_Persona and u.Estado_Usuario = 1");
+                    "  WHERE ID_Venta = "+id+"");
             ResultSet rs = pstmt.executeQuery();
             if(rs.next()){
                 vnt.setId_Venta(rs.getInt(1));
-                vnt.setNumeroComprovante_Venta(rs.getInt(2));
+                vnt.setNumeroComprobante_Venta(rs.getInt(2));
                 vnt.setFechaHora_Venta(rs.getString(3));
                 vnt.setEstado_Venta(rs.getInt(4));
                 vnt.setImpuesto_Venta(rs.getDouble(5));
@@ -73,7 +73,16 @@ public class DAOVentaImpl extends Conexion implements DAOVenta {
     @Override
     public void registrar(Venta vnt) {
         try {
-            PreparedStatement pstmt = conectar().prepareStatement("");
+            PreparedStatement pstmt = conectar().prepareStatement("INSERT INTO venta" +
+                    " (NumeroComprobante_Venta, FechaHora_Venta, Estado_Venta, Impuesto_Venta, TotalTotales_Venta, ID_UsuarioFK, ID_DetalleVentaFK)" +
+                    " VALUES (?, ?, ?, ?, ?, ?, ?)");
+            pstmt.setInt(1,vnt.getNumeroComprobante_Venta());
+            pstmt.setString(2,vnt.getFechaHora_Venta());
+            pstmt.setInt(3,vnt.getEstado_Venta());
+            pstmt.setDouble(4,vnt.getImpuesto_Venta());
+            pstmt.setDouble(5,vnt.getTotalTotales_Venta());
+            pstmt.setInt(6,vnt.getId_UsuarioFK());
+            pstmt.setInt(7,vnt.getId_DetalleVentaFK());
             pstmt.executeUpdate();
         }catch (SQLException e){
             JOptionPane.showMessageDialog(null,"Error:: "+e.getMessage());
@@ -87,7 +96,23 @@ public class DAOVentaImpl extends Conexion implements DAOVenta {
     @Override
     public void actualizar(Venta vnt) {
         try {
-            PreparedStatement pstmt = conectar().prepareStatement("");
+            PreparedStatement pstmt = conectar().prepareStatement("UPDATE venta SET " +
+                    "NumeroComprobante_Venta = ?, " +
+                    "FechaHora_Venta = ?, " +
+                    "Estado_Venta = ?, " +
+                    "Impuesto_Venta = ?, " +
+                    "TotalTotales_Venta = ?, " +
+                    "ID_UsuarioFK = ?, " +
+                    "ID_DetalleVentaFK = ? " +
+                    "WHERE ID_Venta = ?");
+            pstmt.setInt(1,vnt.getNumeroComprobante_Venta());
+            pstmt.setString(2,vnt.getFechaHora_Venta());
+            pstmt.setInt(3,vnt.getEstado_Venta());
+            pstmt.setDouble(4,vnt.getImpuesto_Venta());
+            pstmt.setDouble(5,vnt.getTotalTotales_Venta());
+            pstmt.setInt(6,vnt.getId_UsuarioFK());
+            pstmt.setInt(7,vnt.getId_DetalleVentaFK());
+            pstmt.setInt(8,vnt.getId_Venta());
             pstmt.executeUpdate();
         }catch (SQLException e){
             JOptionPane.showMessageDialog(null,"Error:: "+e.getMessage());
@@ -101,7 +126,8 @@ public class DAOVentaImpl extends Conexion implements DAOVenta {
     @Override
     public void eliminar(Venta vnt) {
         try {
-            PreparedStatement pstmt = conectar().prepareStatement("");
+            PreparedStatement pstmt = conectar().prepareStatement("DELETE FROM venta WHERE ID_Venta = ?");
+            pstmt.setInt(1,vnt.getId_Venta());
             pstmt.executeUpdate();
         }catch (SQLException e){
             JOptionPane.showMessageDialog(null,"Error:: "+e.getMessage());

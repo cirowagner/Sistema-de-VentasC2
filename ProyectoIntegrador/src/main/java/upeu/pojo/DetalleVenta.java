@@ -9,6 +9,7 @@ public class DetalleVenta {
     private double precioTotal_DetalleV;
     private int id_UsuarioFK;
     private int id_ProductoFK;
+    private int id_VentaFK;
 
     public int getId_DetalleV() {
         return id_DetalleV;
@@ -66,6 +67,14 @@ public class DetalleVenta {
         this.id_ProductoFK = id_ProductoFK;
     }
 
+    public int getId_VentaFK() {
+        return id_VentaFK;
+    }
+
+    public void setId_VentaFK(int id_VentaFK) {
+        this.id_VentaFK = id_VentaFK;
+    }
+
     @Override
     public String toString() {
         return "DetalleVenta{" +
@@ -76,6 +85,7 @@ public class DetalleVenta {
                 ", precioTotal_DetalleV=" + precioTotal_DetalleV +
                 ", id_UsuarioFK=" + id_UsuarioFK +
                 ", id_ProductoFK=" + id_ProductoFK +
+                ", id_VentaFK=" + id_VentaFK +
                 '}';
     }
 }
