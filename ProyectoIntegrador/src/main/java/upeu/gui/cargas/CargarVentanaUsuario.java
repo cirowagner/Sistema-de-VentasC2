@@ -4,8 +4,8 @@ import upeu.gui.ventana.VentanaPrincipalCliente;
 
 import javax.swing.*;
 
-public class CargarVentana extends JFrame implements Runnable{
-    public CargarVentana (){
+public class CargarVentanaUsuario extends JFrame implements Runnable{
+    public CargarVentanaUsuario(){
         setUndecorated(true);
         setSize(800,600);
         setVisible(true);

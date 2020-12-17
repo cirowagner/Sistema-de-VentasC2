@@ -9,6 +9,7 @@ public class Usuario extends Persona{
     private double cartera_Usuario;
     private String tipo_Usuario;
     private int estado_Usuario;
+    private String fechaCreacion_Usuario;
     private int id_PersonaFK;
 
     public int getId_Usuario() {
@@ -67,6 +68,14 @@ public class Usuario extends Persona{
         this.estado_Usuario = estado_Usuario;
     }
 
+    public String getFechaCreacion_Usuario() {
+        return fechaCreacion_Usuario;
+    }
+
+    public void setFechaCreacion_Usuario(String fechaCreacion_Usuario) {
+        this.fechaCreacion_Usuario = fechaCreacion_Usuario;
+    }
+
     public int getId_PersonaFK() {
         return id_PersonaFK;
     }
@@ -83,8 +92,9 @@ public class Usuario extends Persona{
                 ", clave_Usuario='" + clave_Usuario + '\'' +
                 ", correo_Usuario='" + correo_Usuario + '\'' +
                 ", cartera_Usuario=" + cartera_Usuario +
-                ", tipo_Usuario=" + tipo_Usuario +
+                ", tipo_Usuario='" + tipo_Usuario + '\'' +
                 ", estado_Usuario=" + estado_Usuario +
+                ", fechaCreacion_Usuario='" + fechaCreacion_Usuario + '\'' +
                 ", id_PersonaFK=" + id_PersonaFK +
                 '}';
     }

@@ -18,8 +18,8 @@ public class DAOUsuarioImpl extends Conexion implements DAOUsuario {
     public List<Usuario> listar() {
         List<Usuario> lista = new ArrayList<>();
         try {
-            PreparedStatement pstmt = conectar().prepareStatement("SELECT * FROM" +
-                    " usuario u, persona p WHERE u.ID_PersonaFK = p.ID_Persona and u.Estado_Usuario = 1");
+            PreparedStatement pstmt = conectar().prepareStatement("SELECT * FROM " +
+                    "usuario u, persona p WHERE u.ID_PersonaFK = p.ID_Persona and u.Estado_Usuario = 1");
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()){
                 Usuario user = new Usuario();
@@ -92,20 +92,21 @@ public class DAOUsuarioImpl extends Conexion implements DAOUsuario {
     public void registrar(Usuario user) {
         try {
             PreparedStatement pstmt = conectar().prepareStatement("INSERT INTO usuario" +
-                    "(Nombre_Usuario, Contraseña_Usuario, Correo_Usuario, Cartera_Usuario, Tipo_Usuario, Estado_Usuario, ID_PersonaFK)" +
-                    " VALUES (?,?,?)");
+                    "(Nombre_Usuario, Contraseña_Usuario, Correo_Usuario, Cartera_Usuario, Tipo_Usuario, Estado_Usuario, FechaCreacion_Usuario, ID_PersonaFK)" +
+                    " VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
             pstmt.setString(1,user.getNombre_Usuario());
             pstmt.setString(2,user.getClave_Usuario());
             pstmt.setString(3,user.getCorreo_Usuario());
             pstmt.setDouble(4,user.getCartera_Usuario());
             pstmt.setString(5,user.getTipo_Usuario());
             pstmt.setInt(6,user.getEstado_Usuario());
-            pstmt.setInt(7,user.getId_PersonaFK());
+            pstmt.setString(7,user.getFechaCreacion_Usuario());
+            pstmt.setInt(8,user.getId_PersonaFK());
             pstmt.executeUpdate();
         }catch (SQLException e){
             JOptionPane.showMessageDialog(null,"Error:: "+e.getMessage());
         }catch (Exception e){
-            Logger.getLogger(DAOUsuarioImpl.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(DAOUsuarioImpl.class.getName()).log(Level.SEVERE, "1", e);
         }finally {
             cerrarConexion(conectar());
         }

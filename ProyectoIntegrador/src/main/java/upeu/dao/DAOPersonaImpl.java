@@ -26,8 +26,8 @@ public class DAOPersonaImpl extends Conexion implements DAOPersona{
                 p.setFechaNacimiento(rs.getString(5));
                 p.setSexo(rs.getString(6));
                 p.setDocumento(rs.getString(7));
-                p.setCelular(rs.getInt(8));
-                p.setDireccion(rs.getString(9));
+                p.setDireccion(rs.getString(8));
+                p.setCelular(rs.getInt(9));
                 lista.add(p);
             }
         }catch (SQLException e){
@@ -41,10 +41,30 @@ public class DAOPersonaImpl extends Conexion implements DAOPersona{
     }
 
     @Override
+    public int buscarIdPersona(){
+        int id = 0;
+        try {
+            PreparedStatement pstmt = conectar().prepareStatement("SELECT ID_Persona FROM persona WHERE ID_Persona = (SELECT MAX(ID_Persona) FROM persona)");
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()){
+              id = rs.getInt(1);
+                System.out.printf("ID: "+id);
+            }
+        }catch (SQLException e){
+            JOptionPane.showMessageDialog(null,"Error:: "+e.getMessage());
+        }catch (Exception e){
+            Logger.getLogger(DAOPersonaImpl.class.getName()).log(Level.SEVERE, null, e);
+        }finally {
+            cerrarConexion(conectar());
+        }
+        return id;
+    }
+
+    @Override
     public void registrar(Persona p) {
         try {
             PreparedStatement pstmt = conectar().prepareStatement("INSERT INTO persona(" +
-                    "Nombres, ApPaterno, ApMaterno, FechaNacimeinto, Sexo, Documento, Direccion, Celular)" +
+                    "Nombres, ApPaterno, ApMaterno, FechaNacimiento, Sexo, Documento, Direccion, Celular)" +
                     " VALUES(?,?,?,?,?,?,?,?)");
             pstmt.setString(1, p.getNombres());
             pstmt.setString(2, p.getAp_Paterno());
@@ -52,8 +72,8 @@ public class DAOPersonaImpl extends Conexion implements DAOPersona{
             pstmt.setString(4, p.getFechaNacimiento());
             pstmt.setString(5, p.getSexo());
             pstmt.setString(6, p.getDocumento());
-            pstmt.setInt(7, p.getCelular());
-            pstmt.setString(8, p.getDireccion());
+            pstmt.setString(7, p.getDireccion());
+            pstmt.setInt(8, p.getCelular());
             pstmt.executeUpdate();
         }catch (SQLException e){
             JOptionPane.showMessageDialog(null,"Error:: "+e.getMessage());

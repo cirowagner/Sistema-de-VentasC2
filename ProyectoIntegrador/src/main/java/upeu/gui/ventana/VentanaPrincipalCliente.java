@@ -1,5 +1,6 @@
 package upeu.gui.ventana;
 
+import upeu.gui.login.Ingresar;
 import upeu.gui.login.JPanelSlider;
 
 import javax.imageio.ImageIO;
@@ -177,6 +178,7 @@ public class VentanaPrincipalCliente extends JFrame implements MouseMotionListen
         btVista4Right.addActionListener(this);
         pnlVista4.add(btVista4Right);
     }
+
     int opcion = 0;
     public void salir(){
         addWindowListener(new WindowAdapter() {
@@ -190,8 +192,10 @@ public class VentanaPrincipalCliente extends JFrame implements MouseMotionListen
                         System.exit(0);
                         break;
                     case JOptionPane.NO_OPTION:
+                        setVisible(true);
                         break;
                     case JOptionPane.CLOSED_OPTION:
+                        System.out.println("alala");
                         break;
                     default:
                         break;

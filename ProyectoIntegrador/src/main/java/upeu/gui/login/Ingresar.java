@@ -1,7 +1,7 @@
 package upeu.gui.login;
 
 import upeu.gui.admin.AdministracionPanel;
-import upeu.gui.cargas.CargarVentana;
+import upeu.gui.cargas.CargarVentanaUsuario;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -41,8 +41,8 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
     JLabel lbFondo = new JLabel(imagen); // Creamos un objeto JLabel y le pasamos a su constructor, el objeto imagen
     JPanelSlider panelSl = new JPanelSlider();
     JPanel panelIngresar = new JPanel();
-    RegistrarCliente panelCliente = new RegistrarCliente();
-    AdministracionPanel panelTrbjador = new AdministracionPanel();
+    RegistrarUsuario panelUsuario = new RegistrarUsuario();
+    AdministracionPanel panelAdmin = new AdministracionPanel();
     public void fondoR() {
 
         panelSl.setBounds(0,0,1005,570);
@@ -59,11 +59,11 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
         panelIngresar.setLayout(null);
         lbFondo.setLayout(null);
 
-        panelTrbjador.btnSalir.addActionListener(this);
-        panelCliente.btnRegresar.addActionListener(this);
+        panelAdmin.btnSalir.addActionListener(this);
+        panelUsuario.btnSalir.addActionListener(this);
         panelSl.add(panelIngresar);
-        panelSl.add(panelCliente);
-        panelSl.add(panelTrbjador);
+        panelSl.add(panelUsuario);
+        panelSl.add(panelAdmin);
         add(panelSl);
     }
 
@@ -124,6 +124,7 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
         tfClave.setHorizontalAlignment(SwingConstants.CENTER);
         tfClave.setLayout(new BorderLayout());
         verClave.setOpaque(false);
+        verClave.setFocusable(false);
         tfClave.setEchoChar('o');
         verClave.addFocusListener(this);
         verClave.addMouseListener(this);
@@ -192,7 +193,7 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
     JLabel lbRecuperarClave = new JLabel("Olvidaste tu contraseña?");
     JFrame frameRClave = new JFrame();
     JPanel pnlRClave = new JPanel();
-    JLabel lbLogoRC = new JLabel("logo");
+    JLabel lbLogoRC = new JLabel("",new ImageIcon("imagenes/iconApp.png"),SwingConstants.CENTER);
     JLabel lbNombreRC = new JLabel("Usuario",SwingConstants.CENTER);
     JTextField tfNombreRC = new JTextField();
     JLabel lbCorreoRC = new JLabel("Correo",SwingConstants.CENTER);
@@ -216,7 +217,6 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
         frameRClave.add(pnlRClave,BorderLayout.CENTER);
 
         lbLogoRC.setBounds(150,20,100,100);
-        lbLogoRC.setOpaque(true);
         pnlRClave.add(lbLogoRC);
 
         lbNombreRC.setBounds(100,150,200,30);
@@ -258,7 +258,7 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
         tfClaveRC.setHorizontalAlignment(SwingConstants.CENTER);
         tfClaveRC.setFont(new Font("Sitka Banner",Font.BOLD,30));
         tfClaveRC.setBorder(new TitledBorder(""));
-        tfClaveRC.setBackground(new Color(25, 10, 72,190));
+        tfClaveRC.setBackground(new Color(25, 10, 72));
         pnlRClave.add(tfClaveRC);
 
         btSalirRC.setBounds(150,445,100,25);
@@ -270,15 +270,15 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btIngrs){
-            new CargarVentana();
+            new CargarVentanaUsuario();
             this.setVisible(false);
         }
 
-        if(e.getSource() == panelTrbjador.btnSalir){
+        if(e.getSource() == panelAdmin.btnSalir){
             panelSl.nextPanel(5,panelIngresar,panelSl.right);
             lbRegistrarCliente.setVisible(true);
         }
-        if (e.getSource() == panelCliente.btnRegresar){
+        if (e.getSource() == panelUsuario.btnSalir){
             panelSl.nextPanel(5,panelIngresar,panelSl.right);
             lbRegistrarCliente.setVisible(true);
         }
@@ -306,13 +306,13 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
     @Override
     public void mouseClicked(MouseEvent e) {
         if(e.getSource() == lbRegistrarCliente){
-            panelSl.nextPanel(5,panelCliente,panelSl.left);
-            panelCliente.setVisible(true);
+            panelSl.nextPanel(5, panelUsuario,panelSl.left);
+            panelUsuario.setVisible(true);
         }
 
         if(e.getSource() == lbAdmin){
-            panelSl.nextPanel(5,panelTrbjador,panelSl.left);
-            panelTrbjador.setVisible(true);
+            panelSl.nextPanel(5, panelAdmin,panelSl.left);
+            panelAdmin.setVisible(true);
         }
 
         if(e.getSource() == verClave){
@@ -452,7 +452,7 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
     public void keyPressed(KeyEvent e) {
         if(e.getSource() == btIngrs){
             if(e.getKeyCode() == KeyEvent.VK_ENTER){
-                JOptionPane.showMessageDialog(null,"EPPA¡¡¡¡");
+                JOptionPane.showMessageDialog(null,"EPPA¡¡¡¡","Confirm",JOptionPane.INFORMATION_MESSAGE);
             }
         }
     }
