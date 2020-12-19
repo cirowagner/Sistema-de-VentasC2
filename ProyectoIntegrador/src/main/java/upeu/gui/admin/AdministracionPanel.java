@@ -25,12 +25,12 @@ public class AdministracionPanel extends JPanel implements MouseListener, Action
         adminGestion();
     }
 
-    ImageIcon fondo = new ImageIcon("imagenes/Admin/FondoR.jpg");
+    ImageIcon fondo = new ImageIcon("imagenes/Admin/adminFon4.gif");
     JLabel lbFondoAdmin = new JLabel(fondo);
 
     public void fondoRegstr() {
         lbFondoAdmin.setBounds(0, 0, 1005, 570);
-        lbFondoAdmin.setIcon(new ImageIcon(fondo.getImage().getScaledInstance(lbFondoAdmin.getWidth(), lbFondoAdmin.getHeight(), Image.SCALE_SMOOTH)));
+        //lbFondoAdmin.setIcon(new ImageIcon(fondo.getImage().getScaledInstance(lbFondoAdmin.getWidth(), lbFondoAdmin.getHeight(), Image.SCALE_SMOOTH)));
         add(lbFondoAdmin);
         lbFondoAdmin.setLayout(null);
     }

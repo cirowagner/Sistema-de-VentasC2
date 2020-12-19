@@ -11,6 +11,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class DAOPersonaImpl extends Conexion implements DAOPersona{
+    public static void main(String[] args) {
+        DAOPersona dao = new DAOPersonaImpl();
+        System.out.println("main ID: "+dao.ultimaIdPersona().getId_Persona());
+    }
     @Override
     public List<Persona> listar() {
         List<Persona>lista = new ArrayList<>();
@@ -41,14 +45,13 @@ public class DAOPersonaImpl extends Conexion implements DAOPersona{
     }
 
     @Override
-    public int buscarIdPersona(){
-        int id = 0;
+    public Persona ultimaIdPersona(){
+        Persona p = new Persona();
         try {
-            PreparedStatement pstmt = conectar().prepareStatement("SELECT ID_Persona FROM persona WHERE ID_Persona = (SELECT MAX(ID_Persona) FROM persona)");
+            PreparedStatement pstmt = conectar().prepareStatement("SELECT MAX (ID_Persona) FROM persona");
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()){
-              id = rs.getInt(1);
-                System.out.printf("ID: "+id);
+                p.setId_Persona(rs.getInt(1));
             }
         }catch (SQLException e){
             JOptionPane.showMessageDialog(null,"Error:: "+e.getMessage());
@@ -57,7 +60,7 @@ public class DAOPersonaImpl extends Conexion implements DAOPersona{
         }finally {
             cerrarConexion(conectar());
         }
-        return id;
+        return p;
     }
 
     @Override

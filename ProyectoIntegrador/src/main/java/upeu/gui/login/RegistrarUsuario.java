@@ -79,13 +79,13 @@ public class RegistrarUsuario extends JPanel implements MouseListener, ActionLis
     JLabel lbDireccion = new JLabel("Dirección:");
     JLabel lbCelular = new JLabel("Celular:");
 
-    JTextField tfNombres = new JTextField();
-    JTextField tfApPaterno = new JTextField();
-    JTextField tfApMaterno = new JTextField();
-    JTextField tfFechaNaci = new JTextField();
+    JTextField tfNombres = new JTextField("Ziro Wagner");
+    JTextField tfApPaterno = new JTextField("Mamani");
+    JTextField tfApMaterno = new JTextField("Mamani");
+    JTextField tfFechaNaci = new JTextField("12-12-2020");
     JTextField tfDocumento = new JTextField();
-    JTextField tfDireccion = new JTextField();
-    JTextField tfCelular = new JTextField();
+    JTextField tfDireccion = new JTextField("Jr.Bazadre");
+    JTextField tfCelular = new JTextField("9831312");
 
     JButton btSiguiente = new JButton("Siguiente");
     public void datosPersonales () {
@@ -218,10 +218,10 @@ public class RegistrarUsuario extends JPanel implements MouseListener, ActionLis
     JLabel lbClave = new JLabel("Contraseña");
     JLabel lbVerifClave = new JLabel("Confirmar contraseña");
 
-    JTextField tfCorreo = new JTextField("wagner@gmail.com");
+    JTextField tfCorreo = new JTextField("@gmail.com");
     JTextField tfNomUser = new JTextField("WagnerSub");
     JPasswordField tfClave = new JPasswordField("123");
-    JPasswordField tfConfirmClave = new JPasswordField();
+    JPasswordField tfConfirmClave = new JPasswordField("123");
 
     JButton btVolver = new JButton("Volver");
     JButton btCrearCuenta = new JButton("Crear");
@@ -330,14 +330,15 @@ public class RegistrarUsuario extends JPanel implements MouseListener, ActionLis
             person.setDireccion(tfDireccion.getText());
             person.setCelular(Integer.parseInt(tfCelular.getText()));
             daoP.registrar(person);
+            daoP = new DAOPersonaImpl();
             user.setCorreo_Usuario(tfCorreo.getText());
             user.setNombre_Usuario(tfNomUser.getText());
-            user.setClave_Usuario(cifrado.md5(String.valueOf(tfConfirmClave)));
+            user.setClave_Usuario(cifrado.md5(String.valueOf(tfConfirmClave.getPassword())));
             user.setTipo_Usuario("C");
             user.setEstado_Usuario(1);
             user.setFechaCreacion_Usuario(""+fechaActual.format(dateFecha));
-            user.setId_PersonaFK(daoP.buscarIdPersona());
-            System.out.println("ID: "+daoP.buscarIdPersona());
+            user.setId_PersonaFK(daoP.ultimaIdPersona().getId_Persona());
+            System.out.println("ID: "+daoP.ultimaIdPersona().getId_Persona());
             daoU.registrar(user);
         }
     }

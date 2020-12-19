@@ -14,31 +14,42 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class DAOUsuarioImpl extends Conexion implements DAOUsuario {
+    PreparedStatement pstmtL = null;
+    ResultSet rsL = null;
     @Override
-    public List<Usuario> listar() {
+    public List<Usuario> listar(String filtro) {
         List<Usuario> lista = new ArrayList<>();
         try {
-            PreparedStatement pstmt = conectar().prepareStatement("SELECT * FROM " +
-                    "usuario u, persona p WHERE u.ID_PersonaFK = p.ID_Persona and u.Estado_Usuario = 1");
-            ResultSet rs = pstmt.executeQuery();
-            while (rs.next()){
+            if (filtro.equals("")){
+                pstmtL = conectar().prepareStatement("SELECT * FROM " +
+                        "usuario u, persona p WHERE u.ID_PersonaFK = p.ID_Persona");
+                rsL = pstmtL.executeQuery();
+            }else{
+                pstmtL = conectar().prepareStatement("SELECT * FROM " +
+                        "usuario u, persona p WHERE u.ID_PersonaFK = p.ID_Persona AND (ID_Usuario LIKE '"+filtro+"%' " +
+                        "OR u.Nombre_Usuario LIKE '"+filtro+"%')");
+                rsL = pstmtL.executeQuery();
+            }
+            while (rsL.next()){
                 Usuario user = new Usuario();
-                user.setId_Usuario(rs.getInt(1));
-                user.setNombre_Usuario(rs.getString(2));
-                user.setClave_Usuario(rs.getString(3));
-                user.setCorreo_Usuario(rs.getString(4));
-                user.setCartera_Usuario(rs.getDouble(5));
-                user.setTipo_Usuario(rs.getString(6));
-                user.setEstado_Usuario(rs.getInt(7));
-                user.setId_PersonaFK(rs.getInt(8));
-                user.setNombres(rs.getString(9));
-                user.setAp_Paterno(rs.getString(10));
-                user.setAp_Materno(rs.getString(11));
-                user.setFechaNacimiento(rs.getString(12));
-                user.setSexo(rs.getString(13));
-                user.setDocumento(rs.getString(14));
-                user.setDireccion(rs.getString(15));
-                user.setCelular(rs.getInt(16));
+                user.setId_Usuario(rsL.getInt(1));
+                user.setNombre_Usuario(rsL.getString(2));
+                user.setClave_Usuario(rsL.getString(3));
+                user.setCorreo_Usuario(rsL.getString(4));
+                user.setCartera_Usuario(rsL.getDouble(5));
+                user.setTipo_Usuario(rsL.getString(6));
+                user.setEstado_Usuario(rsL.getInt(7));
+                user.setFechaCreacion_Usuario(rsL.getString(8));
+                user.setId_PersonaFK(rsL.getInt(9));
+                user.setId_Persona(rsL.getInt(10));
+                user.setNombres(rsL.getString(11));
+                user.setAp_Paterno(rsL.getString(12));
+                user.setAp_Materno(rsL.getString(13));
+                user.setFechaNacimiento(rsL.getString(14));
+                user.setSexo(rsL.getString(15));
+                user.setDocumento(rsL.getString(16));
+                user.setDireccion(rsL.getString(17));
+                user.setCelular(rsL.getInt(18));
                 lista.add(user);
             }
         }catch (SQLException e){

@@ -1,7 +1,10 @@
 package upeu.gui.admin;
 
+import upeu.dao.DAOCategoriaImpl;
 import upeu.dao.DAOProductoImpl;
+import upeu.interfaces.DAOCategoria;
 import upeu.interfaces.DAOProducto;
+import upeu.pojo.Categoria;
 import upeu.pojo.Producto;
 
 import javax.imageio.ImageIO;
@@ -11,15 +14,14 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.InputStream;
 import java.util.List;
 
-public class ProductosPanel extends JPanel implements ActionListener {
+public class ProductosPanel extends JPanel implements ActionListener, MouseListener, KeyListener {
     public ProductosPanel (){
         setVisible(true);
         setBounds(7,15,972, 465);
@@ -33,18 +35,24 @@ public class ProductosPanel extends JPanel implements ActionListener {
         mostrarProductos();
         buscarProducto();
         modificar();
+        vaciarRegistro();
     }
 
     JTable tablaProductos = new JTable();
-    DefaultTableModel modelo = new DefaultTableModel(new Object[][]{},new String[]{});
+    DefaultTableModel modelo = new DefaultTableModel(){
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    };
     public void vistaTablaProd(){
         ((DefaultTableCellRenderer) tablaProductos.getDefaultRenderer(Object.class)).setOpaque(false);
         tablaProductos.setForeground(Color.WHITE);
         tablaProductos.getTableHeader().setOpaque(true);
         tablaProductos.getTableHeader().setBackground(new Color(26, 0, 0));
         tablaProductos.getTableHeader().setForeground(Color.white);
-        tablaProductos.setModel(modelo);
         tablaProductos.setBackground(new Color(0,0,0,150));
+        tablaProductos.addMouseListener(this);
 
         JScrollPane scroll = new JScrollPane(tablaProductos);
         scroll.setOpaque(false);
@@ -53,20 +61,49 @@ public class ProductosPanel extends JPanel implements ActionListener {
         this.add(scroll);
     }
 
-    public void mostrarProductos(){
-        List<Producto> lista = dao.listar();
-        Object[][]data =   new Object[lista.size()][7];
+    JButton btEditProd = new JButton();
+    public void mostrarProductos() {
+        tablaProductos.setDefaultRenderer(Object.class, new RendererTeble());
+        modelo.setColumnCount(0);
+        modelo.setRowCount(0);
+        modelo.addColumn("ID");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Precio");
+        modelo.addColumn("Estado");
+        modelo.addColumn("Stock Inicial");
+        modelo.addColumn("Stock Actual");
+        modelo.addColumn("Categoria");
+        modelo.addColumn("-");
+        btEditProd.setIcon(new ImageIcon("imagenes/Admin/edit.png"));
+        btEditProd.setOpaque(false);
+        btEditProd.setContentAreaFilled(false);
+
+        daoProd = new DAOProductoImpl();
+        List<Producto> lista = daoProd.listar();
+        Object[]data =   new Object[8];
         for(int i = 0; i<lista.size(); i++) {
-            data[i][0] = lista.get(i).getId_Producto();
-            data[i][1] = lista.get(i).getNombre_Producto();
-            data[i][2] = lista.get(i).getPrecio_Producto();
-            data[i][3] = lista.get(i).getEstado_Producto();
-            data[i][4] = lista.get(i).getStockInicial_Producto();
-            data[i][5] = lista.get(i).getStockActual_Producto();
-            data[i][6] = lista.get(i).getID_CategoriaFK();
-            System.out.println("Datos: "+data[i][1]);
+            data[0] = lista.get(i).getId_Producto();
+            data[1] = lista.get(i).getNombre_Producto();
+            data[2] = lista.get(i).getPrecio_Producto();
+            data[3] = lista.get(i).getEstado_Producto();
+            data[4] = lista.get(i).getStockInicial_Producto();
+            data[5] = lista.get(i).getStockActual_Producto();
+            data[6] = lista.get(i).getNombre_CategoriaFK();
+            data[7] = btEditProd;
+            modelo.addRow(data);
+
         }
-        tablaProductos.setModel(new DefaultTableModel(data,new String[]{"ID", "Nombre", "Precio", "Estado", "Stock Inicial", "Stock Actual", "ID Categoria","x"}));
+        tablaProductos.setModel(modelo);
+        tablaProductos.getColumnModel().getColumn(0).setPreferredWidth(30);
+        tablaProductos.getColumnModel().getColumn(7).setPreferredWidth(25);
+        tablaProductos.setRowHeight(25);
+
+
+        DAOCategoria daoC = new DAOCategoriaImpl();
+        cbxCategoria.removeAllItems();
+        for (Categoria c : daoC.listar()){
+            cbxCategoria.addItem(c.getNombre_Categoria());
+        }
     }
 
     JButton btBuscarFile = new JButton("Archivo");
@@ -81,17 +118,16 @@ public class ProductosPanel extends JPanel implements ActionListener {
     ButtonGroup btGrup = new ButtonGroup();
     JRadioButton rbActivo = new JRadioButton("Activo");
     JRadioButton rbInactivo = new JRadioButton("Inactivo");
-    JLabel lbStockActual = new JLabel("Stock Incial:");
+    JLabel lbStockInicial = new JLabel("Stock Incial:");
     JComboBox cbxCategoria = new JComboBox();
 
     JTextField tfNombre = new JTextField();
     JTextField tfPrecio = new JTextField();
-    JTextField tfStockActual = new JTextField();
+    JTextField tfStockInicial = new JTextField();
     Color fuentoColor = new Color(222,222,222);
 
     public void modificar (){
         imagenProducto.setBounds(720,15,210,120);
-        imagenProducto.setOpaque(false);
         imagenProducto.setBorder(new TitledBorder(""));
         this.add(imagenProducto);
 
@@ -145,21 +181,21 @@ public class ProductosPanel extends JPanel implements ActionListener {
         btGrup.add(rbActivo);
         btGrup.add(rbInactivo);
 
-        lbStockActual.setBounds(720,285,80,25);
-        lbStockActual.setForeground(fuentoColor);
-        this.add(lbStockActual);
+        lbStockInicial.setBounds(720,285,80,25);
+        lbStockInicial.setForeground(fuentoColor);
+        this.add(lbStockInicial);
 
-        tfStockActual.setBounds(805,285,100,25);
-        tfStockActual.setOpaque(false);
-        tfStockActual.setBorder(null);
-        tfStockActual.setForeground(fuentoColor);
-        this.add(tfStockActual);
+        tfStockInicial.setBounds(805,285,100,25);
+        tfStockInicial.setOpaque(false);
+        tfStockInicial.setBorder(null);
+        tfStockInicial.setForeground(fuentoColor);
+        this.add(tfStockInicial);
         JSeparator spd3 = new JSeparator();
         spd3.setBounds(720,310,210,2);
         this.add(spd3);
 
-        cbxCategoria.setBounds(760,325,120,20);
-        cbxCategoria.addItem("Categoria");
+        cbxCategoria.setBounds(760,325,130,20);
+        cbxCategoria.addItem("Categorias");
         this.add(cbxCategoria);
 
         btAgregar.setBounds(787,390,90,25);
@@ -185,6 +221,7 @@ public class ProductosPanel extends JPanel implements ActionListener {
         tfBuscarProd.setForeground(fuentoColor);
         tfBuscarProd.setOpaque(false);
         tfBuscarProd.setBorder(null);
+        tfBuscarProd.addKeyListener(this);
         JSeparator spdBuscar = new JSeparator();
         spdBuscar.setBounds(270,35,100,2);
         this.add(spdBuscar);
@@ -196,9 +233,10 @@ public class ProductosPanel extends JPanel implements ActionListener {
     }
 
     Producto prod = new Producto();
-    DAOProducto dao = new DAOProductoImpl();
+    DAOProducto daoProd = new DAOProductoImpl();
     public void mostrarImgen (){
-        List<Producto> list = dao.listar();
+        daoProd = new DAOProductoImpl();
+        List<Producto> list = daoProd.listar();
         for (int i = 0; i < list.size(); i++) {
             prod = list.get(i);
             try {
@@ -213,6 +251,14 @@ public class ProductosPanel extends JPanel implements ActionListener {
                 imagenProducto.setText("No hay imagen");
             }
         }
+    }
+
+    public void vaciarRegistro(){
+        tfNombre.setText("");
+        tfPrecio.setText("");
+        btGrup.clearSelection();
+        cbxCategoria.setSelectedItem("Categorias");
+        tfStockInicial.setText("");
     }
 
 
@@ -230,15 +276,26 @@ public class ProductosPanel extends JPanel implements ActionListener {
                 String ruta = archivo.getSelectedFile().getAbsolutePath();
                 tfRutaImagen.setText(ruta);
                 ImageIcon prueba = new ImageIcon(ruta);
-                imagenProducto.setText("");
                 imagenProducto.setIcon(prueba);
             }
+
         }
 
         if (e.getSource() == btAgregar) {
+            daoProd = new DAOProductoImpl();
             String ruta = tfRutaImagen.getText();
             System.out.println("Ruta: " + ruta);
-            try {
+            prod.setNombre_Producto(tfNombre.getText());
+            prod.setPrecio_Producto(Double.parseDouble(tfPrecio.getText()));
+            if (rbActivo.isSelected()){
+                prod.setEstado_Producto(1);
+            }else if (rbInactivo.isSelected()){
+                prod.setEstado_Producto(0);
+            }
+            prod.setStockInicial_Producto(Integer.parseInt(tfStockInicial.getText()));
+            prod.setStockActual_Producto(Integer.parseInt(tfStockInicial.getText()));
+            prod.setNombre_CategoriaFK(cbxCategoria.getSelectedItem().toString());
+            /*try {
                 byte[] imagen = new byte[(int) ruta.length()];
                 //InputStream input = new FileInputStream(ruta);
                 //input.read(imagen);
@@ -246,9 +303,111 @@ public class ProductosPanel extends JPanel implements ActionListener {
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Enviar Imagen: " + ex.getMessage());
                 prod.setImagen_Producto(null);
+            }*/
+            daoProd.registrar(prod);
+           // mostrarImgen();
+            mostrarProductos();
+        }
+        if (e.getSource() == btActualizar){
+            daoProd = new DAOProductoImpl();
+            prod.setNombre_Producto(tfNombre.getText());
+            prod.setPrecio_Producto(Double.parseDouble(tfPrecio.getText()));
+            if (rbActivo.isSelected()){
+                prod.setEstado_Producto(1);
+            }else if (rbInactivo.isSelected()){
+                prod.setEstado_Producto(0);
             }
-            dao.registrar(prod);
-            mostrarImgen();
+            prod.setStockInicial_Producto(Integer.parseInt(tfStockInicial.getText()));
+            prod.setStockActual_Producto(Integer.parseInt(tfStockInicial.getText()));
+            prod.setNombre_CategoriaFK(cbxCategoria.getSelectedItem().toString());
+            daoProd.actualizar(prod);
+            mostrarProductos();
+            vaciarRegistro();
+        }
+        if (e.getSource() == btEliminar){
+            daoProd = new DAOProductoImpl();
+            System.out.println("ID: "+prod.getId_Producto());
+            daoProd.eliminar(prod);
+            mostrarProductos();
+            vaciarRegistro();
+        }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if (e.getSource() == tablaProductos){
+            int column = tablaProductos.getColumnModel().getColumnIndexAtX(e.getX());
+            int row = e.getY()/tablaProductos.getRowHeight();
+            if (row < tablaProductos.getRowCount() && row >= 0 && column < tablaProductos.getColumnCount() && column >= 0){
+                Object valor = tablaProductos.getValueAt(row, column);
+                if (valor instanceof JButton){
+                    ((JButton)valor).doClick();
+                    btEditProd = (JButton)valor;
+                    int select = tablaProductos.rowAtPoint(e.getPoint());
+                    prod.setId_Producto(Integer.parseInt(String.valueOf(tablaProductos.getValueAt(select,0))));
+                    tfNombre.setText(String.valueOf(tablaProductos.getValueAt(select,1)));
+                    tfPrecio.setText(String.valueOf(tablaProductos.getValueAt(select,2)));
+                    if (String.valueOf(tablaProductos.getValueAt(select,3)).equals("1")){
+                        rbActivo.setSelected(true);
+                    }else if (String.valueOf(tablaProductos.getValueAt(select,3)).equals("0")){
+                        rbInactivo.setSelected(true);
+                    }
+                    tfStockInicial.setText(String.valueOf(tablaProductos.getValueAt(select,4)));
+                    cbxCategoria.setSelectedItem(String.valueOf(tablaProductos.getValueAt(select,6)));
+                    tablaProductos.clearSelection();
+                }
+            }
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        if (e.getSource() == tfBuscarProd){
+            daoProd = new DAOProductoImpl();
+            modelo.setRowCount(0);
+            List<Producto> lista = daoProd.buscarProd2(tfBuscarProd.getText());
+            Object[]data =   new Object[8];
+            for(int i = 0; i<lista.size(); i++) {
+                data[0] = lista.get(i).getId_Producto();
+                data[1] = lista.get(i).getNombre_Producto();
+                data[2] = lista.get(i).getPrecio_Producto();
+                data[3] = lista.get(i).getEstado_Producto();
+                data[4] = lista.get(i).getStockInicial_Producto();
+                data[5] = lista.get(i).getStockActual_Producto();
+                data[6] = lista.get(i).getNombre_CategoriaFK();
+                data[7] = btEditProd;
+                modelo.addRow(data);
+            }
         }
     }
 }

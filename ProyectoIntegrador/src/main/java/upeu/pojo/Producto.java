@@ -11,7 +11,7 @@ public class Producto extends Categoria{
     private int estado_Producto;
     private int StockInicial_Producto;
     private int StockActual_Producto;
-    private int ID_CategoriaFK;
+    private String Nombre_CategoriaFK;
 
     public int getId_Producto() {
         return id_Producto;
@@ -69,12 +69,12 @@ public class Producto extends Categoria{
         StockActual_Producto = stockActual_Producto;
     }
 
-    public int getID_CategoriaFK() {
-        return ID_CategoriaFK;
+    public String getNombre_CategoriaFK() {
+        return Nombre_CategoriaFK;
     }
 
-    public void setID_CategoriaFK(int ID_CategoriaFK) {
-        this.ID_CategoriaFK = ID_CategoriaFK;
+    public void setNombre_CategoriaFK(String nombre_CategoriaFK) {
+        this.Nombre_CategoriaFK = nombre_CategoriaFK;
     }
 
     @Override
@@ -87,7 +87,7 @@ public class Producto extends Categoria{
                 ", estado_Producto=" + estado_Producto +
                 ", StockInicial_Producto=" + StockInicial_Producto +
                 ", StockActual_Producto=" + StockActual_Producto +
-                ", ID_CategoriaFK=" + ID_CategoriaFK +
+                ", ID_CategoriaFK=" + Nombre_CategoriaFK +
                 '}';
     }
 }
