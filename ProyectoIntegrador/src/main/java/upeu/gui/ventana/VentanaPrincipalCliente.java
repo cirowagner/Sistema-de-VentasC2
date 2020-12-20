@@ -90,25 +90,25 @@ public class VentanaPrincipalCliente extends JFrame implements MouseMotionListen
         pnlConfig.setBackground(new Color(0,0,200,200));
         panelPricipal.add(pnlConfig);
 
-        logoApp.setBounds(8,8,120,30);
+        logoApp.setBounds(8,8,120,40);
         logoApp.setOpaque(true);
         pnlConfig.add(logoApp);
 
-        lbImageUser.setBounds(60,53,125,125);
+        lbImageUser.setBounds(60,63,125,125);
         lbImageUser.setOpaque(true);
         pnlConfig.add(lbImageUser);
 
-        lbNameUser.setBounds(10,190,100,25);
+        lbNameUser.setBounds(10,200,100,25);
         lbNameUser.setOpaque(true);
         pnlConfig.add(lbNameUser);
 
-        btCompras.setBounds(5,240,240,50);
+        btCompras.setBounds(5,250,240,50);
         pnlConfig.add(btCompras);
 
-        btCartera.setBounds(5,305,240,50);
+        btCartera.setBounds(5,315,240,50);
         pnlConfig.add(btCartera);
 
-        btConfigUser.setBounds(5,370,240,50);
+        btConfigUser.setBounds(5,380,240,50);
         pnlConfig.add(btConfigUser);
 
         btSalir.setBounds(50,470,150,50);

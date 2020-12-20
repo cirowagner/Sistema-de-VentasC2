@@ -267,7 +267,7 @@ public class ProductosPanel extends JPanel implements ActionListener, MouseListe
         if (e.getSource() == btBuscarFile) {
             JFileChooser archivo = new JFileChooser();
             archivo.setDialogTitle("Abrir imagen");
-            File url = new File("imagenes\\login");
+            File url = new File("imagenes\\Artefactos");
             archivo.setCurrentDirectory(url);
             FileNameExtensionFilter filtro = new FileNameExtensionFilter("JPG, PNG & GIF", "jpg", "png", "gif");
             archivo.setFileFilter(filtro);

@@ -25,7 +25,7 @@ public class DAOVentaImpl extends Conexion implements DAOVenta {
                 vnt.setNumeroComprobante_Venta(rs.getInt(2));
                 vnt.setFechaHora_Venta(rs.getString(3));
                 vnt.setEstado_Venta(rs.getInt(4));
-                vnt.setImpuesto_Venta(rs.getDouble(5));
+                vnt.setIgv_Venta(rs.getDouble(5));
                 vnt.setTotalTotales_Venta(rs.getDouble(6));
                 vnt.setId_UsuarioFK(rs.getInt(7));
                 vnt.setId_DetalleVentaFK(rs.getInt(8));
@@ -53,7 +53,7 @@ public class DAOVentaImpl extends Conexion implements DAOVenta {
                 vnt.setNumeroComprobante_Venta(rs.getInt(2));
                 vnt.setFechaHora_Venta(rs.getString(3));
                 vnt.setEstado_Venta(rs.getInt(4));
-                vnt.setImpuesto_Venta(rs.getDouble(5));
+                vnt.setIgv_Venta(rs.getDouble(5));
                 vnt.setTotalTotales_Venta(rs.getDouble(6));
                 vnt.setId_UsuarioFK(rs.getInt(7));
                 vnt.setId_DetalleVentaFK(rs.getInt(8));
@@ -79,7 +79,7 @@ public class DAOVentaImpl extends Conexion implements DAOVenta {
             pstmt.setInt(1,vnt.getNumeroComprobante_Venta());
             pstmt.setString(2,vnt.getFechaHora_Venta());
             pstmt.setInt(3,vnt.getEstado_Venta());
-            pstmt.setDouble(4,vnt.getImpuesto_Venta());
+            pstmt.setDouble(4,vnt.getIgv_Venta());
             pstmt.setDouble(5,vnt.getTotalTotales_Venta());
             pstmt.setInt(6,vnt.getId_UsuarioFK());
             pstmt.setInt(7,vnt.getId_DetalleVentaFK());
@@ -108,7 +108,7 @@ public class DAOVentaImpl extends Conexion implements DAOVenta {
             pstmt.setInt(1,vnt.getNumeroComprobante_Venta());
             pstmt.setString(2,vnt.getFechaHora_Venta());
             pstmt.setInt(3,vnt.getEstado_Venta());
-            pstmt.setDouble(4,vnt.getImpuesto_Venta());
+            pstmt.setDouble(4,vnt.getIgv_Venta());
             pstmt.setDouble(5,vnt.getTotalTotales_Venta());
             pstmt.setInt(6,vnt.getId_UsuarioFK());
             pstmt.setInt(7,vnt.getId_DetalleVentaFK());

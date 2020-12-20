@@ -31,17 +31,17 @@ public class RegistrarUsuario extends JPanel implements MouseListener, ActionLis
         datosUsuario();
     }
 
-    ImageIcon fondo = new ImageIcon("imagenes/login/RegstrClient/Fondo2.0.jpg");
+    ImageIcon fondo = new ImageIcon("imagenes/login/RegstrClient/Fondo2.gif");
     JLabel lbFondoRClnt = new JLabel(fondo);
     public void fondoRegstr (){
         lbFondoRClnt.setBounds(0,0,1005,570);
-        lbFondoRClnt.setIcon(new ImageIcon(fondo.getImage().getScaledInstance(lbFondoRClnt.getWidth(), lbFondoRClnt.getHeight(), Image.SCALE_SMOOTH)));
+     //   lbFondoRClnt.setIcon(new ImageIcon(fondo.getImage().getScaledInstance(lbFondoRClnt.getWidth(), lbFondoRClnt.getHeight(), Image.SCALE_SMOOTH)));
         add(lbFondoRClnt);
         lbFondoRClnt.setLayout(null);
     }
 
     JPanelSlider pnlSlRegst = new JPanelSlider();
-    JPanel pnlDatosPersonales = new JPanel();
+    private JPanel pnlDatosPersonales = new JPanel();
     JPanel pnlDatosUsuario = new JPanel();
     JButton btnSalir = new JButton("Salir");
 

@@ -6,7 +6,7 @@ public class Venta {
     private int numeroComprobante_Venta;
     private String fechaHora_Venta;
     private int estado_Venta;
-    private double impuesto_Venta;
+    private double igv_Venta;
     private double totalTotales_Venta;
     private int id_UsuarioFK;
     private int id_DetalleVentaFK;
@@ -43,12 +43,12 @@ public class Venta {
         this.estado_Venta = estado_Venta;
     }
 
-    public double getImpuesto_Venta() {
-        return impuesto_Venta;
+    public double getIgv_Venta() {
+        return igv_Venta;
     }
 
-    public void setImpuesto_Venta(double impuesto_Venta) {
-        this.impuesto_Venta = impuesto_Venta;
+    public void setIgv_Venta(double igv_Venta) {
+        this.igv_Venta = igv_Venta;
     }
 
     public double getTotalTotales_Venta() {
@@ -82,7 +82,7 @@ public class Venta {
                 ", numeroComprovante_Venta=" + numeroComprobante_Venta +
                 ", fechaHora_Venta='" + fechaHora_Venta + '\'' +
                 ", estado_Venta=" + estado_Venta +
-                ", impuesto_Venta=" + impuesto_Venta +
+                ", impuesto_Venta=" + igv_Venta +
                 ", totalTotales_Venta=" + totalTotales_Venta +
                 ", id_UsuarioFK=" + id_UsuarioFK +
                 ", id_DetalleVentaFK=" + id_DetalleVentaFK +
