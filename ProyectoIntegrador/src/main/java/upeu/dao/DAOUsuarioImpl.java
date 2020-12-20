@@ -26,7 +26,7 @@ public class DAOUsuarioImpl extends Conexion implements DAOUsuario {
                 rsL = pstmtL.executeQuery();
             }else{
                 pstmtL = conectar().prepareStatement("SELECT * FROM " +
-                        "usuario u, persona p WHERE u.ID_PersonaFK = p.ID_Persona AND (ID_Usuario LIKE '"+filtro+"%' " +
+                        "usuario u, persona p WHERE u.ID_PersonaFK = p.ID_Persona AND (u.ID_Usuario LIKE '"+filtro+"%' " +
                         "OR u.Nombre_Usuario LIKE '"+filtro+"%')");
                 rsL = pstmtL.executeQuery();
             }
@@ -63,31 +63,63 @@ public class DAOUsuarioImpl extends Conexion implements DAOUsuario {
     }
 
     @Override
-    public Usuario buscarUsuario(int id) {
+    public Usuario validarUsuario(String name, String clave) {
         Usuario user = new Usuario();
         try {
-            PreparedStatement pstmt = conectar().prepareStatement("SELECT * FROM" +
-                    " usuario u, persona p WHERE u.ID_PersonaFK = p.ID_Persona and  ID_Usuario = "+id+"");
+            PreparedStatement pstmt = conectar().prepareStatement("SELECT '"+name+"', '"+clave+"' FROM usuario");
             ResultSet rs = pstmt.executeQuery();
             if(rs.next()){
-                user.setId_Usuario(rs.getInt(1));
-                user.setNombre_Usuario(rs.getString(2));
-                user.setClave_Usuario(rs.getString(3));
-                user.setCorreo_Usuario(rs.getString(4));
-                user.setCartera_Usuario(rs.getDouble(5));
-                user.setTipo_Usuario(rs.getString(6));
-                user.setEstado_Usuario(rs.getInt(7));
-                user.setId_PersonaFK(rs.getInt(8));
-                user.setNombres(rs.getString(9));
-                user.setAp_Paterno(rs.getString(10));
-                user.setAp_Materno(rs.getString(11));
-                user.setFechaNacimiento(rs.getString(12));
-                user.setSexo(rs.getString(13));
-                user.setDocumento(rs.getString(14));
-                user.setDireccion(rs.getString(15));
-                user.setCelular(rs.getInt(16));
+                user.setNombre_Usuario(rs.getString(1));
+                user.setClave_Usuario(rs.getString(2));
             }else {
-                user.setId_Usuario(0);
+                user.setNombre_Usuario("F");
+            }
+        }catch (SQLException e){
+            JOptionPane.showMessageDialog(null,"Error:: "+e.getMessage());
+        }catch (Exception e){
+            Logger.getLogger(DAOUsuarioImpl.class.getName()).log(Level.SEVERE, null, e);
+        }finally {
+            cerrarConexion(conectar());
+        }
+        return user;
+    }
+
+    @Override
+    public Usuario recuperarClave(String name, String correo){
+        Usuario user = new Usuario();
+        try {
+            PreparedStatement pstmt = conectar().prepareStatement("SELECT Nombre_Usuario, Correo_Usuario, Contraseña_Usuario FROM usuario WHERE Nombre_Usuario = '"+name+"' AND Correo_Usuario = '"+correo+"'");
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                user.setNombre_Usuario(rs.getString(1));
+                user.setCorreo_Usuario(rs.getString(2));
+                user.setClave_Usuario(rs.getString(3));
+            }else {
+                user.setNombre_Usuario("F");
+            }
+        }catch (SQLException e){
+            JOptionPane.showMessageDialog(null,"Error:: "+e.getMessage());
+        }catch (Exception e){
+            Logger.getLogger(DAOUsuarioImpl.class.getName()).log(Level.SEVERE, null, e);
+        }finally {
+            cerrarConexion(conectar());
+        }
+        return user;
+    }
+
+    @Override
+    public Usuario validarRegistro(String name, String correo, String doc){
+        Usuario user = new Usuario();
+        try {
+            PreparedStatement pstmt = conectar().prepareStatement("SELECT u.Nombre_Usuario, u.Correo_Usuario, p.Documento FROM" +
+                    " usuario u, persona p Where u.Nombre_Usuario = '"+name+"' OR u.Correo_Usuario = '"+correo+"' OR p.Documento = '"+doc+"'");
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                user.setNombre_Usuario(rs.getString(1));
+                user.setCorreo_Usuario(rs.getString(2));
+                user.setDocumento(rs.getString(3));
+            }else {
+                user.setNombre_Usuario("F");
             }
         }catch (SQLException e){
             JOptionPane.showMessageDialog(null,"Error:: "+e.getMessage());
@@ -115,7 +147,7 @@ public class DAOUsuarioImpl extends Conexion implements DAOUsuario {
             pstmt.setInt(8,user.getId_PersonaFK());
             pstmt.executeUpdate();
         }catch (SQLException e){
-            JOptionPane.showMessageDialog(null,"Error:: "+e.getMessage());
+            JOptionPane.showMessageDialog(null,"(*) Datos ya registrados");
         }catch (Exception e){
             Logger.getLogger(DAOUsuarioImpl.class.getName()).log(Level.SEVERE, "1", e);
         }finally {

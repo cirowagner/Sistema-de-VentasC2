@@ -1,82 +1,156 @@
+mvn clean package dependency:copy-dependencies -DoutputDirectory=${project.build.directory}/
+
+java -cp target\sqlite-jdbc-3.7.2.jar;target\ProyectoIntegrador-1.0-SNAPSHOT.jar upeu.myapp.App
+java -cp target\sqlite-jdbc-3.7.2.jar;JPanelSlider-1.0.jar;target\ProyectoIntegrador-1.0-SNAPSHOT.jar upeu.myapp.App
+java -cp target\sqlite-jdbc-3.7.2.jar;jcalendar-1.4.jar;JPanelSlider-1.0.jar;target\ProyectoIntegrador-1.0-SNAPSHOT.jar upeu.myapp.App
+------------------------------------------------------------------------------------------------------------------------------------
 =====================================================
 
 Suponiendo que la biblioteca se compila con las restricciones de clave externa habilitadas, 
 la aplicación aún debe habilitarla en tiempo de ejecución, utilizando el comando:
 
-PRAGMA Foreign_keys = ON;
+Consola: PRAGMA Foreign_keys = ON;
 
-conn.createStatement().executeQuery("PRAGMA foreign_keys = ON;");
+java: conn.createStatement().executeQuery("PRAGMA foreign_keys = ON;");
 
------------------------------------------------------------------------------------------
-select p.NOMBRE, p.DNI, t.ROL, t.USER from persona p, trabajador t WHERE p.IDP = t.IDP_F;
-select * from persona p, trabajador t WHERE p.IDP = t.IDP_F;
------------------------------------------------------------------------------------------	
-=====================================================
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<TABLAS SQLite>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+============================================================================================00
 
 CREATE TABLE persona(
-IDP INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-NOMBRE text NOT NULL,
-ApPATERNO text NOT NULL,
-ApMATERNO text NOT NULL,
-FECHAN text NOT NULL,
-SEXO text NOT NULL,
-DIRECCION text NOT NULL,
-TELEFONO int NOT NULL,
-CORREO text NOT NULL,
-DNI text NOT NULL);
+ID_Persona INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+Nombres VARCHAR(30) NOT NULL,
+ApPaterno VARCHAR(25) NOT NULL,
+ApMaterno VARCHAR(25) NOT NULL,
+FechaNacimiento DATE NOT NULL,
+Sexo text CHAR(1) NOT NULL,
+Documento VARCHAR(8) UNIQUE NOT NULL,
+Direccion VARCHAR(50) NOT NULL,
+Celular INTEGER NOT NULL);
 
-INSERT INTO persona (NOMBRE, ApPATERNO, ApMATERNO, FECHAN, SEXO, DIRECCION, TELEFONO, CORREO, DNI) 
-VALUES ('Ziro','Mamani','Mamani','18-03-2001','M','Jr.Real','9999999','ziro@gmail.com','021214');
+INSERT INTO persona (Nombres, ApPaterno, ApMaterno, FechaNacimiento, Sexo, Documento, Direccion, Celular) 
+VALUES ('Ziro Wagner','Mamani','Mamani','18-03-2001','M','719840289','Jr.Zuñiga','957406598');
 
-======================================================
+
+
+CREATE TABLE usuario(
+ID_Usuario INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+Nombre_Usuario VARCHAR(25) NOT NULL,
+Contraseña_Usuario VARCHAR(32) NOT NULL,
+Correo_Usuario VARCHAR(50) UNIQUE NOT NULL,
+Cartera_Usuario DOUBLE,
+Tipo_Usuario CHAR(1) NOT NULL,
+Estado_Usuario CHAR(1) NOT NULL,
+FechaCreacion_Usuario DATE NOT NULL,
+ID_PersonaFK INTEGER UNIQUE NOT NULL,
+
+FOREIGN KEY (ID_PersonaFK) REFERENCES persona(ID_Persona));
+
+INSERT INTO usuario (Nombre_Usuario, Contraseña_Usuario, Correo_Usuario, Cartera_Usuario, Tipo_Usuario, Estado_Usuario, FechaCreacion_Usuario, ID_PersonaFK) 
+VALUES ('Ziro', '123qwe', 'citot1813@gmail.com', 200.5, 'B', '1','2020-12-08 16:15:59.435', 1);
+
+
+
+CREATE TABLE categoria(
+Nombre_Categoria VARCHAR(35) NOT NULL PRIMARY KEY,
+Codigo_Categoria VARCHAR(10) UNIQUE NOT NULL,
+Estado_Categoria INTEGER NOT NULL);
+
+INSERT INTO categoria (Nombre_Categoria, Codigo_Categoria, Estado_Categoria) VALUES ('MONITOR', '00M1', 1);
+
+
+
+CREATE TABLE producto (
+ID_Producto INTEGER PRIMARY KEY NOT NULL,
+Nombre_Producto VARCHAR(25) NOT NULL,
+Imagen_Producto BLOB,
+Precio_producto DOUBLE NOT NULL,
+Estado_producto CHAR(1) NOT NULL,
+StockInicial_Producto INTEGER NOT NULL,
+StockActual_Producto INTEGER NOT NULL,
+Nombre_CategoriaFK VARCHAR(35) NOT NULL,
+
+FOREIGN KEY (Nombre_CategoriaFK) REFERENCES categoria (Nombre_Categoria) ON DELETE CASCADE);
+
+INSERT INTO producto (Nombre_Producto, Precio_producto, Estado_producto, StockInicial_Producto, StockActual_Producto, Nombre_CategoriaFK) 
+VALUES ('Teclado', 120.50, '1', 10, 6, 'MONITOR');
+
+
+
+
+CREATE TABLE detalleVenta(
+ID_DetalleV INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+CANTIDAD_Detalle INTEGER NOT NULL,
+PrecioUnitario_Detalle DOUBLE NOT NULL,
+Descuento_Detalle DOUBLE NOT NULL,
+PrecioTotal_Detalle DOUBLE NOT NULL,
+ID_UsuarioFK INTEGER NOT NULL,
+ID_ProductoFK INTEGER NOT NULL,
+
+FOREIGN KEY (ID_UsuarioFK) REFERENCES usuario (ID_Usuario), 
+FOREIGN KEY (ID_ProductoFK) REFERENCES producto (ID_Producto));
+
+INSERT INTO detalleVenta (CANTIDAD_Detalle, PrecioUnitario_Detalle, Descuento_Detalle, PrecioTotal_Detalle, ID_UsuarioFK, ID_ProductoFK) 
+VALUES (5, 20.5, 14.5, 88, 1, 1);
+
+
+
+CREATE TABLE venta(
+ID_Venta INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+NumeroComprobante_Venta INTEGER UNIQUE NOT NULL,
+FechaHora_Venta INTEGER NOT NULL,
+Estado_Venta CHAR(1) NOT NULL,     //Ojo
+Impuesto_Venta DOUBLEB NOT NULL,
+TotalTotales_Venta DOUBLE NOT NULL,
+ID_UsuarioFK INTEGER NOT NULL,
+ID_DetalleVFK INTEGER NOT NULL, 
+
+FOREIGN KEY (ID_UsuarioFK) REFERENCES usuario (ID_Usuario), 
+FOREIGN KEY (ID_DetalleVFK) REFERENCES detalleVenta (ID_DetalleV));
+
+INSERT INTO venta (NumeroComprobante_Venta, FechaHora_Venta, Estado_Venta, Impuesto_Venta, TotalTotales_Venta, ID_UsuarioFK, ID_DetalleVFK) 
+VALUES (1, '2020-12-09 16:15:59.435', '1', 5.5, 93.5, 1,1);
+
+============================================================================================00
+
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Consultas>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+select * from usuario u, persona p WHERE u.ID_PersonaFK = p.ID_Persona;
+
+select * from producto p, categoria c WHERE p.ID_CategoriaFK = c.ID_Categoria;
+
+select p.NOMBRE, p.DNI, t.ROL, t.USER from persona p, trabajador t WHERE p.IDP = t.IDP_F;
+
+
+
+==========================================================================================================
+
+
+
+
+--------------------------------------------------------------------------------
+Borrar tabla si existe:
+	
+DROP TABLE IF EXISTS persona;
+--------------------------------------------------------------------------------
+
+-----------------------------otros----------------------------------------------
+
+================================================================================00
 
 CREATE TABLE trabajador(
 IDT INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 PIN INTEGER NOT NULL,
-ROL text NOT NULL,
-USER text NOT NULL,
-PASSWORD text NOT NULL,
+ROL VARCHAR(25) NOT NULL,
+USER CHAR(1) NOT NULL,
+PASSWORD DATE NOT NULL,
 IDP_F INTEGER,
 
 FOREIGN KEY (idp_f) REFERENCES persona(idp));
 
 INSERT INTO trabajador(PIN, ROL, USER, PASSWORD, IDP_F) VALUES ('322','Caja','Ziro','123','1');
 
-=====================================================
-
-CREATE TABLE cliente(
-IDC INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-COD text NOT NULL,
-TIPO text NOT NULL,
-IDP_F INTEGER,
-
-FOREIGN KEY (idp_f) REFERENCES persona(idp));
-
-====================================================
-
-CREATE TABLE categoria(
-IDC INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-NOMBREC text NOT NULL,
-CODIGOC text NOT NULL);
-
-INSERT INTO categoria(NOMBREC, CODIGOC) VALUES ('MONITOR','00M1');
-
-====================================================
-
-CREATE TABLE producto (
-ID_Prod INTEGER PRIMARY KEY NOT NULL,
-NOMBRE_Prod text NOT NULL,
-TIPO_Prod text NOT NULL,
-PRECIO_Prod numeric NOT NULL,
-STOCK_Prod real NOT NULL,
-CONTROL_Stock text NOT NULL,
-IDC_F integer
-
-FOREIGN KEY (IDC_F) REFERENCES categoria (IDC));
-
-INSERT INTO producto(NOMBRE_Prod, TIPO_Prod, PRECIO_Prod, STOCK_Prod, CONTROL_Stock, IDC_F) VALUES ('Teclado','No peligroso','80.5','10','Si','2');
-
-====================================================
+================================================================================00
 
 CREATE TABLE proveedor(
 ID_Prov INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -86,13 +160,18 @@ DIRECTION_Prov text NOT NULL,
 CORREO_Prov text NOT NULL,
 TELEFONO int NOT NULL);
 
-===================================================
+================================================================================00
 
-CREATE TABLE venta(
-ID_Vent INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-CLIENT_Nom text NOT NULL,
-ACTIVO int NOT NULL,
-FECHA text NOT NULL,
-CLIENT_ID INTEGER NOT NULL);
+CREATE TABLE producto (
+ID_Prod INTEGER PRIMARY KEY NOT NULL,
+Nombre_Prod text,
+Imagen_Prod longblob,
+Precio_prod numeric,
+Estado_prod int,
+StockInicial_Prod int,
+StockActual_Prod int,
+IDC_FK integer,
 
-===================================================
+FOREIGN KEY (IDC_FK) REFERENCES categoria (ID_Categoria));
+
+================================================================================00

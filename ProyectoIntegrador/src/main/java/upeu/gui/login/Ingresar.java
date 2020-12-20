@@ -2,6 +2,10 @@ package upeu.gui.login;
 
 import upeu.gui.admin.AdministracionPanel;
 import upeu.gui.cargas.CargarVentanaUsuario;
+import upeu.interfaces.DAOUsuario;
+import upeu.dao.DAOUsuarioImpl;
+import upeu.pojo.Usuario;
+import upeu.utils.CifrarClave;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -71,7 +75,7 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
 
     JLabel lbUser = new JLabel("Usuario");
     JLabel lbClave = new JLabel("Contraseña");
-    JTextField tfUser = new JTextField();
+    public JTextField tfUser = new JTextField();
     JPasswordField tfClave = new JPasswordField();
     JButton btIngrs = new JButton("Ingresar");
     JSeparator spdr1 = new JSeparator();
@@ -82,7 +86,6 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
     Color fuenteColor = new Color(255, 255, 255);
 
     public void panelIn() {
-        pnlIngrs.addFocusListener(this);
         pnlIngrs.setBorder(new LineBorder(new Color(255, 255, 255), 1, true));
         pnlIngrs.setBounds(570, 65, 350, 440);
         pnlIngrs.setLayout(null);
@@ -106,6 +109,7 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
         tfUser.setHorizontalAlignment(SwingConstants.CENTER);
         tfUser.setFont(fuenteTf);
         tfUser.setForeground(fuenteColor);
+        tfUser.addMouseListener(this);
         pnlIngrs.add(tfUser);
 
         spdr1.setBounds(55, 204, 240, 2);
@@ -118,6 +122,7 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
         pnlIngrs.add(lbClave);
 
         tfClave.setBounds(55, 261, 240, 24);
+        tfClave.addMouseListener(this);
         pnlIngrs.add(tfClave);
         tfClave.setOpaque(false);
         tfClave.setBorder(null);
@@ -137,7 +142,7 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
         spdr2.setBounds(55, 285, 240, 2);
         pnlIngrs.add(spdr2);
 
-        btIngrs.setBounds(112, 325, 135, 26);
+        btIngrs.setBounds(112, 355, 135, 26);
         btIngrs.setOpaque(false);
         btIngrs.setForeground(fuenteColor);
         btIngrs.setContentAreaFilled(false);
@@ -159,12 +164,16 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
     //JLabel logoUPeU = new JLabel(new ImageIcon("imagenes/logo.gif"));
 
     JLabel lbRegistrarCliente = new JLabel("Registrarce");
+    JLabel lbErrorIngreso = new JLabel("(!) El usuario y/o contraseña son incorrectos");
     JLabel lbAdmin = new JLabel("ADM");
     Font fuenteRs = new Font("Arial",Font.PLAIN,17);
     Color coloRs = new Color(255,255,255);
 
     public void utils(){
-        lbRegistrarCliente.setBounds(140,370,135,25);
+        lbErrorIngreso.setBounds(50,320,250,20);
+        lbErrorIngreso.setForeground(Color.RED);
+
+        lbRegistrarCliente.setBounds(140,395,135,25);
         lbRegistrarCliente.setForeground(coloRs);
         lbRegistrarCliente.setFont(fuenteRs);
         lbRegistrarCliente.addMouseListener(this);
@@ -197,7 +206,7 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
     JLabel lbNombreRC = new JLabel("Usuario",SwingConstants.CENTER);
     JTextField tfNombreRC = new JTextField();
     JLabel lbCorreoRC = new JLabel("Correo",SwingConstants.CENTER);
-    JTextField tfCoreoRC = new JTextField();
+    JTextField tfCorreoRC = new JTextField();
     JButton btEnviarRC = new JButton("Enviar");
     JTextField tfClaveRC = new JTextField();
     JButton btSalirRC = new JButton("Cancelar");
@@ -239,17 +248,17 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
         lbCorreoRC.setForeground(fuenteColor);
         pnlRClave.add(lbCorreoRC);
 
-        tfCoreoRC.setBounds(100,253,200,25);
-        tfCoreoRC.setFont(fuenteTf);
-        tfCoreoRC.setForeground(fuenteColor);
-        tfCoreoRC.setBorder(null);
-        tfCoreoRC.setOpaque(false);
-        tfCoreoRC.setHorizontalAlignment(SwingConstants.CENTER);
+        tfCorreoRC.setBounds(100,253,200,25);
+        tfCorreoRC.setFont(fuenteTf);
+        tfCorreoRC.setForeground(fuenteColor);
+        tfCorreoRC.setBorder(null);
+        tfCorreoRC.setOpaque(false);
+        tfCorreoRC.setHorizontalAlignment(SwingConstants.CENTER);
         spdrRC2.setBounds(100,278,200,2);
         pnlRClave.add(spdrRC2);
-        pnlRClave.add(tfCoreoRC);
+        pnlRClave.add(tfCorreoRC);
 
-        btEnviarRC.setBounds(100,305,200,30);
+        btEnviarRC.setBounds(120,305,160,30);
         btEnviarRC.setBackground(new Color(0,0,0,190));
         btEnviarRC.addActionListener(this);
         pnlRClave.add(btEnviarRC);
@@ -266,12 +275,23 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
         btSalirRC.addActionListener(this);
         pnlRClave.add(btSalirRC);
     }
-
+    DAOUsuario daoUser = new DAOUsuarioImpl();
+    Usuario user = new Usuario();
+    CifrarClave cifrado = new CifrarClave();
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btIngrs){
-            new CargarVentanaUsuario();
-            this.setVisible(false);
+            daoUser = new DAOUsuarioImpl();
+            user = daoUser.validarUsuario(tfUser.getText(), cifrado.cifrado(String.valueOf(tfClave.getPassword())));
+           if (user.getNombre_Usuario().equals("F")){
+               pnlIngrs.add(lbErrorIngreso);
+               lbErrorIngreso.setVisible(true);
+           }else {
+               user = new Usuario();
+               user.setNombre_Usuario(tfUser.getText());
+               System.out.println("NAmE: "+tfUser.getText());
+               new CargarVentanaUsuario();
+           }
         }
 
         if(e.getSource() == panelAdmin.btnSalir){
@@ -293,7 +313,25 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
             }
         }
 
+        if(e.getSource() == btEnviarRC){
+            daoUser = new DAOUsuarioImpl();
+            user = daoUser.recuperarClave(tfNombreRC.getText(), tfCorreoRC.getText());
+            if (tfNombreRC.getText().equals(user.getNombre_Usuario()) && tfCorreoRC.getText().equals(user.getCorreo_Usuario())){
+                tfClaveRC.setForeground(Color.white);
+                tfClaveRC.setText(cifrado.decifrar(user.getClave_Usuario()));
+                btSalirRC.setText("Aceptar");
+            }else {
+                System.out.println(user.getNombre_Usuario()+" "+user.getCorreo_Usuario());
+                tfClaveRC.setForeground(Color.RED);
+                tfClaveRC.setText("¡Error!");
+            }
+        }
+
         if(e.getSource() == btSalirRC){
+            tfNombreRC.setText("");
+            tfCorreoRC.setText("");
+            tfClaveRC.setText("");
+            btSalirRC.setText("Cancelar");
             frameRClave.dispose();
             this.setEnabled(true);
         }
@@ -305,6 +343,14 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        if (e.getSource() == tfUser){
+            lbErrorIngreso.setVisible(false);
+        }
+
+        if (e.getSource() == tfClave){
+            lbErrorIngreso.setVisible(false);
+        }
+
         if(e.getSource() == lbRegistrarCliente){
             panelSl.nextPanel(5, panelUsuario,panelSl.left);
             panelUsuario.setVisible(true);
@@ -431,11 +477,6 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
     @Override
     public void focusLost(FocusEvent f){
 
-        if(f.getSource() == pnlIngrs){
-            pnlIngrs.setBounds(570, 65, 350, 440);
-            pnlIngrs.setBackground(new Color(11, 25, 39,200));
-        }
-
         if (f.getSource() == verClave & f.getSource() == tfClave){
                 verClave.setIcon(Uneye);
                 tfClave.setEchoChar('o');
@@ -452,7 +493,16 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
     public void keyPressed(KeyEvent e) {
         if(e.getSource() == btIngrs){
             if(e.getKeyCode() == KeyEvent.VK_ENTER){
-                JOptionPane.showMessageDialog(null,"EPPA¡¡¡¡","Confirm",JOptionPane.INFORMATION_MESSAGE);
+                daoUser = new DAOUsuarioImpl();
+                user = daoUser.validarUsuario(tfUser.getText(), cifrado.cifrado(String.valueOf(tfClave.getPassword())));
+                if (user.getNombre_Usuario().equals("F")){
+                    pnlIngrs.add(lbErrorIngreso);
+                    lbErrorIngreso.setVisible(true);
+                }else {
+                    new CargarVentanaUsuario();
+                    user.setNombre_Usuario(tfUser.getText());
+                    this.dispose();
+                }
             }
         }
     }

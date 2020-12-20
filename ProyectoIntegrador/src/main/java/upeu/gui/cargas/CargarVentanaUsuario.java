@@ -1,7 +1,6 @@
 package upeu.gui.cargas;
 
 import upeu.gui.ventana.VentanaPrincipalCliente;
-
 import javax.swing.*;
 
 public class CargarVentanaUsuario extends JFrame implements Runnable{
@@ -27,11 +26,10 @@ public class CargarVentanaUsuario extends JFrame implements Runnable{
     @Override
     public void run()    {
         try {
-            while (carga != null) {
+            if (carga != null) {
                 Thread.sleep(2500);
                 this.dispose();
                 new VentanaPrincipalCliente().repaint();
-                break;
             }
         }catch (InterruptedException r){
             JOptionPane.showMessageDialog(null,"Error al cargar>> "+r.getMessage());

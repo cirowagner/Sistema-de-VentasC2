@@ -73,7 +73,6 @@ public class UsuariosPanel extends JPanel implements ActionListener, KeyListener
             data[7] = lista.get(i).getDireccion();
             data[8] = lista.get(i).getCelular();
             modelo.addRow(data);
-
         }
         tablaUsuario.setModel(modelo);
         tablaUsuario.getColumnModel().getColumn(0).setPreferredWidth(1);
@@ -126,14 +125,14 @@ public class UsuariosPanel extends JPanel implements ActionListener, KeyListener
     public void utils (){
         btDataPerson.setBounds(15,7,135,25);
         btDataPerson.setBackground(new Color(20,0,0));
-        btDataPerson.setFocusable(false);
+        //btDataPerson.setFocusable(false);
         btDataPerson.setEnabled(false);
         btDataPerson.addActionListener(this);
         this.add(btDataPerson);
 
         btDataUser.setBounds(160,7,135,25);
         btDataUser.setBackground(new Color(20,0,0));
-        btDataUser.setFocusable(false);
+        //btDataUser.setFocusable(false);
         btDataUser.addActionListener(this);
         this.add(btDataUser);
 
@@ -143,6 +142,7 @@ public class UsuariosPanel extends JPanel implements ActionListener, KeyListener
         tfBuscarUser.setForeground(new Color(222,222,222));
         tfBuscarUser.setLayout(new BorderLayout());
         tfBuscarUser.add(lbBusacarIco, BorderLayout.EAST);
+        tfBuscarUser.addKeyListener(this);
         this.add(tfBuscarUser);
         JSeparator spd1 = new JSeparator();
         spd1.setBounds(400,31,160,2);
@@ -177,6 +177,24 @@ public class UsuariosPanel extends JPanel implements ActionListener, KeyListener
 
     @Override
     public void keyReleased(KeyEvent e) {
+        if (e.getSource() == tfBuscarUser){
+            daoUser = new DAOUsuarioImpl();
+            List<Usuario> lista = daoUser.listar(tfBuscarUser.getText());
+            Object[]data =   new Object[9];
+            modelo.setRowCount(0);
+            for(int i = 0; i<lista.size(); i++) {
+                data[0] = lista.get(i).getId_Usuario();
+                data[1] = lista.get(i).getNombre_Usuario();
+                data[2] = lista.get(i).getClave_Usuario();
+                data[3] = lista.get(i).getCorreo_Usuario();
+                data[4] = lista.get(i).getCartera_Usuario();
+                data[5] = lista.get(i).getTipo_Usuario();
+                data[6] = lista.get(i).getEstado_Usuario();
+                data[7] = lista.get(i).getFechaCreacion_Usuario();
+                data[8] = lista.get(i).getId_PersonaFK();
+                modelo.addRow(data);
+            }
 
+        }
     }
 }

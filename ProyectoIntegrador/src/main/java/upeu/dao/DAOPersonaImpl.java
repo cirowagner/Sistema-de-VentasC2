@@ -79,7 +79,7 @@ public class DAOPersonaImpl extends Conexion implements DAOPersona{
             pstmt.setInt(8, p.getCelular());
             pstmt.executeUpdate();
         }catch (SQLException e){
-            JOptionPane.showMessageDialog(null,"Error:: "+e.getMessage());
+            JOptionPane.showMessageDialog(null,"(*) Datos ya registrados");
         }catch (Exception e){
             Logger.getLogger(DAOPersonaImpl.class.getName()).log(Level.SEVERE, null, e);
         }finally {

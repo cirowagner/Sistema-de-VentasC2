@@ -172,6 +172,7 @@ public class RegistrarUsuario extends JPanel implements MouseListener, ActionLis
         tfDocumento.setOpaque(false);
         tfDocumento.setBorder(null);
         tfDocumento.addKeyListener(this);
+        tfDocumento.setLayout(new BorderLayout());
         pnlDatosPersonales.add(tfDocumento);
         JSeparator spd5 = new JSeparator();
         spd5.setBounds(70,335,280,1);
@@ -234,6 +235,8 @@ public class RegistrarUsuario extends JPanel implements MouseListener, ActionLis
         tfCorreo.setBounds(100,120,220,25);
         tfCorreo.setOpaque(false);
         tfCorreo.setBorder(null);
+        tfCorreo.addKeyListener(this);
+        tfCorreo.setLayout(new BorderLayout());
         tfCorreo.setForeground(fuenteColor);
         pnlDatosUsuario.add(tfCorreo);
         JSeparator spdU1 = new JSeparator();
@@ -248,6 +251,8 @@ public class RegistrarUsuario extends JPanel implements MouseListener, ActionLis
         tfNomUser.setBounds(100,190,220,25);
         tfNomUser.setOpaque(false);
         tfNomUser.setBorder(null);
+        tfNomUser.addKeyListener(this);
+        tfNomUser.setLayout(new BorderLayout());
         tfNomUser.setForeground(fuenteColor);
         pnlDatosUsuario.add(tfNomUser);
         JSeparator spdU2 = new JSeparator();
@@ -308,6 +313,7 @@ public class RegistrarUsuario extends JPanel implements MouseListener, ActionLis
     Date dateFecha = new Date();
     @Override
     public void actionPerformed(ActionEvent e) {
+        daoP = new DAOPersonaImpl();
         if (e.getSource() == btSiguiente){
             pnlSlRegst.nextPanel(5,pnlDatosUsuario,pnlSlRegst.left);
         }
@@ -317,6 +323,7 @@ public class RegistrarUsuario extends JPanel implements MouseListener, ActionLis
         }
 
         if (e.getSource() == btCrearCuenta){
+            daoP = new DAOPersonaImpl();
             person.setNombres(tfNombres.getText());
             person.setAp_Paterno(tfApPaterno.getText());
             person.setAp_Materno(tfApMaterno.getText());
@@ -330,15 +337,16 @@ public class RegistrarUsuario extends JPanel implements MouseListener, ActionLis
             person.setDireccion(tfDireccion.getText());
             person.setCelular(Integer.parseInt(tfCelular.getText()));
             daoP.registrar(person);
-            daoP = new DAOPersonaImpl();
+
+            daoU = new DAOUsuarioImpl();
             user.setCorreo_Usuario(tfCorreo.getText());
             user.setNombre_Usuario(tfNomUser.getText());
-            user.setClave_Usuario(cifrado.md5(String.valueOf(tfConfirmClave.getPassword())));
+            user.setClave_Usuario(cifrado.cifrado(String.valueOf(tfConfirmClave.getPassword())));
             user.setTipo_Usuario("C");
             user.setEstado_Usuario(1);
-            user.setFechaCreacion_Usuario(""+fechaActual.format(dateFecha));
+            user.setFechaCreacion_Usuario(fechaActual.format(dateFecha));
+            daoP = new DAOPersonaImpl();
             user.setId_PersonaFK(daoP.ultimaIdPersona().getId_Persona());
-            System.out.println("ID: "+daoP.ultimaIdPersona().getId_Persona());
             daoU.registrar(user);
         }
     }
@@ -418,20 +426,12 @@ public class RegistrarUsuario extends JPanel implements MouseListener, ActionLis
     @Override
     public void keyPressed(KeyEvent e){
     }
+
     ImageIcon icoBien = new ImageIcon("imagenes/Admin/Check.png");
     ImageIcon icoMal = new ImageIcon("imagenes/Admin/DisCheck.png");
     JLabel check = new JLabel("", SwingConstants.CENTER);
     @Override
     public void keyReleased(KeyEvent e) {
-        if (e.getSource() == tfConfirmClave){
-            if (String.valueOf(tfClave.getPassword()).equals(String.valueOf(tfConfirmClave.getPassword()))){
-                check.setIcon(icoBien);
-                btCrearCuenta.setEnabled(true);
-            }else {
-                check.setIcon(icoMal);
-                btCrearCuenta.setEnabled(false);
-            }
-        }
         if (e.getSource() == tfClave){
             if (String.valueOf(tfClave.getPassword()).equals(String.valueOf(tfConfirmClave.getPassword()))){
                 check.setIcon(icoBien);
@@ -441,5 +441,55 @@ public class RegistrarUsuario extends JPanel implements MouseListener, ActionLis
                 btCrearCuenta.setEnabled(false);
             }
         }
+
+        if (e.getSource() == tfConfirmClave){
+            if (String.valueOf(tfClave.getPassword()).equals(String.valueOf(tfConfirmClave.getPassword()))){
+                check.setIcon(icoBien);
+                btCrearCuenta.setEnabled(true);
+            }else {
+                check.setIcon(icoMal);
+                btCrearCuenta.setEnabled(false);
+            }
+        }
+        if (e.getSource() == tfDocumento){
+            daoU = new DAOUsuarioImpl();
+            user = daoU.validarRegistro("","",tfDocumento.getText());
+            if (tfDocumento.getText().equals(user.getDocumento())){
+                alerta1.setVisible(true);
+                alerta1.setForeground(Color.RED);
+                alerta1.setFont(alertafont);
+                tfDocumento.add(alerta1,BorderLayout.EAST);
+            }else {
+                alerta1.setVisible(false);
+            }
+        }
+        if (e.getSource() == tfCorreo){
+            daoU = new DAOUsuarioImpl();
+            user = daoU.validarRegistro("",tfCorreo.getText(),"");
+            if (tfCorreo.getText().equals(user.getCorreo_Usuario())){
+                alerta2.setVisible(true);
+                alerta2.setForeground(Color.RED);
+                alerta2.setFont(alertafont);
+                tfCorreo.add(alerta2,BorderLayout.EAST);
+            }else {
+                alerta2.setVisible(false);
+            }
+        }
+        if (e.getSource() == tfNomUser){
+            daoU = new DAOUsuarioImpl();
+            user = daoU.validarRegistro(tfNomUser.getText(),"","");
+            if (tfNomUser.getText().equals(user.getNombre_Usuario())){
+                alerta3.setForeground(Color.RED);
+                alerta3.setFont(alertafont);
+                tfNomUser.add(alerta3,BorderLayout.EAST);
+                alerta3.setVisible(true);
+            }else {
+                alerta3.setVisible(false);
+            }
+        }
     }
+    Font alertafont = new Font("Arial",Font.BOLD,30);
+    JLabel alerta1 = new JLabel("*");
+    JLabel alerta2 = new JLabel("*");
+    JLabel alerta3 = new JLabel("*");
 }
