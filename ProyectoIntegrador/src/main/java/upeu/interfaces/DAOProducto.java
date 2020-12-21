@@ -9,5 +9,4 @@ public interface DAOProducto {
      byte[] leerArchivo(String file);
      void registrar(Producto prod);
      void actualizar(Producto prod);
-     void eliminar(Producto prod);
 }

@@ -68,12 +68,11 @@ public class VentasPanel extends JPanel implements ActionListener, MouseListener
         modelo.addColumn("IVG");
         modelo.addColumn("Total");
         modelo.addColumn("ID Usuario");
-        modelo.addColumn("ID DetalleVenta");
         modelo.addColumn("-");
         btVer.setContentAreaFilled(false);
 
         daoV = new DAOVentaImpl();
-        Object [] data = new Object[9];
+        Object [] data = new Object[8];
         for (Venta v : daoV.listar()){
             data [0] = v.getId_Venta();
             data [1] = v.getNumeroComprobante_Venta();
@@ -82,8 +81,7 @@ public class VentasPanel extends JPanel implements ActionListener, MouseListener
             data [4] = v.getIgv_Venta();
             data [5] = v.getTotalTotales_Venta();
             data [6] = v.getId_UsuarioFK();
-            data [7] = v.getId_DetalleVentaFK();
-            data [8] = btVer;
+            data [7] = btVer;
             modelo.addRow(data);
         }
         tablaVenta.setModel(modelo);
@@ -93,7 +91,7 @@ public class VentasPanel extends JPanel implements ActionListener, MouseListener
         tablaVenta.getColumnModel().getColumn(3).setPreferredWidth(15);
         tablaVenta.getColumnModel().getColumn(4).setPreferredWidth(15);
         tablaVenta.getColumnModel().getColumn(5).setPreferredWidth(15);
-        tablaVenta.getColumnModel().getColumn(8).setPreferredWidth(25);
+        tablaVenta.getColumnModel().getColumn(7).setPreferredWidth(25);
         tablaVenta.setRowHeight(25);
     }
 
@@ -192,14 +190,14 @@ public class VentasPanel extends JPanel implements ActionListener, MouseListener
 
     @Override
     public void keyReleased(KeyEvent e) {
-        if (e.getSource() == tfBuscarVenta){
+       /* if (e.getSource() == tfBuscarVenta){
             daoV = new DAOVentaImpl();
             Object[]data =   new Object[9];
             modelo.setRowCount(0);
             for(Venta v : daoV.listar()) {
                 modelo.addRow(data);
             }
-        }
+        }*/
     }
 }
 

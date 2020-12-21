@@ -2,6 +2,7 @@ package upeu.gui.cargas;
 
 import upeu.gui.ventana.VentanaPrincipalCliente;
 import javax.swing.*;
+import java.awt.*;
 
 public class CargarVentanaUsuario extends JFrame implements Runnable{
     String nameUser;
@@ -12,9 +13,10 @@ public class CargarVentanaUsuario extends JFrame implements Runnable{
         setVisible(true);
         setLocationRelativeTo(null);
         setResizable(false);
+        setBackground(new Color(0,0,0,1));
         getContentPane().setLayout(null);
 
-        JLabel fondo = new JLabel(new ImageIcon("imagenes/logo.gif"));
+        JLabel fondo = new JLabel(new ImageIcon("imagenes/gif logos/1.gif"));
         fondo.setBounds(0,0,800,600);
         add(fondo);
 
@@ -29,7 +31,7 @@ public class CargarVentanaUsuario extends JFrame implements Runnable{
     public void run()    {
         try {
             if (carga != null) {
-                Thread.sleep(2500);
+                Thread.sleep(8500);
                 this.dispose();
                 new VentanaPrincipalCliente(nameUser).repaint();
             }

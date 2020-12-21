@@ -1,6 +1,6 @@
 package upeu.pojo;
 
-public class DetalleVenta {
+public class DetalleVenta extends Producto {
 
     private int id_DetalleV;
     private int cantidad_DetalleV;

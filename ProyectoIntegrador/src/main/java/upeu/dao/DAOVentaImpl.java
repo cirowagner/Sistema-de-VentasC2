@@ -28,7 +28,6 @@ public class DAOVentaImpl extends Conexion implements DAOVenta {
                 vnt.setIgv_Venta(rs.getDouble(5));
                 vnt.setTotalTotales_Venta(rs.getDouble(6));
                 vnt.setId_UsuarioFK(rs.getInt(7));
-                vnt.setId_DetalleVentaFK(rs.getInt(8));
                 lista.add(vnt);
             }
         }catch (SQLException e){
@@ -56,7 +55,6 @@ public class DAOVentaImpl extends Conexion implements DAOVenta {
                 vnt.setIgv_Venta(rs.getDouble(5));
                 vnt.setTotalTotales_Venta(rs.getDouble(6));
                 vnt.setId_UsuarioFK(rs.getInt(7));
-                vnt.setId_DetalleVentaFK(rs.getInt(8));
             }else {
                 vnt.setId_Venta(0);
             }
@@ -74,15 +72,14 @@ public class DAOVentaImpl extends Conexion implements DAOVenta {
     public void registrar(Venta vnt) {
         try {
             PreparedStatement pstmt = conectar().prepareStatement("INSERT INTO venta" +
-                    " (NumeroComprobante_Venta, FechaHora_Venta, Estado_Venta, Impuesto_Venta, TotalTotales_Venta, ID_UsuarioFK, ID_DetalleVentaFK)" +
-                    " VALUES (?, ?, ?, ?, ?, ?, ?)");
+                    " (NumeroComprobante_Venta, FechaHora_Venta, Estado_Venta, Impuesto_Venta, TotalTotales_Venta, ID_UsuarioFK)" +
+                    " VALUES (?, ?, ?, ?, ?, ?)");
             pstmt.setInt(1,vnt.getNumeroComprobante_Venta());
             pstmt.setString(2,vnt.getFechaHora_Venta());
             pstmt.setInt(3,vnt.getEstado_Venta());
             pstmt.setDouble(4,vnt.getIgv_Venta());
             pstmt.setDouble(5,vnt.getTotalTotales_Venta());
             pstmt.setInt(6,vnt.getId_UsuarioFK());
-            pstmt.setInt(7,vnt.getId_DetalleVentaFK());
             pstmt.executeUpdate();
         }catch (SQLException e){
             JOptionPane.showMessageDialog(null,"Error:: "+e.getMessage());
@@ -102,8 +99,7 @@ public class DAOVentaImpl extends Conexion implements DAOVenta {
                     "Estado_Venta = ?, " +
                     "Impuesto_Venta = ?, " +
                     "TotalTotales_Venta = ?, " +
-                    "ID_UsuarioFK = ?, " +
-                    "ID_DetalleVentaFK = ? " +
+                    "ID_UsuarioFK = ? " +
                     "WHERE ID_Venta = ?");
             pstmt.setInt(1,vnt.getNumeroComprobante_Venta());
             pstmt.setString(2,vnt.getFechaHora_Venta());
@@ -111,7 +107,6 @@ public class DAOVentaImpl extends Conexion implements DAOVenta {
             pstmt.setDouble(4,vnt.getIgv_Venta());
             pstmt.setDouble(5,vnt.getTotalTotales_Venta());
             pstmt.setInt(6,vnt.getId_UsuarioFK());
-            pstmt.setInt(7,vnt.getId_DetalleVentaFK());
             pstmt.setInt(8,vnt.getId_Venta());
             pstmt.executeUpdate();
         }catch (SQLException e){

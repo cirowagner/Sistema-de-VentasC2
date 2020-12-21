@@ -66,7 +66,7 @@ public class DAOUsuarioImpl extends Conexion implements DAOUsuario {
     public Usuario validarUsuario(String name, String clave) {
         Usuario user = new Usuario();
         try {
-            PreparedStatement pstmt = conectar().prepareStatement("SELECT '"+name+"', '"+clave+"' FROM usuario");
+            PreparedStatement pstmt = conectar().prepareStatement("SELECT Nombre_Usuario, Contraseña_Usuario FROM usuario WHERE Nombre_Usuario = '"+name+"' AND Contraseña_Usuario = '"+clave+"'");
             ResultSet rs = pstmt.executeQuery();
             if(rs.next()){
                 user.setNombre_Usuario(rs.getString(1));

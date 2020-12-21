@@ -19,6 +19,7 @@ public class RegistrarUsuario extends JPanel implements MouseListener, ActionLis
 
     public RegistrarUsuario(){
         setBounds(0,0,1005,570);
+        setBackground(Color.BLACK);
         setVisible(false);
         setLayout(null);
         initComponents();
@@ -32,7 +33,7 @@ public class RegistrarUsuario extends JPanel implements MouseListener, ActionLis
     }
 
     ImageIcon fondo = new ImageIcon("imagenes/login/RegstrClient/Fondo2.gif");
-    JLabel lbFondoRClnt = new JLabel(fondo);
+    JLabel lbFondoRClnt = new JLabel(fondo,SwingConstants.LEFT);
     public void fondoRegstr (){
         lbFondoRClnt.setBounds(0,0,1005,570);
      //   lbFondoRClnt.setIcon(new ImageIcon(fondo.getImage().getScaledInstance(lbFondoRClnt.getWidth(), lbFondoRClnt.getHeight(), Image.SCALE_SMOOTH)));
@@ -51,13 +52,13 @@ public class RegistrarUsuario extends JPanel implements MouseListener, ActionLis
         pnlSlRegst.setBounds(550,15,425,540);
 
         btnSalir.setBounds(10,540,80,20);
-        btnSalir.setBackground(new Color(0,0,0));
+        btnSalir.setBackground(new Color(25,0,0));
         btnSalir.addActionListener(this);
         lbFondoRClnt.add(btnSalir);
 
-        pnlDatosPersonales.setBackground(new Color(10,0,0));
+        pnlDatosPersonales.setBackground(new Color(0,0,0));
         pnlDatosPersonales.setLayout(null);
-        pnlDatosUsuario.setBackground(new Color(10,0,0));
+        pnlDatosUsuario.setBackground(new Color(0,0,0));
         pnlDatosUsuario.setLayout(null);
 
         pnlSlRegst.add(pnlDatosPersonales);
@@ -87,8 +88,14 @@ public class RegistrarUsuario extends JPanel implements MouseListener, ActionLis
     JTextField tfDireccion = new JTextField("Jr.Bazadre");
     JTextField tfCelular = new JTextField("9831312");
 
+    JLabel lbTitleDP = new JLabel("Datos Personales",SwingConstants.CENTER);
     JButton btSiguiente = new JButton("Siguiente");
     public void datosPersonales () {
+        lbTitleDP.setBounds(100,30,225,35);
+        lbTitleDP.setForeground(fuenteColor);
+        lbTitleDP.setFont(new Font("Arial",Font.BOLD,23));
+        pnlDatosPersonales.add(lbTitleDP);
+
         lbNombres.setBounds(70, 90, 75, 25);
         lbNombres.setForeground(fuenteColor);
         lbNombres.setFont(fuente);
@@ -209,7 +216,7 @@ public class RegistrarUsuario extends JPanel implements MouseListener, ActionLis
         pnlDatosPersonales.add(spd7);
 
         btSiguiente.setBounds(153,465,120,25);
-        btSiguiente.setBackground(new Color(0,0,0));
+        btSiguiente.setBackground(new Color(25,0,0));
         btSiguiente.addActionListener(this);
         pnlDatosPersonales.add(btSiguiente);
     }
@@ -226,7 +233,14 @@ public class RegistrarUsuario extends JPanel implements MouseListener, ActionLis
 
     JButton btVolver = new JButton("Volver");
     JButton btCrearCuenta = new JButton("Crear");
+
+    JLabel lbTitleDU = new JLabel("Datos de Usuario",SwingConstants.CENTER);
     public void datosUsuario (){
+        lbTitleDU.setBounds(100,30,225,35);
+        lbTitleDU.setForeground(fuenteColor);
+        lbTitleDU.setFont(new Font("Arial",Font.BOLD,23));
+        pnlDatosUsuario.add(lbTitleDU);
+
         lbCorreo.setBounds(100,95,60,25);
         lbCorreo.setFont(fuente);
         lbCorreo.setForeground(fuenteColor);
@@ -293,12 +307,12 @@ public class RegistrarUsuario extends JPanel implements MouseListener, ActionLis
         pnlDatosUsuario.add(spdU4);
 
         btVolver.setBounds(115,445,85,25);
-        btVolver.setBackground(new Color(0,0,0));
+        btVolver.setBackground(new Color(25,0,0));
         btVolver.addActionListener(this);
         pnlDatosUsuario.add(btVolver);
 
         btCrearCuenta.setBounds(220,445,85,25);
-        btCrearCuenta.setBackground(new Color(0,0,0));
+        btCrearCuenta.setBackground(new Color(25,0,0));
         btCrearCuenta.setEnabled(false);
         btCrearCuenta.addActionListener(this);
         pnlDatosUsuario.add(btCrearCuenta);

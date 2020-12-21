@@ -218,6 +218,7 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
         frameRClave.setVisible(true);
         frameRClave.setBackground(new Color(0,0,10,231));
         frameRClave.setLayout(new BorderLayout());
+        frameRClave.setLocationRelativeTo(null);
 
         pnlRClave.setOpaque(false);
         pnlRClave.setLayout(null);

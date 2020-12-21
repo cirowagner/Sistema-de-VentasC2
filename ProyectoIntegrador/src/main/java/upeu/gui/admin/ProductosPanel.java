@@ -111,7 +111,6 @@ public class ProductosPanel extends JPanel implements ActionListener, MouseListe
     JTextField tfRutaImagen = new JTextField();
     JButton btAgregar = new JButton("Agregar");
     JButton btActualizar = new JButton("Actualizar");
-    JButton btEliminar = new JButton("Eliminar");
 
     JLabel imagenProducto = new JLabel("",SwingConstants.CENTER);
     JLabel lbNombre = new JLabel("Nombre:");
@@ -199,20 +198,15 @@ public class ProductosPanel extends JPanel implements ActionListener, MouseListe
         cbxCategoria.addItem("Categorias");
         this.add(cbxCategoria);
 
-        btAgregar.setBounds(787,390,90,25);
-        btAgregar.setBackground(new Color(0,0,0));
-        btAgregar.addActionListener(this);
-        this.add(btAgregar);
-
-        btActualizar.setBounds(680,390,100,25);
+        btActualizar.setBounds(730,390,100,25);
         btActualizar.setBackground(new Color(0,0,0));
         btActualizar.addActionListener(this);
         this.add(btActualizar);
 
-        btEliminar.setBounds(885,390,85,25);
-        btEliminar.setBackground(new Color(0,0,0));
-        btEliminar.addActionListener(this);
-        this.add(btEliminar);
+        btAgregar.setBounds(837,390,90,25);
+        btAgregar.setBackground(new Color(0,0,0));
+        btAgregar.addActionListener(this);
+        this.add(btAgregar);
     }
 
     JTextField tfBuscarProd = new JTextField();
@@ -298,13 +292,6 @@ public class ProductosPanel extends JPanel implements ActionListener, MouseListe
             mostrarProductos();
             vaciarRegistro();
         }
-        if (e.getSource() == btEliminar){
-            daoProd = new DAOProductoImpl();
-            System.out.println("ID: "+prod.getId_Producto());
-            daoProd.eliminar(prod);
-            mostrarProductos();
-            vaciarRegistro();
-        }
     }
 
     @Override
@@ -361,7 +348,6 @@ public class ProductosPanel extends JPanel implements ActionListener, MouseListe
 
     @Override
     public void keyPressed(KeyEvent e) {
-
     }
 
     @Override

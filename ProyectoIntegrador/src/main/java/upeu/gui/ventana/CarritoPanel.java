@@ -60,24 +60,24 @@ public class CarritoPanel extends JPanel implements ActionListener, MouseListene
         modelo.setRowCount(0);
         modelo.setColumnCount(0);
         modelo.addColumn("ID");
+        modelo.addColumn("Nombre Producto");
         modelo.addColumn("Cantidad");
         modelo.addColumn("Precio Unitario");
         modelo.addColumn("Descuento/p");
         modelo.addColumn("Precio Total");
-        modelo.addColumn("ID Producto");
         modelo.addColumn("ID Venta");
         modelo.addColumn("-");
         btEditar.setContentAreaFilled(false);
 
         daoDatalle = new DAODetalleVImpl();
-        Object[] data = new Object[9];
+        Object[] data = new Object[8];
         for (DetalleVenta dv : daoDatalle.listar()){
             data[0] = dv.getId_DetalleV();
-            data[1] = dv.getCantidad_DetalleV();
-            data[2] = dv.getPrecioUnitario_DetalleV();
-            data[3] = dv.getDescuento_DetalleV();
-            data[4] = dv.getPrecioTotal_DetalleV();
-            data[5] = dv.getId_ProductoFK();
+            data[1] = dv.getNombre_Producto();
+            data[2] = dv.getCantidad_DetalleV();
+            data[3] = dv.getPrecioUnitario_DetalleV();
+            data[4] = dv.getDescuento_DetalleV();
+            data[5] = dv.getPrecioTotal_DetalleV();
             data[6] = dv.getId_VentaFK();
             data[7] = btEditar;
             modelo.addRow(data);
