@@ -1,12 +1,10 @@
 package upeu.pojo;
 
-import java.util.Arrays;
-
 public class Producto extends Categoria{
 
     private int id_Producto;
     private String nombre_Producto;
-    private byte[] imagen_Producto;
+    private String imagen_Producto;
     private double precio_Producto;
     private int estado_Producto;
     private int StockInicial_Producto;
@@ -29,11 +27,11 @@ public class Producto extends Categoria{
         this.nombre_Producto = nombre_Producto;
     }
 
-    public byte[] getImagen_Producto() {
+    public String getImagen_Producto() {
         return imagen_Producto;
     }
 
-    public void setImagen_Producto(byte[] imagen_Producto) {
+    public void setImagen_Producto(String imagen_Producto) {
         this.imagen_Producto = imagen_Producto;
     }
 
@@ -82,7 +80,7 @@ public class Producto extends Categoria{
         return "Producto{" +
                 "id_Producto=" + id_Producto +
                 ", nombre_Producto='" + nombre_Producto + '\'' +
-                ", imagen_Producto=" + Arrays.toString(imagen_Producto) +
+                ", imagen_Producto=" + imagen_Producto +
                 ", precio_Producto=" + precio_Producto +
                 ", estado_Producto=" + estado_Producto +
                 ", StockInicial_Producto=" + StockInicial_Producto +

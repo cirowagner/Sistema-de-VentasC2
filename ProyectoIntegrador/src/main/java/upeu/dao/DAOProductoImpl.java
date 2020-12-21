@@ -5,6 +5,7 @@ import upeu.interfaces.DAOProducto;
 import upeu.pojo.Producto;
 
 import javax.swing.*;
+import java.io.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class DAOProductoImpl extends Conexion implements DAOProducto {
+
     @Override
     public List<Producto> listar() {
         List<Producto>listar = new ArrayList<>();
@@ -25,7 +27,7 @@ public class DAOProductoImpl extends Conexion implements DAOProducto {
                 Producto prod = new Producto();
                 prod.setId_Producto(rs.getInt(1));
                 prod.setNombre_Producto(rs.getString(2));
-                prod.setImagen_Producto(rs.getBytes(3));
+                prod.setImagen_Producto(rs.getString(3));
                 prod.setPrecio_Producto(rs.getDouble(4));
                 prod.setEstado_Producto(rs.getInt(5));
                 prod.setStockInicial_Producto(rs.getInt(6));
@@ -53,7 +55,7 @@ public class DAOProductoImpl extends Conexion implements DAOProducto {
                 Producto prod = new Producto();
                 prod.setId_Producto(rs.getInt(1));
                 prod.setNombre_Producto(rs.getString(2));
-                prod.setImagen_Producto(rs.getBytes(3));
+              //  prod.setImagen_Producto(rs.getBytes(3));
                 prod.setPrecio_Producto(rs.getDouble(4));
                 prod.setEstado_Producto(rs.getInt(5));
                 prod.setStockInicial_Producto(rs.getInt(6));
@@ -70,19 +72,37 @@ public class DAOProductoImpl extends Conexion implements DAOProducto {
         return lista;
     }
 
+    public byte[] leerArchivo(String file){
+        ByteArrayOutputStream bos = null;
+        try {
+            File f = new File(file);
+            FileInputStream fis = new FileInputStream(f);
+            byte[] buffer = new byte[1024];
+            bos = new ByteArrayOutputStream();
+            for (int len; (len = fis.read(buffer)) != -1;) {
+                bos.write(buffer, 0, len);
+            }
+        } catch (FileNotFoundException e) {
+            System.err.println(e.getMessage());
+        } catch (IOException e2) {
+            System.err.println(e2.getMessage());
+        }
+        return bos != null ? bos.toByteArray() : null;
+    }
+
     @Override
     public void registrar(Producto prod) {
         try {
             PreparedStatement pstmt = conectar().prepareStatement("INSERT INTO producto (" +
-                    "Nombre_Producto, Precio_Producto, Estado_Producto, StockInicial_Producto, StockActual_Producto, Nombre_CategoriaFK)" +
-                    " VALUES (?,?,?,?,?,?)");
+                    "Nombre_Producto, Imagen_Producto,  Precio_Producto, Estado_Producto, StockInicial_Producto, StockActual_Producto, Nombre_CategoriaFK)" +
+                    " VALUES (?,?,?,?,?,?,?)");
             pstmt.setString(1,prod.getNombre_Producto());
-            //pstmt.setBytes(2,prod.getImagen_Producto());
-            pstmt.setDouble(2,prod.getPrecio_Producto());
-            pstmt.setInt(3,prod.getEstado_Producto());
-            pstmt.setInt(4,prod.getStockInicial_Producto());
-            pstmt.setInt(5,prod.getStockActual_Producto());
-            pstmt.setString(6,prod.getNombre_CategoriaFK());
+          //  pstmt.setBytes(2,prod.getImagen_Producto());
+            pstmt.setDouble(3,prod.getPrecio_Producto());
+            pstmt.setInt(4,prod.getEstado_Producto());
+            pstmt.setInt(5,prod.getStockInicial_Producto());
+            pstmt.setInt(6,prod.getStockActual_Producto());
+            pstmt.setString(7,prod.getNombre_CategoriaFK());
             pstmt.executeUpdate();
         }catch (SQLException e){
             JOptionPane.showMessageDialog(null,"Error:: "+e.getMessage());
@@ -105,7 +125,7 @@ public class DAOProductoImpl extends Conexion implements DAOProducto {
                     "Nombre_CategoriaFK = ? " +
                     "WHERE ID_Producto = ?");
             pstmt.setString(1,prod.getNombre_Producto());
-            pstmt.setBytes(2,prod.getImagen_Producto());
+           // pstmt.setBytes(2,prod.getImagen_Producto());
             pstmt.setDouble(3,prod.getPrecio_Producto());
             pstmt.setInt(4,prod.getEstado_Producto());
             pstmt.setInt(5,prod.getStockInicial_Producto());

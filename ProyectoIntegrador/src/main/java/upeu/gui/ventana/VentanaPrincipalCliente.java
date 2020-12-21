@@ -1,7 +1,6 @@
 package upeu.gui.ventana;
 
 import upeu.dao.DAOProductoImpl;
-import upeu.gui.login.Ingresar;
 import upeu.gui.login.JPanelSlider;
 import upeu.interfaces.DAOProducto;
 import upeu.pojo.Producto;
@@ -16,12 +15,9 @@ import java.io.File;
 import java.io.IOException;
 
 public class VentanaPrincipalCliente extends JFrame implements MouseMotionListener, MouseListener, ActionListener {
-
-    public static void main(String []args){
-        new VentanaPrincipalCliente();
-    }
-
-    public VentanaPrincipalCliente(){
+    String nameUser;
+    public VentanaPrincipalCliente(String nameUser){
+        this.nameUser = nameUser;
         setUndecorated(true);
         setSize(1030,560);
         setVisible(true);
@@ -55,10 +51,10 @@ public class VentanaPrincipalCliente extends JFrame implements MouseMotionListen
         getContentPane().add(panelPricipal, BorderLayout.CENTER);
         panelPricipal.setLayout(null);
     }
-    Ingresar ingr = new Ingresar();
+
     public void mostrarUsuario (){
-        System.out.println("NameUser: "+ingr.tfUser.getText());
-        lbNameUser.setText(ingr.tfUser.getText());
+        System.out.println("NameUser: "+nameUser);
+        lbNameUser.setText(nameUser);
     }
 
     JPanel pnlOpciones = new JPanel(new FlowLayout());
@@ -292,12 +288,11 @@ public class VentanaPrincipalCliente extends JFrame implements MouseMotionListen
     public void colocarProd(){
         plantilla1Prod.removeAll();
         daoProd = new DAOProductoImpl();
-        List<Producto>lista = daoProd.listar();
-        for (int i = 0; i<8 ;i++){
-            JButton btnProd = new JButton(lista.get(i).getNombre_Producto());
+        for (Producto prod : daoProd.listar()){
+            JButton btnProd = new JButton(new ImageIcon(prod.getNombre_Producto()));
             btnProd.setBackground(new Color(34,0,0));
             btnProd.setLayout(new BorderLayout());
-            JLabel lbPrecio = new JLabel(String.valueOf(lista.get(i).getPrecio_Producto()),SwingConstants.CENTER);
+            JLabel lbPrecio = new JLabel(String.valueOf(prod.getPrecio_Producto()),SwingConstants.CENTER);
             btnProd.add(lbPrecio,BorderLayout.SOUTH);
             btnProd.addActionListener(new ActionListener() {
                 @Override
@@ -385,12 +380,11 @@ public class VentanaPrincipalCliente extends JFrame implements MouseMotionListen
             pnlSlArticulos.nextPanel(5,pnlVista4,pnlSlArticulos.right);
             plantilla4Prod.removeAll();
             daoProd = new DAOProductoImpl();
-            List<Producto>lista = daoProd.listar();
-            for (int i = 0; i<8 ;i++){
-                JButton btnProd = new JButton(lista.get(i).getNombre_Producto());
+            for (Producto prod : daoProd.listar()){
+                JButton btnProd = new JButton(new ImageIcon(prod.getNombre_Producto()));
                 btnProd.setBackground(new Color(34,0,0));
                 btnProd.setLayout(new BorderLayout());
-                JLabel lbPrecio = new JLabel(String.valueOf(lista.get(i).getPrecio_Producto()),SwingConstants.CENTER);
+                JLabel lbPrecio = new JLabel(String.valueOf(prod.getPrecio_Producto()),SwingConstants.CENTER);
                 btnProd.add(lbPrecio,BorderLayout.SOUTH);
                 btnProd.addActionListener(new ActionListener() {
                     @Override
@@ -406,12 +400,11 @@ public class VentanaPrincipalCliente extends JFrame implements MouseMotionListen
             pnlSlArticulos.nextPanel(5,pnlVista2,pnlSlArticulos.left);
             plantilla2Prod.removeAll();
             daoProd = new DAOProductoImpl();
-            List<Producto>lista = daoProd.listar();
-            for (int i = 8; i<16 ;i++){
-                JButton btnProd = new JButton(lista.get(i).getNombre_Producto());
+            for (Producto prod : daoProd.listar()){
+                JButton btnProd = new JButton(new ImageIcon(prod.getNombre_Producto()));
                 btnProd.setBackground(new Color(34,0,0));
                 btnProd.setLayout(new BorderLayout());
-                JLabel lbPrecio = new JLabel(String.valueOf(lista.get(i).getPrecio_Producto()),SwingConstants.CENTER);
+                JLabel lbPrecio = new JLabel(String.valueOf(prod.getPrecio_Producto()),SwingConstants.CENTER);
                 btnProd.add(lbPrecio,BorderLayout.SOUTH);
                 btnProd.addActionListener(new ActionListener() {
                     @Override
@@ -428,12 +421,11 @@ public class VentanaPrincipalCliente extends JFrame implements MouseMotionListen
             pnlSlArticulos.nextPanel(5,pnlVista1,pnlSlArticulos.right);
             plantilla1Prod.removeAll();
             daoProd = new DAOProductoImpl();
-            List<Producto>lista = daoProd.listar();
-            for (int i = 0; i<8 ;i++){
-                JButton btnProd = new JButton(lista.get(i).getNombre_Producto());
+            for (Producto prod : daoProd.listar()){
+                JButton btnProd = new JButton(new ImageIcon(prod.getNombre_Producto()));
                 btnProd.setBackground(new Color(34,0,0));
                 btnProd.setLayout(new BorderLayout());
-                JLabel lbPrecio = new JLabel(String.valueOf(lista.get(i).getPrecio_Producto()),SwingConstants.CENTER);
+                JLabel lbPrecio = new JLabel(String.valueOf(prod.getPrecio_Producto()),SwingConstants.CENTER);
                 btnProd.add(lbPrecio,BorderLayout.SOUTH);
                 btnProd.addActionListener(new ActionListener() {
                     @Override
@@ -449,12 +441,11 @@ public class VentanaPrincipalCliente extends JFrame implements MouseMotionListen
             pnlSlArticulos.nextPanel(5,pnlVista3,pnlSlArticulos.left);
             plantilla3Prod.removeAll();
             daoProd = new DAOProductoImpl();
-            List<Producto>lista = daoProd.listar();
-            for (int i = 16; i<24 ;i++){
-                JButton btnProd = new JButton(lista.get(i).getNombre_Producto());
+            for (Producto prod : daoProd.listar()){
+                JButton btnProd = new JButton(new ImageIcon(prod.getNombre_Producto()));
                 btnProd.setBackground(new Color(34,0,0));
                 btnProd.setLayout(new BorderLayout());
-                JLabel lbPrecio = new JLabel(String.valueOf(lista.get(i).getPrecio_Producto()),SwingConstants.CENTER);
+                JLabel lbPrecio = new JLabel(String.valueOf(prod.getPrecio_Producto()),SwingConstants.CENTER);
                 btnProd.add(lbPrecio,BorderLayout.SOUTH);
                 btnProd.addActionListener(new ActionListener() {
                     @Override
@@ -471,12 +462,11 @@ public class VentanaPrincipalCliente extends JFrame implements MouseMotionListen
             pnlSlArticulos.nextPanel(5,pnlVista2,pnlSlArticulos.right);
             plantilla2Prod.removeAll();
             daoProd = new DAOProductoImpl();
-            List<Producto>lista = daoProd.listar();
-            for (int i = 0; i<8 ;i++){
-                JButton btnProd = new JButton(lista.get(i).getNombre_Producto());
+            for (Producto prod : daoProd.listar()){
+                JButton btnProd = new JButton(new ImageIcon(prod.getNombre_Producto()));
                 btnProd.setBackground(new Color(34,0,0));
                 btnProd.setLayout(new BorderLayout());
-                JLabel lbPrecio = new JLabel(String.valueOf(lista.get(i).getPrecio_Producto()),SwingConstants.CENTER);
+                JLabel lbPrecio = new JLabel(String.valueOf(prod.getPrecio_Producto()),SwingConstants.CENTER);
                 btnProd.add(lbPrecio,BorderLayout.SOUTH);
                 btnProd.addActionListener(new ActionListener() {
                     @Override
@@ -492,12 +482,11 @@ public class VentanaPrincipalCliente extends JFrame implements MouseMotionListen
             pnlSlArticulos.nextPanel(5,pnlVista4,pnlSlArticulos.left);
             plantilla4Prod.removeAll();
             daoProd = new DAOProductoImpl();
-            List<Producto>lista = daoProd.listar();
-            for (int i = 0; i<8 ;i++){
-                JButton btnProd = new JButton(lista.get(i).getNombre_Producto());
+            for (Producto prod : daoProd.listar()){
+                JButton btnProd = new JButton(new ImageIcon(prod.getNombre_Producto()));
                 btnProd.setBackground(new Color(34,0,0));
                 btnProd.setLayout(new BorderLayout());
-                JLabel lbPrecio = new JLabel(String.valueOf(lista.get(i).getPrecio_Producto()),SwingConstants.CENTER);
+                JLabel lbPrecio = new JLabel(String.valueOf(prod.getPrecio_Producto()),SwingConstants.CENTER);
                 btnProd.add(lbPrecio,BorderLayout.SOUTH);
                 btnProd.addActionListener(new ActionListener() {
                     @Override
@@ -514,12 +503,11 @@ public class VentanaPrincipalCliente extends JFrame implements MouseMotionListen
             pnlSlArticulos.nextPanel(5,pnlVista3,pnlSlArticulos.right);
             plantilla3Prod.removeAll();
             daoProd = new DAOProductoImpl();
-            List<Producto>lista = daoProd.listar();
-            for (int i = 0; i<8 ;i++){
-                JButton btnProd = new JButton(lista.get(i).getNombre_Producto());
+            for (Producto prod : daoProd.listar()){
+                JButton btnProd = new JButton(new ImageIcon(prod.getNombre_Producto()));
                 btnProd.setBackground(new Color(34,0,0));
                 btnProd.setLayout(new BorderLayout());
-                JLabel lbPrecio = new JLabel(String.valueOf(lista.get(i).getPrecio_Producto()),SwingConstants.CENTER);
+                JLabel lbPrecio = new JLabel(String.valueOf(prod.getPrecio_Producto()),SwingConstants.CENTER);
                 btnProd.add(lbPrecio,BorderLayout.SOUTH);
                 btnProd.addActionListener(new ActionListener() {
                     @Override
@@ -536,12 +524,11 @@ public class VentanaPrincipalCliente extends JFrame implements MouseMotionListen
             pnlSlArticulos.nextPanel(5,pnlVista1,pnlSlArticulos.left);
             plantilla1Prod.removeAll();
             daoProd = new DAOProductoImpl();
-            List<Producto>lista = daoProd.listar();
-            for (int i = 0; i<8 ;i++){
-                JButton btnProd = new JButton(lista.get(i).getNombre_Producto());
+            for (Producto prod : daoProd.listar()){
+                JButton btnProd = new JButton(new ImageIcon(prod.getNombre_Producto()));
                 btnProd.setBackground(new Color(34,0,0));
                 btnProd.setLayout(new BorderLayout());
-                JLabel lbPrecio = new JLabel(String.valueOf(lista.get(i).getPrecio_Producto()),SwingConstants.CENTER);
+                JLabel lbPrecio = new JLabel(String.valueOf(prod.getPrecio_Producto()),SwingConstants.CENTER);
                 btnProd.add(lbPrecio,BorderLayout.SOUTH);
                 btnProd.addActionListener(new ActionListener() {
                     @Override

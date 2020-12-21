@@ -4,7 +4,9 @@ import upeu.gui.ventana.VentanaPrincipalCliente;
 import javax.swing.*;
 
 public class CargarVentanaUsuario extends JFrame implements Runnable{
-    public CargarVentanaUsuario(){
+    String nameUser;
+    public CargarVentanaUsuario(String nameUser){
+        this.nameUser = nameUser;
         setUndecorated(true);
         setSize(800,600);
         setVisible(true);
@@ -29,7 +31,7 @@ public class CargarVentanaUsuario extends JFrame implements Runnable{
             if (carga != null) {
                 Thread.sleep(2500);
                 this.dispose();
-                new VentanaPrincipalCliente().repaint();
+                new VentanaPrincipalCliente(nameUser).repaint();
             }
         }catch (InterruptedException r){
             JOptionPane.showMessageDialog(null,"Error al cargar>> "+r.getMessage());

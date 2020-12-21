@@ -18,6 +18,7 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.List;
 
@@ -234,24 +235,6 @@ public class ProductosPanel extends JPanel implements ActionListener, MouseListe
 
     Producto prod = new Producto();
     DAOProducto daoProd = new DAOProductoImpl();
-    public void mostrarImgen (){
-        daoProd = new DAOProductoImpl();
-        List<Producto> list = daoProd.listar();
-        for (int i = 0; i < list.size(); i++) {
-            prod = list.get(i);
-            try {
-                byte[] bi = prod.getImagen_Producto();
-                BufferedImage image;
-                InputStream in = new ByteArrayInputStream(bi);
-                image = ImageIO.read(in);
-                ImageIcon imgi = new ImageIcon(image.getScaledInstance(100, 100, Image.SCALE_DEFAULT));
-                imagenProducto.setIcon(imgi);
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Error al enviar Imagen: " + ex.getMessage());
-                imagenProducto.setText("No hay imagen");
-            }
-        }
-    }
 
     public void vaciarRegistro(){
         tfNombre.setText("");
@@ -261,7 +244,7 @@ public class ProductosPanel extends JPanel implements ActionListener, MouseListe
         tfStockInicial.setText("");
     }
 
-
+    String ruta;
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btBuscarFile) {
@@ -273,7 +256,7 @@ public class ProductosPanel extends JPanel implements ActionListener, MouseListe
             archivo.setFileFilter(filtro);
             int seleccion = archivo.showOpenDialog(null);
             if (seleccion == JFileChooser.APPROVE_OPTION) {
-                String ruta = archivo.getSelectedFile().getAbsolutePath();
+                ruta = archivo.getSelectedFile().getAbsolutePath();
                 tfRutaImagen.setText(ruta);
                 ImageIcon prueba = new ImageIcon(ruta);
                 imagenProducto.setIcon(prueba);
@@ -292,20 +275,11 @@ public class ProductosPanel extends JPanel implements ActionListener, MouseListe
             }else if (rbInactivo.isSelected()){
                 prod.setEstado_Producto(0);
             }
+            prod.setImagen_Producto(ruta);
             prod.setStockInicial_Producto(Integer.parseInt(tfStockInicial.getText()));
             prod.setStockActual_Producto(Integer.parseInt(tfStockInicial.getText()));
             prod.setNombre_CategoriaFK(cbxCategoria.getSelectedItem().toString());
-            /*try {
-                byte[] imagen = new byte[(int) ruta.length()];
-                //InputStream input = new FileInputStream(ruta);
-                //input.read(imagen);
-                prod.setImagen_Producto(imagen);
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Enviar Imagen: " + ex.getMessage());
-                prod.setImagen_Producto(null);
-            }*/
             daoProd.registrar(prod);
-           // mostrarImgen();
             mostrarProductos();
         }
         if (e.getSource() == btActualizar){

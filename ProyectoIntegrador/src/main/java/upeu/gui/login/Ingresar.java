@@ -285,10 +285,8 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
                pnlIngrs.add(lbErrorIngreso);
                lbErrorIngreso.setVisible(true);
            }else {
-               user = new Usuario();
-               user.setNombre_Usuario(tfUser.getText());
-               System.out.println("NAmE: "+tfUser.getText());
-               new CargarVentanaUsuario();
+               new CargarVentanaUsuario(tfUser.getText());
+               this.dispose();
            }
         }
 
@@ -497,8 +495,7 @@ public class Ingresar extends JFrame implements MouseListener, ActionListener, M
                     pnlIngrs.add(lbErrorIngreso);
                     lbErrorIngreso.setVisible(true);
                 }else {
-                    new CargarVentanaUsuario();
-                    user.setNombre_Usuario(tfUser.getText());
+                    new CargarVentanaUsuario(tfUser.getText());
                     this.dispose();
                 }
             }
