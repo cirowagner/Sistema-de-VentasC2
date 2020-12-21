@@ -5,9 +5,8 @@ public class DetalleVenta {
     private int id_DetalleV;
     private int cantidad_DetalleV;
     private double precioUnitario_DetalleV;
-    private double descuento_DetalleV;
+    private int descuento_DetalleV;
     private double precioTotal_DetalleV;
-    private int id_UsuarioFK;
     private int id_ProductoFK;
     private int id_VentaFK;
 
@@ -35,11 +34,11 @@ public class DetalleVenta {
         this.precioUnitario_DetalleV = precioUnitario_DetalleV;
     }
 
-    public double getDescuento_DetalleV() {
+    public int getDescuento_DetalleV() {
         return descuento_DetalleV;
     }
 
-    public void setDescuento_DetalleV(double descuento_DetalleV) {
+    public void setDescuento_DetalleV(int descuento_DetalleV) {
         this.descuento_DetalleV = descuento_DetalleV;
     }
 
@@ -49,14 +48,6 @@ public class DetalleVenta {
 
     public void setPrecioTotal_DetalleV(double precioTotal_DetalleV) {
         this.precioTotal_DetalleV = precioTotal_DetalleV;
-    }
-
-    public int getId_UsuarioFK() {
-        return id_UsuarioFK;
-    }
-
-    public void setId_UsuarioFK(int id_UsuarioFK) {
-        this.id_UsuarioFK = id_UsuarioFK;
     }
 
     public int getId_ProductoFK() {
@@ -83,7 +74,6 @@ public class DetalleVenta {
                 ", precioUnitario_DetalleV=" + precioUnitario_DetalleV +
                 ", descuento_DetalleV=" + descuento_DetalleV +
                 ", precioTotal_DetalleV=" + precioTotal_DetalleV +
-                ", id_UsuarioFK=" + id_UsuarioFK +
                 ", id_ProductoFK=" + id_ProductoFK +
                 ", id_VentaFK=" + id_VentaFK +
                 '}';

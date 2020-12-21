@@ -21,7 +21,7 @@ public class CargarInicio extends JFrame implements Runnable {
         add(fondo);
 
         JLabel titulo = new JLabel("",new ImageIcon("imagenes/login/Cargas/gifBar1.gif"),SwingConstants.CENTER);
-        titulo.setBounds(150,470,550,150);
+        titulo.setBounds(120,440,550,150);
         titulo.setFont(new Font("Impact",Font.ITALIC,40));
         titulo.setForeground(Color.WHITE);
         fondo.add(titulo);

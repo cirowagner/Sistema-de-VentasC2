@@ -21,10 +21,10 @@ public class App {
                     System.out.println("Reporte Jhobany");
                     System.out.println("Reporte Ciro");
 
-                    //new CargarInicio();
-                    Ingresar runI = new Ingresar();
+                    new CargarInicio();
+                   /* Ingresar runI = new Ingresar();
                     runI.setVisible(true);
-                    runI.setLocationRelativeTo(null);
+                    runI.setLocationRelativeTo(null);*/
 
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Error : " + e.getMessage());
